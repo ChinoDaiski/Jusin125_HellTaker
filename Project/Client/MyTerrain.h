@@ -1,7 +1,7 @@
 #pragma once
 #include "Obj.h"
-class CMyTerrain :
-	public CObj
+
+class CMyTerrain : public CObj
 {
 public:
 	CMyTerrain();

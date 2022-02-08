@@ -163,10 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Azazel.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Cerberus.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Judgement.h" />
     <ClInclude Include="Justice.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMgr.h" />
@@ -197,10 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Azazel.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Cerberus.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Judgement.cpp" />
     <ClCompile Include="Justice.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMgr.cpp" />

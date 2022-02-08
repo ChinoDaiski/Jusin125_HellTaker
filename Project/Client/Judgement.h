@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
 
-class CMonster : public CObj
+class CJudgement : public CObj
 {
 public:
-	CMonster();
-	virtual ~CMonster();
+	CJudgement();
+	virtual ~CJudgement();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -15,11 +15,11 @@ public:
 	virtual void Release(void) override;
 
 public:
-	void	Set_Hit();
+	void	Set_Jump();
 
 private:
 	wstring		m_wstrStateKey = L"";
 
-	bool		m_Hit = false;		// 타격받을 때 true
+	bool	m_Jump = false;	// 점프 상태일 때 true
 };
 

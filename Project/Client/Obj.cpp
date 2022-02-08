@@ -10,7 +10,7 @@ CObj::CObj()
 	D3DXMatrixIdentity(&m_tInfo.matWorld);
 
 	ZeroMemory(&m_tFrame, sizeof(FRAME));
-	m_tFrame.fFrameSpeed = 1.3f;
+	m_tFrame.fFrameSpeed = 1.3f;		// Default FrameSpeed
 
 	m_tInfo.vLook = D3DXVECTOR3(1.f, 0.f, 0.f);
 }

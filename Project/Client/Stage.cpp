@@ -15,6 +15,7 @@
 #include "Modeus.h"
 #include "Pandemonica.h"
 #include "Zdrada.h"
+#include "Judgement.h"
 
 // MapObj
 #include "Monster.h"
@@ -120,6 +121,14 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
+	// 저지먼트. Judgement
+	pObj = new CJudgement;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
 
 	// 몬스터. Monster
 	pObj = new CMonster;

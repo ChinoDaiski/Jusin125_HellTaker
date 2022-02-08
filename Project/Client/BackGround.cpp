@@ -1,37 +1,33 @@
 #include "stdafx.h"
-#include "Monster.h"
+#include "BackGround.h"
 #include "Device.h"
 #include "TextureMgr.h"
 
-CMonster::CMonster()
+CBackGround::CBackGround()
 {
 	// empty
 }
 
-CMonster::~CMonster()
+CBackGround::~CBackGround()
 {
 	Release();
 }
 
-HRESULT CMonster::Initialize(void)
+HRESULT CBackGround::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Monster/Hit/hit%d.png", L"Monster", L"Hit", 6)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Azazel/azazel%d.png", L"Azazel", L"Idle", 12)))
 		return S_FALSE;
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Monster/Idle/idle%d.png", L"Monster", L"Idle", 12)))
-		return S_FALSE;
-
-	m_tInfo.vPos = D3DXVECTOR3(80.f, 130.f, 0.f);
-	m_wstrObjKey = L"Monster";
-	m_wstrStateKey = L"Idle";
+	m_tInfo.vPos = D3DXVECTOR3(150.f, 34.f, 0.f);
+	m_wstrObjKey = L"Azazel";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 12.f, 1.4f };
+	m_tFrame = { 0.f, 12.f };
 
 	return S_OK;
 }
 
-int CMonster::Update(void)
+int CBackGround::Update(void)
 {
 	D3DXMATRIX	matTrans;
 
@@ -45,31 +41,14 @@ int CMonster::Update(void)
 	return OBJ_NOEVENT;
 }
 
-void CMonster::Late_Update(void)
+void CBackGround::Late_Update(void)
 {
-	// Hit Frame
-	if (m_Hit)
-	{
-		// Hit Frame End
-		if (m_tFrame.fFrame > 5.f)
-		{
-			m_Hit = false;
-			m_tFrame.fFrame = 0.f;
-			m_tFrame = { 0.f, 12.f, 1.4f };
-			m_wstrStateKey = L"Idle";
-		}
-		else
-			MoveFrame();
-	}
-	// Idle Frame
-	else 
-		MoveFrame();
-
+	// empty
 }
 
-void CMonster::Render(void)
+void CBackGround::Render(void)
 {
-	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), (int)m_tFrame.fFrame);
+	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str(), L"Idle", (int)m_tFrame.fFrame);
 
 	if (nullptr == pTexInfo)
 		return;
@@ -86,14 +65,7 @@ void CMonster::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 }
 
-void CMonster::Release(void)
+void CBackGround::Release(void)
 {
 	// empty
-}
-
-void CMonster::Set_Hit()
-{
-	m_Hit = true;
-	m_tFrame = { 0.f, 6.f, 2.f };
-	m_wstrStateKey = L"Hit";
 }

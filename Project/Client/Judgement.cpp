@@ -1,37 +1,39 @@
 #include "stdafx.h"
-#include "Monster.h"
+#include "Judgement.h"
 #include "Device.h"
 #include "TextureMgr.h"
 
-CMonster::CMonster()
+CJudgement::CJudgement()
 {
 	// empty
 }
 
-CMonster::~CMonster()
+CJudgement::~CJudgement()
 {
 	Release();
 }
 
-HRESULT CMonster::Initialize(void)
+HRESULT CJudgement::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Monster/Hit/hit%d.png", L"Monster", L"Hit", 6)))
+	// Idle
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Judgement/Idle/Idle%d.png", L"Judgement", L"Idle", 12)))
 		return S_FALSE;
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Monster/Idle/idle%d.png", L"Monster", L"Idle", 12)))
+	// Jump
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Judgement/Jump/Jump%d.png", L"Judgement", L"Jump", 9)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(80.f, 130.f, 0.f);
-	m_wstrObjKey = L"Monster";
+	m_tInfo.vPos = D3DXVECTOR3(730.f, 34.f, 0.f);
+	m_wstrObjKey = L"Judgement";
 	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 12.f, 1.4f };
+	m_tFrame = { 0.f, 12.f };
 
 	return S_OK;
 }
 
-int CMonster::Update(void)
+int CJudgement::Update(void)
 {
 	D3DXMATRIX	matTrans;
 
@@ -45,29 +47,28 @@ int CMonster::Update(void)
 	return OBJ_NOEVENT;
 }
 
-void CMonster::Late_Update(void)
+void CJudgement::Late_Update(void)
 {
-	// Hit Frame
-	if (m_Hit)
+	// Jump Frame
+	if (m_Jump)
 	{
 		// Hit Frame End
-		if (m_tFrame.fFrame > 5.f)
+		if (m_tFrame.fFrame > 8.f)
 		{
-			m_Hit = false;
+			m_Jump = false;
 			m_tFrame.fFrame = 0.f;
-			m_tFrame = { 0.f, 12.f, 1.4f };
+			m_tFrame = { 0.f, 12.f };
 			m_wstrStateKey = L"Idle";
 		}
 		else
 			MoveFrame();
 	}
 	// Idle Frame
-	else 
+	else
 		MoveFrame();
-
 }
 
-void CMonster::Render(void)
+void CJudgement::Render(void)
 {
 	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), (int)m_tFrame.fFrame);
 
@@ -86,14 +87,14 @@ void CMonster::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 }
 
-void CMonster::Release(void)
+void CJudgement::Release(void)
 {
 	// empty
 }
 
-void CMonster::Set_Hit()
+void CJudgement::Set_Jump()
 {
-	m_Hit = true;
-	m_tFrame = { 0.f, 6.f, 2.f };
-	m_wstrStateKey = L"Hit";
+	m_Jump = true;
+	m_tFrame = { 0.f, 9.f };
+	m_wstrStateKey = L"Jump";
 }
