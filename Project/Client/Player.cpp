@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
+
 #include "Device.h"
 #include "TextureMgr.h"
+#include "KeyMgr.h"
 
 CPlayer::CPlayer()
 {
@@ -79,4 +81,28 @@ void CPlayer::Render(void)
 void CPlayer::Release(void)
 {
 	// empty
+}
+
+void CPlayer::Key_Input(void)
+{
+	// 윗쪽 방향키. UP
+	if (CKeyMgr::GetInstance()->Key_Down(VK_UP))
+	{
+		// TODO : 인덱스 비교하여 충돌처리/이동
+	}
+	// 아래쪽 방향키. DOWN
+	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
+	{
+		// TODO : 인덱스 비교하여 충돌처리/이동
+	}
+	// 왼쪽 방향키. LEFT
+	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
+	{
+		// TODO : 인덱스 비교하여 충돌처리/이동
+	}
+	// 오른쪽 방향키. RIGHT
+	else if (CKeyMgr::GetInstance()->Key_Down(VK_RIGHT))
+	{
+		// TODO : 인덱스 비교하여 충돌처리/이동
+	}
 }

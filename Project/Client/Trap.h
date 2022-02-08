@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
-class CPlayer :
-	public CObj
+
+class CTrap : public CObj
 {
 public:
-	CPlayer();
-	virtual ~CPlayer();
+	CTrap();
+	virtual ~CTrap();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -14,11 +14,11 @@ public:
 	virtual void Render(void) override;
 	virtual void Release(void) override;
 
-private:
-	void		Key_Input(void);		// 방향키 입력
+public:
+	bool	Get_Active() { return m_Active; }
+	void	Set_Active(bool _active) { m_Active = _active; }
 
-
 private:
-	wstring			m_wstrStateKey = L"";
+	bool	m_Active = true;		// true 이면 가시가 올라옴(Up), false 이면 내려감(Down)
 };
 

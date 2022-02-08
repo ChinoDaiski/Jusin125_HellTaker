@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
-class CPlayer :
-	public CObj
+
+class CChest : public CObj
 {
 public:
-	CPlayer();
-	virtual ~CPlayer();
+	CChest();
+	virtual ~CChest();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -14,11 +14,10 @@ public:
 	virtual void Render(void) override;
 	virtual void Release(void) override;
 
-private:
-	void		Key_Input(void);		// 방향키 입력
+public:
+	void	Set_Open() { m_Open = true; }		// 조건 검사 후 Open => true
 
-
 private:
-	wstring			m_wstrStateKey = L"";
+	bool	m_Open = false;	// 상자의 열림 판단
 };
 

@@ -5,6 +5,8 @@
 #include "MyTerrain.h"
 
 #include "Player.h"
+
+// Evil
 #include "Azazel.h"
 #include "Cerberus.h"
 #include "Justice.h"
@@ -14,10 +16,17 @@
 #include "Pandemonica.h"
 #include "Zdrada.h"
 
+// MapObj
+#include "Monster.h"
+#include "Wall.h"
+#include "Key.h"
+#include "Chest.h"
+#include "Trap.h"
+
 CStage::CStage()
 {
+	// empty
 }
-
 
 CStage::~CStage()
 {
@@ -111,6 +120,41 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 벽. Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// 키. Key
+	pObj = new CKey;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
+
+	// 상자. Chest
+	pObj = new CChest;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
+
+	// 트랩. Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
 
 	return S_OK;
 }

@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
-class CPlayer :
-	public CObj
+
+class CWall : public CObj
 {
 public:
-	CPlayer();
-	virtual ~CPlayer();
+	CWall();
+	virtual ~CWall();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -15,10 +15,6 @@ public:
 	virtual void Release(void) override;
 
 private:
-	void		Key_Input(void);		// 방향키 입력
-
-
-private:
-	wstring			m_wstrStateKey = L"";
+	int m_iOption;		// 벽의 종류 옵션
 };
 

@@ -88,6 +88,27 @@
     <Filter Include="02. Obj\02. Evil\07. Zdrada">
       <UniqueIdentifier>{cb7f33dd-8954-4234-9103-3efb9acdb2b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. MapObj">
+      <UniqueIdentifier>{7668d83b-884e-4227-9c3b-50114c45c152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\00. Monster">
+      <UniqueIdentifier>{d842c79a-5f7f-459e-ad05-0e6c9a49e578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\01. Wall">
+      <UniqueIdentifier>{5f5ffcf4-086b-4d7a-a92d-82e0c1f9f45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\02. Key &amp; Chest">
+      <UniqueIdentifier>{4a09f49e-9693-478d-920c-ebb15a41f1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\02. Key &amp; Chest\00. Key">
+      <UniqueIdentifier>{974c0aeb-f4a2-479f-a779-cb46c498cfe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\02. Key &amp; Chest\01. Chest">
+      <UniqueIdentifier>{8ca03c73-0232-493b-b963-a9572baa8a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. MapObj\03. Trap">
+      <UniqueIdentifier>{16c309a5-836f-4eba-9325-68dbf293f436}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -177,6 +198,21 @@
     <ClInclude Include="Zdrada.h">
       <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>02. Obj\04. MapObj\00. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>02. Obj\04. MapObj\01. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>02. Obj\04. MapObj\02. Key &amp; Chest\00. Key</Filter>
+    </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>02. Obj\04. MapObj\02. Key &amp; Chest\01. Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>02. Obj\04. MapObj\03. Trap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -253,6 +289,21 @@
     </ClCompile>
     <ClCompile Include="Zdrada.cpp">
       <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>02. Obj\04. MapObj\00. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>02. Obj\04. MapObj\01. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>02. Obj\04. MapObj\02. Key &amp; Chest\00. Key</Filter>
+    </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>02. Obj\04. MapObj\02. Key &amp; Chest\01. Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>02. Obj\04. MapObj\03. Trap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

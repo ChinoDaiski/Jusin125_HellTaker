@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
-class CPlayer :
-	public CObj
+
+class CKey : public CObj
 {
 public:
-	CPlayer();
-	virtual ~CPlayer();
+	CKey();
+	virtual ~CKey();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -13,12 +13,5 @@ public:
 	virtual void Late_Update(void) override;
 	virtual void Render(void) override;
 	virtual void Release(void) override;
-
-private:
-	void		Key_Input(void);		// 방향키 입력
-
-
-private:
-	wstring			m_wstrStateKey = L"";
 };
 

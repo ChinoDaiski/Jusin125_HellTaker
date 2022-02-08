@@ -61,8 +61,12 @@ typedef struct tagFrame
 {
 	tagFrame() {}
 	tagFrame(float _fFrame, float _fMax)
-	: fFrame(_fFrame), fMax(_fMax) {}
+	: fFrame(_fFrame), fMax(_fMax), fFrameSpeed(1.3f) {}
+	tagFrame(float _fFrame, float _fMax, float _frameSpeed)
+	: fFrame(_fFrame), fMax(_fMax), fFrameSpeed(_frameSpeed) {}
 	
-	float		fFrame;	// 현재 애니메이션 인덱스
-	float		fMax;	// 최대 인덱스
+	float		fFrame;			// 현재 애니메이션 인덱스
+	float		fMax;			// 최대 인덱스
+	float		fFrameSpeed;	// FrameSpeed. 프레임 속도조절
+
 }FRAME;

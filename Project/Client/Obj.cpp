@@ -10,6 +10,7 @@ CObj::CObj()
 	D3DXMatrixIdentity(&m_tInfo.matWorld);
 
 	ZeroMemory(&m_tFrame, sizeof(FRAME));
+	m_tFrame.fFrameSpeed = 1.3f;
 
 	m_tInfo.vLook = D3DXVECTOR3(1.f, 0.f, 0.f);
 }
@@ -17,12 +18,12 @@ CObj::CObj()
 
 CObj::~CObj()
 {
+	// empty
 }
 
 void CObj::MoveFrame(void)
 {
-	// TODO : 1.3f 상수부분 변수로 변경할 것
-	m_tFrame.fFrame += m_tFrame.fMax * (1.3f) * CTimeMgr::GetInstance()->Get_TimeDelta();
+	m_tFrame.fFrame += m_tFrame.fMax * (m_tFrame.fFrameSpeed) * CTimeMgr::GetInstance()->Get_TimeDelta();
 
 	if (m_tFrame.fFrame > m_tFrame.fMax)
 		m_tFrame.fFrame = 0.f;
