@@ -27,7 +27,7 @@ HRESULT CMyTerrain::Initialize(void)
 
 int CMyTerrain::Update(void)
 {
-	D3DXVECTOR3	vMouse = ::Get_Mouse();
+	/*D3DXVECTOR3	vMouse = ::Get_Mouse();
 
 	if (0.f > vMouse.x)
 		m_vScroll.x += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
@@ -39,7 +39,7 @@ int CMyTerrain::Update(void)
 		m_vScroll.y += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
 	if (WINCY < vMouse.y)
-		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();*/
 
 
 	return OBJ_NOEVENT;

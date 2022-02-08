@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Stage.h"
+
 #include "TextureMgr.h"
 #include "ObjMgr.h"
 #include "MyTerrain.h"
+#include "BackGround.h"
 
 #include "Player.h"
 
@@ -45,16 +47,25 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 	}*/
 
-	if (FAILED(CTextureMgr::GetInstance()->ReadImgPath(L"../Data/ImgPath.txt")))
+	/*if (FAILED(CTextureMgr::GetInstance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
 		MSG_BOX(L"Texture txt Load Failed");
 		return E_FAIL;
-	}
+	}*/
 
 
+	/*
 	CObj*		pObj = new CMyTerrain;
 
 	if(nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pObj);
+	*/
+
+	CObj*		pObj = new CBackGround;
+
+	if (nullptr != pObj)
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pObj);
@@ -185,7 +196,7 @@ void CStage::Render_Scene()
 
 void CStage::Release_Scene()
 {
-	
+	// empty
 }
 
 CStage* CStage::Create(void)

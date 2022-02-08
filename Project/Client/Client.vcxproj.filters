@@ -64,30 +64,6 @@
     <Filter Include="02. Obj\02. Evil">
       <UniqueIdentifier>{59a68ee5-2975-44e3-8ed7-3137b06f500e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Obj\02. Evil\00. Azazel">
-      <UniqueIdentifier>{7230ac00-2877-44d2-9b5e-32164c98b953}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\01. Cerberus">
-      <UniqueIdentifier>{4d06da9b-4c8e-4350-af02-6cb02bcb40f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\02. Justice">
-      <UniqueIdentifier>{96b4f942-da58-4119-943b-5d45ec0235a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\03. Lucifer">
-      <UniqueIdentifier>{af89ae57-f559-4e06-93c4-c25cdc2ef3ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\04. Malina">
-      <UniqueIdentifier>{6290e10c-f917-40a9-9fd1-d33811572bb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\05. Modeus">
-      <UniqueIdentifier>{04268b3a-9c3b-4ccd-ae5c-16508d973f30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\06. Pandemonica">
-      <UniqueIdentifier>{5e06fc7f-61a9-4f81-be87-e7b6b30e60e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Obj\02. Evil\07. Zdrada">
-      <UniqueIdentifier>{cb7f33dd-8954-4234-9103-3efb9acdb2b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Obj\03. MapObj">
       <UniqueIdentifier>{7668d83b-884e-4227-9c3b-50114c45c152}</UniqueIdentifier>
     </Filter>
@@ -114,6 +90,30 @@
     </Filter>
     <Filter Include="02. Obj\00. BackGround">
       <UniqueIdentifier>{9e8c7570-ac94-49fe-bd0e-d2e01e25aed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\00. Pandemonica">
+      <UniqueIdentifier>{5e06fc7f-61a9-4f81-be87-e7b6b30e60e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\01. Modeus">
+      <UniqueIdentifier>{04268b3a-9c3b-4ccd-ae5c-16508d973f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\02. Cerberus">
+      <UniqueIdentifier>{4d06da9b-4c8e-4350-af02-6cb02bcb40f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\03. Malina">
+      <UniqueIdentifier>{6290e10c-f917-40a9-9fd1-d33811572bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\04. Zdrada">
+      <UniqueIdentifier>{cb7f33dd-8954-4234-9103-3efb9acdb2b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\05. Azazel">
+      <UniqueIdentifier>{7230ac00-2877-44d2-9b5e-32164c98b953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\06. Justice">
+      <UniqueIdentifier>{96b4f942-da58-4119-943b-5d45ec0235a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. Evil\07. Lucifer">
+      <UniqueIdentifier>{af89ae57-f559-4e06-93c4-c25cdc2ef3ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,28 +181,28 @@
       <Filter>01. Manager\05. KeyMgr</Filter>
     </ClInclude>
     <ClInclude Include="Azazel.h">
-      <Filter>02. Obj\02. Evil\00. Azazel</Filter>
+      <Filter>02. Obj\02. Evil\05. Azazel</Filter>
     </ClInclude>
     <ClInclude Include="Cerberus.h">
-      <Filter>02. Obj\02. Evil\01. Cerberus</Filter>
+      <Filter>02. Obj\02. Evil\02. Cerberus</Filter>
     </ClInclude>
     <ClInclude Include="Justice.h">
-      <Filter>02. Obj\02. Evil\02. Justice</Filter>
+      <Filter>02. Obj\02. Evil\06. Justice</Filter>
     </ClInclude>
     <ClInclude Include="Lucifer.h">
-      <Filter>02. Obj\02. Evil\03. Lucifer</Filter>
+      <Filter>02. Obj\02. Evil\07. Lucifer</Filter>
     </ClInclude>
     <ClInclude Include="Malina.h">
-      <Filter>02. Obj\02. Evil\04. Malina</Filter>
+      <Filter>02. Obj\02. Evil\03. Malina</Filter>
     </ClInclude>
     <ClInclude Include="Modeus.h">
-      <Filter>02. Obj\02. Evil\05. Modeus</Filter>
+      <Filter>02. Obj\02. Evil\01. Modeus</Filter>
     </ClInclude>
     <ClInclude Include="Pandemonica.h">
-      <Filter>02. Obj\02. Evil\06. Pandemonica</Filter>
+      <Filter>02. Obj\02. Evil\00. Pandemonica</Filter>
     </ClInclude>
     <ClInclude Include="Zdrada.h">
-      <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
+      <Filter>02. Obj\02. Evil\04. Zdrada</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>02. Obj\03. MapObj\00. Monster</Filter>
@@ -279,28 +279,28 @@
       <Filter>01. Manager\05. KeyMgr</Filter>
     </ClCompile>
     <ClCompile Include="Azazel.cpp">
-      <Filter>02. Obj\02. Evil\00. Azazel</Filter>
+      <Filter>02. Obj\02. Evil\05. Azazel</Filter>
     </ClCompile>
     <ClCompile Include="Cerberus.cpp">
-      <Filter>02. Obj\02. Evil\01. Cerberus</Filter>
+      <Filter>02. Obj\02. Evil\02. Cerberus</Filter>
     </ClCompile>
     <ClCompile Include="Justice.cpp">
-      <Filter>02. Obj\02. Evil\02. Justice</Filter>
+      <Filter>02. Obj\02. Evil\06. Justice</Filter>
     </ClCompile>
     <ClCompile Include="Lucifer.cpp">
-      <Filter>02. Obj\02. Evil\03. Lucifer</Filter>
+      <Filter>02. Obj\02. Evil\07. Lucifer</Filter>
     </ClCompile>
     <ClCompile Include="Malina.cpp">
-      <Filter>02. Obj\02. Evil\04. Malina</Filter>
+      <Filter>02. Obj\02. Evil\03. Malina</Filter>
     </ClCompile>
     <ClCompile Include="Modeus.cpp">
-      <Filter>02. Obj\02. Evil\05. Modeus</Filter>
+      <Filter>02. Obj\02. Evil\01. Modeus</Filter>
     </ClCompile>
     <ClCompile Include="Pandemonica.cpp">
-      <Filter>02. Obj\02. Evil\06. Pandemonica</Filter>
+      <Filter>02. Obj\02. Evil\00. Pandemonica</Filter>
     </ClCompile>
     <ClCompile Include="Zdrada.cpp">
-      <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
+      <Filter>02. Obj\02. Evil\04. Zdrada</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>02. Obj\03. MapObj\00. Monster</Filter>

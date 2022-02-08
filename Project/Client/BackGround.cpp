@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "BackGround.h"
+
 #include "Device.h"
 #include "TextureMgr.h"
+#include "TimeMgr.h"
 
 CBackGround::CBackGround()
 {
@@ -15,14 +17,16 @@ CBackGround::~CBackGround()
 
 HRESULT CBackGround::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Azazel/azazel%d.png", L"Azazel", L"Idle", 12)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/BackGround/chapter%d.png", L"BackGround", L"Idle", 8)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(150.f, 34.f, 0.f);
-	m_wstrObjKey = L"Azazel";
+	m_tInfo.vPos = D3DXVECTOR3(WINCX>>1, WINCY>>1, 0.f);
+	m_wstrObjKey = L"BackGround";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 12.f };
+	// m_tFrame = { 6.f, 8.f };
+	m_tFrame = { 7.f, 8.f };
+
 
 	return S_OK;
 }
@@ -37,6 +41,21 @@ int CBackGround::Update(void)
 		0.f);
 
 	m_tInfo.matWorld = matTrans;
+
+	D3DXVECTOR3	vMouse = ::Get_Mouse();
+
+	if (10.f > vMouse.x)
+		m_vScroll.x += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+	if (WINCX - 10 < vMouse.x)
+		m_vScroll.x -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+	if (10.f > vMouse.y)
+		m_vScroll.y += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+	if (WINCY - 10 - (920/4) < vMouse.y)
+		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
 
 	return OBJ_NOEVENT;
 }

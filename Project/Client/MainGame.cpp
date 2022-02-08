@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainGame.h"
+
 #include "Device.h"
 #include "ObjMgr.h"
 #include "SceneMgr.h"
