@@ -3,11 +3,10 @@
 #include "Device.h"
 #include "TextureMgr.h"
 
-
 CPlayer::CPlayer()
 {
+	// empty
 }
-
 
 CPlayer::~CPlayer()
 {
@@ -30,10 +29,10 @@ HRESULT CPlayer::Initialize(void)
 
 	m_tInfo.vPos = D3DXVECTOR3(65.f, 34.f, 0.f);
 	m_wstrObjKey = L"Player";
-	m_wstrStateKey = L"Clear";
+	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 19.f };
+	m_tFrame = { 0.f, 12.f };
 
 	return S_OK;
 }

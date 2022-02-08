@@ -175,7 +175,7 @@
       <Filter>02. Obj\02. Evil\06. Pandemonica</Filter>
     </ClInclude>
     <ClInclude Include="Zdrada.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +252,7 @@
       <Filter>02. Obj\02. Evil\06. Pandemonica</Filter>
     </ClCompile>
     <ClCompile Include="Zdrada.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>02. Obj\02. Evil\07. Zdrada</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

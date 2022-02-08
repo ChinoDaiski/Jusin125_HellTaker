@@ -21,7 +21,8 @@ CObj::~CObj()
 
 void CObj::MoveFrame(void)
 {
-	m_tFrame.fFrame += m_tFrame.fMax * CTimeMgr::GetInstance()->Get_TimeDelta();
+	// TODO : 1.3f 상수부분 변수로 변경할 것
+	m_tFrame.fFrame += m_tFrame.fMax * (1.3f) * CTimeMgr::GetInstance()->Get_TimeDelta();
 
 	if (m_tFrame.fFrame > m_tFrame.fMax)
 		m_tFrame.fFrame = 0.f;
