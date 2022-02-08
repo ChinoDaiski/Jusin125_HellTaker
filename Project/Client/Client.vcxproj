@@ -162,14 +162,21 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Azazel.h" />
+    <ClInclude Include="Cerberus.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Justice.h" />
     <ClInclude Include="KeyMgr.h" />
+    <ClInclude Include="Lucifer.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Malina.h" />
+    <ClInclude Include="Modeus.h" />
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="MyTerrain.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
+    <ClInclude Include="Pandemonica.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
@@ -181,16 +188,24 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureMgr.h" />
     <ClInclude Include="TimeMgr.h" />
+    <ClInclude Include="Zdrada.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Azazel.cpp" />
+    <ClCompile Include="Cerberus.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Justice.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
+    <ClCompile Include="Lucifer.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Malina.cpp" />
+    <ClCompile Include="Modeus.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="MyTerrain.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
+    <ClCompile Include="Pandemonica.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
@@ -205,6 +220,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureMgr.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
+    <ClCompile Include="Zdrada.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

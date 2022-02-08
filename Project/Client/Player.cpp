@@ -16,12 +16,24 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Initialize(void)
 {
+	// Idle
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Idle/idle%d.png", L"Player", L"Idle", 12)))
+		return S_FALSE;
+
+	// Kick
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Attack/Kick/kick%d.png", L"Player", L"Kick", 13)))
+		return S_FALSE;
+
+	// Clear
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Clear/clear%d.png", L"Player", L"Clear", 19)))
+		return S_FALSE;
+
 	m_tInfo.vPos = D3DXVECTOR3(65.f, 34.f, 0.f);
 	m_wstrObjKey = L"Player";
-	m_wstrStateKey = L"Dash";
+	m_wstrStateKey = L"Clear";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 11.f };
+	m_tFrame = { 0.f, 19.f };
 
 	return S_OK;
 }
@@ -67,5 +79,5 @@ void CPlayer::Render(void)
 
 void CPlayer::Release(void)
 {
-	
+	// empty
 }
