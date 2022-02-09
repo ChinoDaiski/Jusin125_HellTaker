@@ -75,6 +75,7 @@ HRESULT CStage::Ready_Scene()
 
 	if (nullptr != pObj)
 		pObj->Initialize();
+	pObj->Set_Pos(D3DXVECTOR3((float)(WINCX >> 1), (float)(WINCY >> 1), 0.f));
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pObj);
 
@@ -183,6 +184,31 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Map Width must Include Max 19 Object
+	for (int i = 0; i < 19; ++i)
+	{
+		pObj = new CMonster;
+		if (nullptr != pObj)
+			pObj->Initialize();
+
+		pObj->Set_Pos(D3DXVECTOR3(50.f + i*100.f, 700.f, 0.f));
+
+		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+	}
+
+	// Map Height must Include Max 9~10 Object
+	// 9개까지의 오브젝트를 좀 더 자연스럽게 배치가능. 10개는 좁음
+	for (int i = 0; i < 11; ++i)
+	{
+		pObj = new CMonster;
+		if (nullptr != pObj)
+			pObj->Initialize();
+
+		pObj->Set_Pos(D3DXVECTOR3(1400.f, 50.f + i*100.f, 0.f));
+
+		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+	}
 
 	return S_OK;
 }

@@ -60,7 +60,7 @@ void CJudgement::Late_Update(void)
 	{
 		if (m_tInfo.vPos.y >= 500)
 		{
-			// Hit Frame End
+			// Jump Frame End
 			if (m_tFrame.fFrame > 8.f)
 			{
 				m_Jump = false;

@@ -24,8 +24,8 @@ HRESULT CBackGround::Initialize(void)
 	m_wstrObjKey = L"BackGround";
 	m_fSpeed = 100.f;
 
-	// m_tFrame = { 6.f, 8.f };
-	m_tFrame = { 7.f, 8.f };
+	m_tFrame = { 6.f, 8.f };
+	// m_tFrame = { 7.f, 8.f };
 
 
 	return S_OK;
@@ -33,14 +33,30 @@ HRESULT CBackGround::Initialize(void)
 
 int CBackGround::Update(void)
 {
-	D3DXMATRIX	matTrans;
+	/*D3DXMATRIX	matTrans;
 
 	D3DXMatrixTranslation(&matTrans,
 		m_tInfo.vPos.x + CObj::m_vScroll.x,
 		m_tInfo.vPos.y + CObj::m_vScroll.y,
 		0.f);
 
-	m_tInfo.matWorld = matTrans;
+	m_tInfo.matWorld = matTrans;*/
+
+	D3DXMATRIX	matTrans, matScale;
+
+	D3DXMatrixIdentity(&matTrans);
+	D3DXMatrixIdentity(&matScale);
+
+	D3DXMatrixTranslation(&matTrans,
+		m_tInfo.vPos.x + CObj::m_vScroll.x,
+		m_tInfo.vPos.y + CObj::m_vScroll.y,
+		0.f);
+
+	// 1920 / 800 = 2.4 => 10/24 = 0.41666...
+	// 1080 / 600 = 1.8 => 10/18 = 0.5555...
+	D3DXMatrixScaling(&matScale, 0.42f, 0.56f, 1.f);
+
+	m_tInfo.matWorld = matScale * matTrans;
 
 	D3DXVECTOR3	vMouse = ::Get_Mouse();
 
