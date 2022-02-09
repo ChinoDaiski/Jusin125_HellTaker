@@ -1,0 +1,5 @@
+Button|Select|2|..\Texture\Stage\Button\Button%d.png
+Scene|Logo|2|..\Texture\Stage\Scene\Logo\Logo%d.png
+Scene|Clear|29|..\Texture\Stage\Scene\Clear\transtion%d.png
+Scene|Background|15|..\Texture\Stage\Scene\Background\Background%d.png
+Stage|Character|1|..\Texture\Stage\Character\Baal\Baal_fly%d.png
