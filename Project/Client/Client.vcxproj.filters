@@ -115,6 +115,12 @@
     <Filter Include="02. Obj\02. Evil\07. Lucifer">
       <UniqueIdentifier>{af89ae57-f559-4e06-93c4-c25cdc2ef3ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\03. MapObj\04. FlameBase">
+      <UniqueIdentifier>{539157a9-d911-4fee-86e8-bf1d1c5401bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\03. MapObj\04. FlameBase\00. Fire">
+      <UniqueIdentifier>{9becfe81-3180-4b99-bf7e-5851d7d00ae0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -225,6 +231,12 @@
     <ClInclude Include="BackGround.h">
       <Filter>02. Obj\00. BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="FlameBase.h">
+      <Filter>02. Obj\03. MapObj\04. FlameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>02. Obj\03. MapObj\04. FlameBase\00. Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -322,6 +334,12 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>02. Obj\00. BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameBase.cpp">
+      <Filter>02. Obj\03. MapObj\04. FlameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>02. Obj\03. MapObj\04. FlameBase\00. Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

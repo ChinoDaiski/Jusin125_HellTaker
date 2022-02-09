@@ -1,34 +1,38 @@
 #include "stdafx.h"
-#include "Lucifer.h"
+#include "FlameBase.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "ObjMgr.h"
 
-CLucifer::CLucifer()
+#include "Fire.h"
+
+CFlameBase::CFlameBase()
 {
 	// empty
 }
 
-CLucifer::~CLucifer()
+CFlameBase::~CFlameBase()
 {
 	Release();
 }
 
-HRESULT CLucifer::Initialize(void)
+HRESULT CFlameBase::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Lucifer/lucifer%d.png", L"Lucifer", L"Idle", 12)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/FlameBase/flamebase%d.png", L"FlameBase", L"Idle", 2)))
 		return S_FALSE;
 
-	// m_tInfo.vPos = D3DXVECTOR3(370.f, 34.f, 0.f);
-	m_tInfo.vPos = D3DXVECTOR3(960.f, 170.f, 0.f);
-	m_wstrObjKey = L"Lucifer";
+	m_tInfo.vPos = D3DXVECTOR3(760.f, 540.f, 0.f);
+	m_wstrObjKey = L"FlameBase";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 12.f };
+	m_tFrame = { 0.f, 2.f };
+
+	Create_Fire();
 
 	return S_OK;
 }
 
-int CLucifer::Update(void)
+int CFlameBase::Update(void)
 {
 	D3DXMATRIX	matTrans;
 
@@ -42,12 +46,12 @@ int CLucifer::Update(void)
 	return OBJ_NOEVENT;
 }
 
-void CLucifer::Late_Update(void)
+void CFlameBase::Late_Update(void)
 {
-	MoveFrame();
+	// empty
 }
 
-void CLucifer::Render(void)
+void CFlameBase::Render(void)
 {
 	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str(), L"Idle", (int)m_tFrame.fFrame);
 
@@ -66,7 +70,18 @@ void CLucifer::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 }
 
-void CLucifer::Release(void)
+void CFlameBase::Release(void)
 {
 	// empty
+}
+
+void CFlameBase::Create_Fire(void)
+{
+	CObj*		pObj = new CFire;
+
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	pObj->Set_Pos(D3DXVECTOR3(m_tInfo.vPos.x, m_tInfo.vPos.y - 27, 0.f));
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pObj);
 }

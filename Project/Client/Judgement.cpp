@@ -2,6 +2,7 @@
 #include "Judgement.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "TimeMgr.h"
 
 CJudgement::CJudgement()
 {
@@ -23,18 +24,23 @@ HRESULT CJudgement::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Judgement/Jump/Jump%d.png", L"Judgement", L"Jump", 9)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(730.f, 34.f, 0.f);
+	m_tInfo.vPos = D3DXVECTOR3(1030.f, 34.f, 0.f);
 	m_wstrObjKey = L"Judgement";
 	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;
 
 	m_tFrame = { 0.f, 12.f };
 
+	Set_Jump();
+
 	return S_OK;
 }
 
 int CJudgement::Update(void)
 {
+	if (m_Jump && (0 == m_tFrame.fFrame))
+		m_tInfo.vPos.y += 450.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
 	D3DXMATRIX	matTrans;
 
 	D3DXMatrixTranslation(&matTrans,
@@ -52,16 +58,19 @@ void CJudgement::Late_Update(void)
 	// Jump Frame
 	if (m_Jump)
 	{
-		// Hit Frame End
-		if (m_tFrame.fFrame > 8.f)
+		if (m_tInfo.vPos.y >= 500)
 		{
-			m_Jump = false;
-			m_tFrame.fFrame = 0.f;
-			m_tFrame = { 0.f, 12.f };
-			m_wstrStateKey = L"Idle";
+			// Hit Frame End
+			if (m_tFrame.fFrame > 8.f)
+			{
+				m_Jump = false;
+				m_tFrame.fFrame = 0.f;
+				m_tFrame = { 0.f, 12.f };
+				m_wstrStateKey = L"Idle";
+			}
+			else
+				MoveFrame();
 		}
-		else
-			MoveFrame();
 	}
 	// Idle Frame
 	else

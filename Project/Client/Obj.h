@@ -26,6 +26,7 @@ public:
 			m_bDead = true;
 	}
 
+	void			Set_Pos(D3DXVECTOR3 _vecPos) { m_tInfo.vPos = _vecPos; }
 
 protected:
 	static D3DXVECTOR3			m_vScroll;

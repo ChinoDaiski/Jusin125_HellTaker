@@ -25,6 +25,7 @@
 #include "Key.h"
 #include "Chest.h"
 #include "Trap.h"
+#include "FlameBase.h"
 
 CStage::CStage()
 {
@@ -175,6 +176,13 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// 플레임베이스. FlameBase
+	pObj = new CFlameBase;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
 
 	return S_OK;
 }

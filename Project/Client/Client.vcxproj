@@ -168,6 +168,8 @@
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Fire.h" />
+    <ClInclude Include="FlameBase.h" />
     <ClInclude Include="Judgement.h" />
     <ClInclude Include="Justice.h" />
     <ClInclude Include="Key.h" />
@@ -204,6 +206,8 @@
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="FlameBase.cpp" />
     <ClCompile Include="Judgement.cpp" />
     <ClCompile Include="Justice.cpp" />
     <ClCompile Include="Key.cpp" />
