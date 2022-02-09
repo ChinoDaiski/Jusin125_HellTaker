@@ -32,14 +32,19 @@ HRESULT CTrap::Initialize(void)
 
 int CTrap::Update(void)
 {
-	D3DXMATRIX	matTrans;
+	D3DXMATRIX	matTrans, matScale;
+
+	D3DXMatrixIdentity(&matTrans);
+	D3DXMatrixIdentity(&matScale);
 
 	D3DXMatrixTranslation(&matTrans,
 		m_tInfo.vPos.x + CObj::m_vScroll.x,
 		m_tInfo.vPos.y + CObj::m_vScroll.y,
 		0.f);
 
-	m_tInfo.matWorld = matTrans;
+	D3DXMatrixScaling(&matScale, MAPSIZEX, MAPSIZEY, 1.f);
+
+	m_tInfo.matWorld = matScale * matTrans;
 
 	return OBJ_NOEVENT;
 }

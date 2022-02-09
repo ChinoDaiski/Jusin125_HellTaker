@@ -31,12 +31,15 @@ int CFire::Update(void)
 {
 	D3DXMATRIX	matTrans, matScale;
 
+	D3DXMatrixIdentity(&matTrans);
+	D3DXMatrixIdentity(&matScale);
+
 	D3DXMatrixTranslation(&matTrans,
 		m_tInfo.vPos.x + CObj::m_vScroll.x,
 		m_tInfo.vPos.y + CObj::m_vScroll.y,
 		0.f);
 
-	D3DXMatrixScaling(&matScale, 0.58f, 0.55f, 1.f);
+	D3DXMatrixScaling(&matScale, MAPSIZEX*0.58f, MAPSIZEY*0.58f, 1.f);
 
 	m_tInfo.matWorld = matScale * matTrans;
 

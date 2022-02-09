@@ -24,9 +24,8 @@ HRESULT CBackGround::Initialize(void)
 	m_wstrObjKey = L"BackGround";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 6.f, 8.f };
-	// m_tFrame = { 7.f, 8.f };
-
+	//m_tFrame = { 6.f, 8.f };
+	 m_tFrame = { 7.f, 8.f };
 
 	return S_OK;
 }
@@ -52,9 +51,7 @@ int CBackGround::Update(void)
 		m_tInfo.vPos.y + CObj::m_vScroll.y,
 		0.f);
 
-	// 1920 / 800 = 2.4 => 10/24 = 0.41666...
-	// 1080 / 600 = 1.8 => 10/18 = 0.5555...
-	D3DXMatrixScaling(&matScale, 0.42f, 0.56f, 1.f);
+	D3DXMatrixScaling(&matScale, MAPSIZEX, MAPSIZEY, 1.f);
 
 	m_tInfo.matWorld = matScale * matTrans;
 
@@ -69,7 +66,7 @@ int CBackGround::Update(void)
 	if (10.f > vMouse.y)
 		m_vScroll.y += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
-	if (WINCY - 10 - (920/4) < vMouse.y)
+	if (WINCY - 10 < vMouse.y)
 		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
 

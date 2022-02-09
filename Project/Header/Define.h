@@ -1,7 +1,7 @@
 #pragma once
 
-#define WINCX		800
-#define WINCY		600
+#define WINCX		1280
+#define WINCY		720
 
 #define		OBJ_NOEVENT			0
 #define		OBJ_DEAD			1
@@ -16,11 +16,6 @@
 
 #define		MIN_STR		64
 #define		MAX_STR		256
-
-#define		RUBY		0x01
-#define		DIAMOND		0x02
-#define		SAPPHIRE	0x04
-
 
 #define			MSG_BOX(_message)			MessageBox(NULL, _message, L"System Message", MB_OK)
 
@@ -54,3 +49,5 @@
 
 
 extern		HWND	g_hWnd;
+extern		float	MAPSIZEX;
+extern		float	MAPSIZEY;

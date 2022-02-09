@@ -192,7 +192,7 @@ HRESULT CStage::Ready_Scene()
 		if (nullptr != pObj)
 			pObj->Initialize();
 
-		pObj->Set_Pos(D3DXVECTOR3(50.f + i*100.f, 700.f, 0.f));
+		pObj->Set_Pos(D3DXVECTOR3(30.f + i*100.f*MAPSIZEX, 600.f, 0.f));
 
 		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
 	}
@@ -205,7 +205,7 @@ HRESULT CStage::Ready_Scene()
 		if (nullptr != pObj)
 			pObj->Initialize();
 
-		pObj->Set_Pos(D3DXVECTOR3(1400.f, 50.f + i*100.f, 0.f));
+		pObj->Set_Pos(D3DXVECTOR3(800.f, 30.f + i*100.f*MAPSIZEY, 0.f));
 
 		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
 	}
