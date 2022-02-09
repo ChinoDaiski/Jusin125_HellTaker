@@ -70,3 +70,16 @@ typedef struct tagFrame
 	float		fFrameSpeed;	// FrameSpeed. 프레임 속도조절
 
 }FRAME;
+
+typedef struct tagGridInfo
+{
+	float	Width;			// Grid 가로
+	float	Height;			// Grid 세로
+	float	fCX;			// Grid 중점 X
+	float	fCY;			// Grid 중점 Y
+
+	int		iStart_Index;		// i 인덱스 시작 빼줄값
+	int		jStart_Index;		// j 인덱스 시작 빼줄값
+	int		iEnd_Index;			// i 인덱스 마지막 빼줄값
+	int		jEnd_Index;			// j 인덱스 마지막 빼줄값
+} GRID_INFO;

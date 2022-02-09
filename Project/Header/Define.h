@@ -1,18 +1,18 @@
 #pragma once
 
-#define WINCX		1280
-#define WINCY		720
+#define WINCX		1250
+#define WINCY		750
 
 #define		OBJ_NOEVENT			0
 #define		OBJ_DEAD			1
 
 #define		VK_MAX		0xff
 
-#define		TILECX		130
-#define		TILECY		68
+#define		TILECX		100
+#define		TILECY		100
 
-#define		TILEX		20
-#define		TILEY		30
+#define		TILEX		19
+#define		TILEY		11
 
 #define		MIN_STR		64
 #define		MAX_STR		256

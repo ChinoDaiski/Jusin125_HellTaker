@@ -9,6 +9,7 @@
 CMainGame::CMainGame()
 	: m_pGraphicDev(CDevice::GetInstance())
 {
+	// empty
 }
 
 

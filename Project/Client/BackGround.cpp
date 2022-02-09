@@ -6,8 +6,9 @@
 #include "TimeMgr.h"
 
 CBackGround::CBackGround()
+	: m_Chapter(ZERO)
 {
-	// empty
+	ZeroMemory(&m_GridInfo, sizeof(GRID_INFO));
 }
 
 CBackGround::~CBackGround()
@@ -20,27 +21,20 @@ HRESULT CBackGround::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/BackGround/chapter%d.png", L"BackGround", L"Idle", 8)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(WINCX>>1, WINCY>>1, 0.f);
+	m_tInfo.vPos = D3DXVECTOR3(float(WINCX>>1), float(WINCY>>1), 0.f);
 	m_wstrObjKey = L"BackGround";
 	m_fSpeed = 100.f;
 
-	//m_tFrame = { 6.f, 8.f };
-	 m_tFrame = { 7.f, 8.f };
+	m_tFrame = { (float)m_Chapter, 8.f };
+
+	Map_Init();
+	Create_Grid();
 
 	return S_OK;
 }
 
 int CBackGround::Update(void)
 {
-	/*D3DXMATRIX	matTrans;
-
-	D3DXMatrixTranslation(&matTrans,
-		m_tInfo.vPos.x + CObj::m_vScroll.x,
-		m_tInfo.vPos.y + CObj::m_vScroll.y,
-		0.f);
-
-	m_tInfo.matWorld = matTrans;*/
-
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);
@@ -57,18 +51,20 @@ int CBackGround::Update(void)
 
 	D3DXVECTOR3	vMouse = ::Get_Mouse();
 
-	if (10.f > vMouse.x)
+	if (0.f > vMouse.x)
 		m_vScroll.x += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
-	if (WINCX - 10 < vMouse.x)
+	if (WINCX < vMouse.x)
 		m_vScroll.x -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
-	if (10.f > vMouse.y)
+	if (0.f > vMouse.y)
 		m_vScroll.y += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
-	if (WINCY - 10 < vMouse.y)
+	if (WINCY < vMouse.y)
 		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
+	for (auto& iter : vecGrid)
+		iter->Update();
 
 	return OBJ_NOEVENT;
 }
@@ -95,9 +91,86 @@ void CBackGround::Render(void)
 		&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
 		nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
 		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+
+	for (auto& iter : vecGrid)
+		iter->Render();
 }
 
 void CBackGround::Release(void)
 {
 	// empty
+}
+
+void CBackGround::Create_Grid(void)
+{
+	for (int i = 2; i < TILEY - 2; ++i)
+	{
+		for (int j = 5; j < TILEX - 5; ++j)
+		{
+			m_pGrid = new CGrid;
+			m_pGrid->Initialize();
+
+			float fX = float((TILECX * j * m_GridInfo.fCX)) + m_GridInfo.Width;
+			float fY = float((TILECY * i * m_GridInfo.fCY)) + m_GridInfo.Height;
+
+			m_pGrid->Set_Pos(D3DXVECTOR3(fX, fY, 0.f));
+
+			vecGrid.push_back(m_pGrid);
+		}
+	}
+}
+
+void CBackGround::Map_Init(void)
+{
+	switch (m_Chapter)
+	{
+	case ZERO: case FIVE:
+		Part1_ChapterInit();
+		m_GridInfo.iStart_Index = 2;
+		m_GridInfo.jStart_Index = 5;
+		m_GridInfo.iEnd_Index = 2;
+		m_GridInfo.jEnd_Index = 5;
+		break;
+	case ONE:
+		Part1_ChapterInit();
+		m_GridInfo.iStart_Index = 0;
+		m_GridInfo.jStart_Index = 0;
+		m_GridInfo.iEnd_Index = 0;
+		m_GridInfo.jEnd_Index = 0;
+		break;
+	case TWO: case THREE: case FOUR: case SIX:
+		m_GridInfo.iStart_Index = 2;
+		m_GridInfo.jStart_Index = 5;
+		m_GridInfo.iEnd_Index = 2;
+		m_GridInfo.jEnd_Index = 5;
+		break;
+	case CBackGround::SEVEN:
+		// TODO : 루시퍼 룸 구현 (Lucifer)
+		Part3_ChapterInit();
+		break;
+	case CBackGround::EIGHT:
+		// empty
+		break;
+	}
+}
+
+void CBackGround::Part1_ChapterInit()
+{
+	m_GridInfo.fCX = MAPSIZEX * ((1920.f / TILEX) / 100.f);
+	m_GridInfo.fCY = MAPSIZEY * ((1080.f / TILEY) / 100.f);
+	m_GridInfo.Width = ((TILECX * m_GridInfo.fCX) / 2.f);
+	m_GridInfo.Height = 0.f;
+}
+
+void CBackGround::Part2_ChapterInit()
+{
+	m_GridInfo.fCX = MAPSIZEX * ((1920.f / TILEX) / 100.f);
+	m_GridInfo.fCY = MAPSIZEY * ((1080.f / TILEY) / 100.f);
+	m_GridInfo.Width = 0.f;
+	m_GridInfo.Height = -((TILECY * m_GridInfo.fCY) / 2.f);
+}
+
+void CBackGround::Part3_ChapterInit()
+{
+	// TODO : Lucifer room Create
 }

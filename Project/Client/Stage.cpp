@@ -75,7 +75,6 @@ HRESULT CStage::Ready_Scene()
 
 	if (nullptr != pObj)
 		pObj->Initialize();
-	pObj->Set_Pos(D3DXVECTOR3((float)(WINCX >> 1), (float)(WINCY >> 1), 0.f));
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pObj);
 

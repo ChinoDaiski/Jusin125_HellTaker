@@ -29,7 +29,7 @@ HRESULT CPlayer::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Clear/clear%d.png", L"Player", L"Clear", 19)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(65.f, 34.f, 0.f);
+	m_tInfo.vPos = D3DXVECTOR3(50.f, 650.f, 0.f);
 	m_wstrObjKey = L"Player";
 	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;

@@ -121,6 +121,9 @@
     <Filter Include="02. Obj\03. MapObj\04. FlameBase\00. Fire">
       <UniqueIdentifier>{9becfe81-3180-4b99-bf7e-5851d7d00ae0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\00. BackGround\00. Grid">
+      <UniqueIdentifier>{089f40ca-b19a-412d-ba92-acbf189a75b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -237,6 +240,9 @@
     <ClInclude Include="Fire.h">
       <Filter>02. Obj\03. MapObj\04. FlameBase\00. Fire</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>02. Obj\00. BackGround\00. Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -340,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="Fire.cpp">
       <Filter>02. Obj\03. MapObj\04. FlameBase\00. Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>02. Obj\00. BackGround\00. Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
