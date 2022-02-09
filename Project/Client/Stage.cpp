@@ -4,7 +4,7 @@
 #include "ObjMgr.h"
 #include "MyTerrain.h"
 #include "Player.h"
-
+#include "Background.h"
 
 CStage::CStage()
 {
@@ -27,26 +27,19 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 	}*/
 
-	if (FAILED(CTextureMgr::GetInstance()->ReadImgPath(L"../Data/ImgPath.txt")))
+	if (FAILED(CTextureMgr::GetInstance()->ReadImgPath(L"../Data/JSU_ImgPath.txt")))
 	{
 		MSG_BOX(L"Texture txt Load Failed");
 		return E_FAIL;
 	}
 
-
-	CObj*		pObj = new CMyTerrain;
-
-	if(nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pObj);
-
-	pObj = new CPlayer;
+	CObj* pObj = new CBackground;
+	dynamic_cast<CBackground*>(pObj)->Set_SceneID(CSceneMgr::ID::STAGE);
 
 	if (nullptr != pObj)
 		pObj->Initialize();
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::ID::BACK, pObj);
 	
 	return S_OK;
 }

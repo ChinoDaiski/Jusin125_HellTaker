@@ -3,6 +3,7 @@
 #include "Include.h"
 
 #include "Stage.h"
+#include "Logo.h"
 
 class CScene; 
 class CSceneMgr final
@@ -10,7 +11,7 @@ class CSceneMgr final
 	DECLARE_SINGLETON(CSceneMgr)
 
 public:
-	enum ID {LOADING, STAGE, BOSS, END};
+	enum ID {LOGO, STAGE, BOSS, LOADING, END};
 
 private:
 	CSceneMgr();

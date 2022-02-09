@@ -9,3 +9,4 @@ Player|Dash|11|..\Texture\Stage\Player\Dash\AKIHA_AKI13_00%d.png
 Player|Stand|12|..\Texture\Stage\Player\Stand\AKIHA_AKI00_00%d.png
 Player|Walk|13|..\Texture\Stage\Player\Walk\AKIHA_AKI26_00%d.png
 Terrain|Tile|36|..\Texture\Stage\Terrain\Tile\Tile%d.png
+Scene|Clear|29|..\Texture\Stage\Scene\Clear\transtion%d.png

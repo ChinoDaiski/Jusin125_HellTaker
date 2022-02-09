@@ -25,7 +25,7 @@ HRESULT CMainGame::Initialize(void)
 		return E_FAIL;
 	}
 
-	CSceneMgr::GetInstance()->Change_SceneMgr(CSceneMgr::STAGE);
+	CSceneMgr::GetInstance()->Change_SceneMgr(CSceneMgr::ID::LOGO);
 	CTimeMgr::GetInstance()->Initialize();
 
 	return S_OK;

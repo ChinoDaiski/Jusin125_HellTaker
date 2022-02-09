@@ -43,9 +43,6 @@
     <Filter Include="03. Scene">
       <UniqueIdentifier>{28240c0f-9b59-4bf3-ab90-8ca2ce9c9606}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Scene\00. Stage">
-      <UniqueIdentifier>{4d71bb3f-65c1-48a1-8f2c-98556d1f6162}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Manager\02. SceneMgr">
       <UniqueIdentifier>{e6811853-9ee3-4949-9e1e-bb088c256af9}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,24 @@
     </Filter>
     <Filter Include="01. Manager\05. KeyMgr">
       <UniqueIdentifier>{c50fd205-d1d8-44c4-98b3-39d7ebc6a10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Scene\00. Logo">
+      <UniqueIdentifier>{af4f7580-36df-4626-b67d-ec2fdab05680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Scene\01. Stage">
+      <UniqueIdentifier>{4d71bb3f-65c1-48a1-8f2c-98556d1f6162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\02. BackGround">
+      <UniqueIdentifier>{7a597776-e7b4-4a4c-a63e-064c97f3a584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\03. Button">
+      <UniqueIdentifier>{db323ef1-98d6-47bd-9c55-e4eeec504159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. Transparency">
+      <UniqueIdentifier>{a0480b60-fc71-4745-b9b0-d87646dc665d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\05. Character">
+      <UniqueIdentifier>{7931f940-efcb-4165-892c-a01fe3f4144b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +118,7 @@
       <Filter>02. Obj</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
-      <Filter>03. Scene\00. Stage</Filter>
+      <Filter>03. Scene\01. Stage</Filter>
     </ClInclude>
     <ClInclude Include="SceneMgr.h">
       <Filter>01. Manager\02. SceneMgr</Filter>
@@ -125,6 +140,21 @@
     </ClInclude>
     <ClInclude Include="KeyMgr.h">
       <Filter>01. Manager\05. KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>03. Scene\00. Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>02. Obj\02. BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GameButton.h">
+      <Filter>02. Obj\03. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Transparency.h">
+      <Filter>02. Obj\04. Transparency</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>02. Obj\05. Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +186,7 @@
       <Filter>02. Obj</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>03. Scene\00. Stage</Filter>
+      <Filter>03. Scene\01. Stage</Filter>
     </ClCompile>
     <ClCompile Include="SceneMgr.cpp">
       <Filter>01. Manager\02. SceneMgr</Filter>
@@ -178,6 +208,21 @@
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
       <Filter>01. Manager\05. KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>03. Scene\00. Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>02. Obj\02. BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="GameButton.cpp">
+      <Filter>02. Obj\03. Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Transparency.cpp">
+      <Filter>02. Obj\04. Transparency</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>02. Obj\05. Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

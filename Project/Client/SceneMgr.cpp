@@ -26,14 +26,20 @@ HRESULT CSceneMgr::Change_SceneMgr(ID eID)
 
 		switch (m_eNextScene)
 		{
-		case CSceneMgr::LOADING:
+		case CSceneMgr::LOGO:
+			m_pScene = CLogo::Create();
 			break;
+
 		case CSceneMgr::STAGE:
 			m_pScene = CStage::Create(); 
 			break;
+
 		case CSceneMgr::BOSS:
+
 			break;
-		default:
+
+		case CSceneMgr::LOADING:
+
 			break;
 		}
 		if (nullptr == m_pScene)
