@@ -27,7 +27,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ZERO)
+	: m_chapter(SEVEN)
 {
 	CObj* pBackGround = new CBackGround;
 
@@ -95,8 +95,7 @@ void CStage::Change_NextChapter()
 {
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
-	m_pBackGround->Release();
-
+	
 	switch (m_chapter)
 	{
 	case ZERO:
@@ -134,6 +133,10 @@ void CStage::Change_NextChapter()
 
 void CStage::Init_Chapter()
 {
+	m_pBackGround->Release();
+	dynamic_cast<CPlayer*>(m_pPlayer)->Set_GroundPtr(m_pBackGround);
+	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(m_chapter);
+
 	switch (m_chapter)
 	{
 	case ZERO:
@@ -167,8 +170,6 @@ void CStage::Init_Chapter()
 		// TODO : 엔딩 씬(Ending Scene)?
 		break;
 	}
-
-	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(m_chapter);
 }
 
 void CStage::Init_ChapterZERO()
@@ -219,14 +220,15 @@ void CStage::Init_ChapterZERO()
 
 void CStage::Init_ChapterONE()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15 - 9));
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
+	m_pPlayer->Set_ObjIndex(55);
 
 	// 모데우스. Modeus
 	CObj* pObj = new CModeus;
 	if (nullptr != pObj)
 	{
 		pObj->Initialize();
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68 - 9));
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -234,7 +236,8 @@ void CStage::Init_ChapterONE()
 
 void CStage::Init_ChapterTWO()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(0));
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
 
 	// 케르베로스. Cerberus
 	CObj* pObj = new CCerberus;
@@ -249,6 +252,9 @@ void CStage::Init_ChapterTWO()
 
 void CStage::Init_ChapterTHREE()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 말리나. Malina
 	CObj* pObj = new CMalina;
 	if (nullptr != pObj)
@@ -259,6 +265,9 @@ void CStage::Init_ChapterTHREE()
 
 void CStage::Init_ChapterFOUR()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 즈드라다. Zdrada
 	CObj* pObj = new CZdrada;
 	if (nullptr != pObj)
@@ -269,6 +278,9 @@ void CStage::Init_ChapterFOUR()
 
 void CStage::Init_ChapterFIVE()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 아자젤. Azazel
 	CObj* pObj = new CAzazel;
 	if (nullptr != pObj)
@@ -279,6 +291,9 @@ void CStage::Init_ChapterFIVE()
 
 void CStage::Init_ChapterSIX()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 저스티스. Justice
 	CObj* pObj = new CJustice;
 	if (nullptr != pObj)
@@ -289,6 +304,9 @@ void CStage::Init_ChapterSIX()
 
 void CStage::Init_ChapterSeven()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 루시퍼. Lucifer
 	CObj* pObj = new CLucifer;
 	if (nullptr != pObj)
@@ -299,6 +317,9 @@ void CStage::Init_ChapterSeven()
 
 void CStage::Init_ChapterEIGHT()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
+
 	// 저지먼트. Judgement
 	CObj* pObj = new CJudgement;
 	if (nullptr != pObj)

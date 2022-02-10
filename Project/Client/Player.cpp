@@ -97,14 +97,25 @@ void CPlayer::Key_Input(void)
 	// 윗쪽 방향키. UP
 	if (CKeyMgr::GetInstance()->Key_Down(VK_UP))
 	{
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 9);
-		Set_ObjIndex(m_ObjIndex - 9);
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
+		(m_ObjIndex - 
+			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index - 
+			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+		Set_ObjIndex(m_ObjIndex -
+			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+
 	}
 	// 아래쪽 방향키. DOWN
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
 	{
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 9);
-		Set_ObjIndex(m_ObjIndex + 9);
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
+		(m_ObjIndex +
+			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+		Set_ObjIndex(m_ObjIndex +
+			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
 	}
 	// 왼쪽 방향키. LEFT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
