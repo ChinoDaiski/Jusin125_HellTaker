@@ -27,7 +27,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(SEVEN)
+	: m_chapter(ZERO)
 {
 	CObj* pBackGround = new CBackGround;
 
@@ -164,6 +164,7 @@ void CStage::Init_Chapter()
 		Init_ChapterSeven();
 		break;
 	case EIGHT:
+		// TODO : BOSS_ROOM
 		Init_ChapterEIGHT();
 		break;
 	case CHAPTER_END:

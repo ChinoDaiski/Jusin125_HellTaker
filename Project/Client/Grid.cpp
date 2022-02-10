@@ -5,7 +5,7 @@
 #include "TextureMgr.h"
 
 CGrid::CGrid()
-	: m_iIndex(0)
+	: m_iIndex(0), m_bOnObject(false)
 {
 	// empty
 }

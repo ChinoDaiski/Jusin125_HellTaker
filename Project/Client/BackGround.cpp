@@ -232,6 +232,23 @@ D3DXVECTOR3 CBackGround::Find_IndexPos(int _index)
 	{
 		index = dynamic_cast<CGrid*>(iter)->Get_Index();
 		if (index == _index)
+		{
+			dynamic_cast<CGrid*>(iter)->Set_OnObject(true);
 			return iter->Get_Info().vPos;
+		}
+	}
+}
+
+bool CBackGround::Find_IndexBlock(int _index)
+{
+	int index = 0;
+
+	for (auto& iter : vecGrid)
+	{
+		index = dynamic_cast<CGrid*>(iter)->Get_Index();
+		if (index == _index)
+		{
+			return iter->Get_Block();
+		}
 	}
 }

@@ -6,6 +6,7 @@ D3DXVECTOR3 CObj::m_vScroll{};
 
 CObj::CObj()
 	: m_bDead(false), m_iHp(10), m_ObjIndex(0)
+	, m_Dir(DIR_END), m_bBlock(false)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	D3DXMatrixIdentity(&m_tInfo.matWorld);

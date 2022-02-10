@@ -31,6 +31,7 @@ public:
 	void		Select_Chapter(CHAPTER _chapter);
 
 	D3DXVECTOR3	Find_IndexPos(int _index);
+	bool		Find_IndexBlock(int _index);
 
 private:
 	vector<CObj*>	vecGrid;
