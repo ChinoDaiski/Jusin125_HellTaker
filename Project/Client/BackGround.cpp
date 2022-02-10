@@ -103,9 +103,9 @@ void CBackGround::Release(void)
 
 void CBackGround::Create_Grid(void)
 {
-	for (int i = 2; i < TILEY - 2; ++i)
+	for (int i = m_GridInfo.iStart_Index; i < m_GridInfo.iEnd_Index; ++i)		// Y 축
 	{
-		for (int j = 5; j < TILEX - 5; ++j)
+		for (int j = m_GridInfo.jStart_Index; j < m_GridInfo.jEnd_Index; ++j)	// X 축
 		{
 			m_pGrid = new CGrid;
 			m_pGrid->Initialize();
@@ -124,29 +124,62 @@ void CBackGround::Map_Init(void)
 {
 	switch (m_Chapter)
 	{
-	case ZERO: case FIVE:
+	case ZERO:
 		Part1_ChapterInit();
 		m_GridInfo.iStart_Index = 2;
 		m_GridInfo.jStart_Index = 5;
-		m_GridInfo.iEnd_Index = 2;
-		m_GridInfo.jEnd_Index = 5;
+		m_GridInfo.iEnd_Index = TILEY - 1;
+		m_GridInfo.jEnd_Index = TILEX - 5;
 		break;
 	case ONE:
 		Part1_ChapterInit();
-		m_GridInfo.iStart_Index = 0;
-		m_GridInfo.jStart_Index = 0;
-		m_GridInfo.iEnd_Index = 0;
-		m_GridInfo.jEnd_Index = 0;
+		m_GridInfo.iStart_Index = 1;
+		m_GridInfo.jStart_Index = 5;
+		m_GridInfo.iEnd_Index = TILEY - 1;
+		m_GridInfo.jEnd_Index = TILEX - 5;
 		break;
-	case TWO: case THREE: case FOUR: case SIX:
+	case FIVE:
+		Part1_ChapterInit();
+		m_GridInfo.iStart_Index = 1;
+		m_GridInfo.jStart_Index = 5;
+		m_GridInfo.iEnd_Index = TILEY - 0;
+		m_GridInfo.jEnd_Index = TILEX - 5;
+		break;
+	case TWO:
+		Part2_ChapterInit();
 		m_GridInfo.iStart_Index = 2;
 		m_GridInfo.jStart_Index = 5;
-		m_GridInfo.iEnd_Index = 2;
-		m_GridInfo.jEnd_Index = 5;
+		m_GridInfo.iEnd_Index = TILEY - 0;
+		m_GridInfo.jEnd_Index = TILEX - 4;
+		break;
+	case THREE:
+		Part2_ChapterInit();
+		m_GridInfo.iStart_Index = 3;
+		m_GridInfo.jStart_Index = 5;
+		m_GridInfo.iEnd_Index = TILEY - 1;
+		m_GridInfo.jEnd_Index = TILEX - 4;
+		break;
+	case FOUR:
+		Part2_ChapterInit();
+		m_GridInfo.iStart_Index = 2;
+		m_GridInfo.jStart_Index = 6;
+		m_GridInfo.iEnd_Index = TILEY - 0;
+		m_GridInfo.jEnd_Index = TILEX - 5;
+		break;
+	case SIX:
+		Part2_ChapterInit();
+		m_GridInfo.iStart_Index = 2;
+		m_GridInfo.jStart_Index = 6;
+		m_GridInfo.iEnd_Index = TILEY - 0;
+		m_GridInfo.jEnd_Index = TILEX - 5;
 		break;
 	case CBackGround::SEVEN:
 		// TODO : 루시퍼 룸 구현 (Lucifer)
 		Part3_ChapterInit();
+		m_GridInfo.iStart_Index = 2;
+		m_GridInfo.jStart_Index = 4;
+		m_GridInfo.iEnd_Index = TILEY + 5;
+		m_GridInfo.jEnd_Index = TILEX - 4;
 		break;
 	case CBackGround::EIGHT:
 		// empty
@@ -172,5 +205,8 @@ void CBackGround::Part2_ChapterInit()
 
 void CBackGround::Part3_ChapterInit()
 {
-	// TODO : Lucifer room Create
+	m_GridInfo.fCX = MAPSIZEX * ((1920.f / TILEX) / 100.f);
+	m_GridInfo.fCY = MAPSIZEY * ((1080.f / TILEY) / 100.f);
+	m_GridInfo.Width = ((TILECX * m_GridInfo.fCX) / 2.f);
+	m_GridInfo.Height = 0.f;
 }

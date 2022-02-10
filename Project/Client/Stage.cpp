@@ -39,31 +39,6 @@ CStage::~CStage()
 
 HRESULT CStage::Ready_Scene()
 {
-	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Stage/Terrain/Tile/Tile%d.png",
-		L"Terrain",
-		L"Tile",
-		36)))
-	{
-		MSG_BOX(L"Tile Texture Insert Failed");
-		return E_FAIL;
-	}*/
-
-	/*if (FAILED(CTextureMgr::GetInstance()->ReadImgPath(L"../Data/ImgPath.txt")))
-	{
-		MSG_BOX(L"Texture txt Load Failed");
-		return E_FAIL;
-	}*/
-
-
-	/*
-	CObj*		pObj = new CMyTerrain;
-
-	if(nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pObj);
-	*/
-
 	CObj*		pObj = new CBackGround;
 
 	if (nullptr != pObj)
@@ -141,7 +116,6 @@ HRESULT CStage::Ready_Scene()
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
 
-
 	// 몬스터. Monster
 	pObj = new CMonster;
 	if (nullptr != pObj)
@@ -183,31 +157,6 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
-
-	// Map Width must Include Max 19 Object
-	for (int i = 0; i < 19; ++i)
-	{
-		pObj = new CMonster;
-		if (nullptr != pObj)
-			pObj->Initialize();
-
-		pObj->Set_Pos(D3DXVECTOR3(30.f + i*100.f*MAPSIZEX, 600.f, 0.f));
-
-		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
-	}
-
-	// Map Height must Include Max 9~10 Object
-	// 9개까지의 오브젝트를 좀 더 자연스럽게 배치가능. 10개는 좁음
-	for (int i = 0; i < 11; ++i)
-	{
-		pObj = new CMonster;
-		if (nullptr != pObj)
-			pObj->Initialize();
-
-		pObj->Set_Pos(D3DXVECTOR3(800.f, 30.f + i*100.f*MAPSIZEY, 0.f));
-
-		CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
-	}
 
 	return S_OK;
 }
