@@ -184,6 +184,7 @@ void CStage::Init_ChapterZERO()
 	{
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(43, ON_OBJECT);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -194,6 +195,7 @@ void CStage::Init_ChapterZERO()
 	{
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(22));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(22, ON_OBJECT);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
@@ -204,6 +206,7 @@ void CStage::Init_ChapterZERO()
 	{
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(30));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(30, ON_OBJECT);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
@@ -214,9 +217,81 @@ void CStage::Init_ChapterZERO()
 	{
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(32));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(32, ON_OBJECT);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 플레임베이스
+	pObj = new CFlameBase;
+	if (nullptr != pObj)
+	{
+		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(36);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(36, CANT_MOVE);
+
+		pObj->Initialize();
+		pObj->Set_Pos(tmp);
+		tmp -= D3DXVECTOR3{ 0.f, 20.f, 0.f };
+		dynamic_cast<CFlameBase*>(pObj)->Get_Frie()->Set_Pos(tmp);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// 플레임베이스
+	pObj = new CFlameBase;
+	if (nullptr != pObj)
+	{
+		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(10);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(10, CANT_MOVE);
+
+		pObj->Initialize();
+		pObj->Set_Pos(tmp);
+		tmp -= D3DXVECTOR3{ 0.f, 20.f, 0.f };
+		dynamic_cast<CFlameBase*>(pObj)->Get_Frie()->Set_Pos(tmp);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// 플레임베이스
+	pObj = new CFlameBase;
+	if (nullptr != pObj)
+	{
+		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(4);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(4, CANT_MOVE);
+
+		pObj->Initialize();
+		pObj->Set_Pos(tmp);
+		tmp -= D3DXVECTOR3{ 0.f, 20.f, 0.f };
+		dynamic_cast<CFlameBase*>(pObj)->Get_Frie()->Set_Pos(tmp);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// 플레임베이스
+	pObj = new CFlameBase;
+	if (nullptr != pObj)
+	{
+		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(43);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(43, CANT_MOVE);
+
+		pObj->Initialize();
+		pObj->Set_Pos(tmp);
+		tmp -= D3DXVECTOR3{ 0.f, 20.f, 0.f };
+		dynamic_cast<CFlameBase*>(pObj)->Get_Frie()->Set_Pos(tmp);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// 트랩
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(23));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(23, ON_OBJECT);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
 }
 
 void CStage::Init_ChapterONE()

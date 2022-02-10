@@ -24,6 +24,8 @@ HRESULT CGrid::Initialize(void)
 	m_wstrObjKey = L"Layer";
 	m_fSpeed = 100.f;
 
+	m_GridState = CAN_MOVE;
+
 	return S_OK;
 }
 

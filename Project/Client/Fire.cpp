@@ -18,7 +18,6 @@ HRESULT CFire::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/FlameBase/Fire/fire%d.png", L"Fire", L"Idle", 12)))
 		return S_FALSE;
 
-	// m_tInfo.vPos = D3DXVECTOR3(300.f, 130.f, 0.f);
 	m_wstrObjKey = L"Fire";
 	m_fSpeed = 100.f;
 

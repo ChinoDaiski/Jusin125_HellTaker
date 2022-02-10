@@ -30,7 +30,9 @@ public:
 	INFO&			Get_Info() { return m_tInfo; }
 
 	void			Set_ObjIndex(int _index) { m_ObjIndex = _index; }
-	bool			Get_Block() { return m_bBlock; }
+
+	void		Set_GridState(GRID_STATE _gridstate) { m_GridState = _gridstate; }
+	GRID_STATE	Get_GridState() { return m_GridState; }
 
 protected:
 	static D3DXVECTOR3			m_vScroll;		// 스크롤
@@ -48,6 +50,6 @@ protected:
 	int			m_ObjIndex;				// 객체가 위치한 인덱스
 	DIR			m_Dir;					// 오브젝트 방향
 
-	bool		m_bBlock;				// 객체의 장애물 판단 (true면 장애물)
+	GRID_STATE	m_GridState;			// 격자의 속성
 };
 

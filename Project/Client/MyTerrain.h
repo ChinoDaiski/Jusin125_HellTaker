@@ -1,11 +1,11 @@
 #pragma once
 #include "Obj.h"
 
-class CFlameBase : public CObj
+class CMyTerrain : public CObj
 {
 public:
-	CFlameBase();
-	virtual ~CFlameBase();
+	CMyTerrain();
+	virtual ~CMyTerrain();
 
 public:
 	virtual HRESULT Initialize(void) override;
@@ -14,13 +14,11 @@ public:
 	virtual void Render(void) override;
 	virtual void Release(void) override;
 
-public:
-	CObj*	Get_Frie() { return m_pFire; };
+private:
+	HRESULT		Load_Tile(const TCHAR* pTilePath);
 
 private:
-	void	Create_Fire(void);
+	vector<TILE*>		m_vecTile;
 
-private:
-	CObj*	m_pFire;		// ÆÄÀÌ¾î
 };
 

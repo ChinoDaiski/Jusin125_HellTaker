@@ -123,6 +123,8 @@ void CPlayer::Key_Input(void)
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
 		m_Dir = DIR_UP;
+
+		--m_iHp;
 	}
 	// 아래쪽 방향키. DOWN
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
@@ -140,6 +142,8 @@ void CPlayer::Key_Input(void)
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
 		m_Dir = DIR_DOWN;
+
+		--m_iHp;
 	}
 	// 왼쪽 방향키. LEFT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
@@ -151,6 +155,8 @@ void CPlayer::Key_Input(void)
 		Set_ObjIndex(m_ObjIndex - 1);
 		m_Dir = DIR_LEFT;
 		m_PreDir = DIR_LEFT;
+
+		--m_iHp;
 	}
 	// 오른쪽 방향키. RIGHT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_RIGHT))
@@ -162,30 +168,16 @@ void CPlayer::Key_Input(void)
 		Set_ObjIndex(m_ObjIndex + 1);
 		m_Dir = DIR_RIGHT;
 		m_PreDir = DIR_RIGHT;
+
+		--m_iHp;
 	}
 }
 
 bool CPlayer::DontMove(int _index)
 {
 	// 갈 수 없는 타일인지 판단
-	if (true == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
+	if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 		return true;
-
-	// 격자 위 오브젝트 판단
-	if (true == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
-		return true;
-
-	//// MOST UP. 가장 윗 라인
-	//if (0 == (_index / 9))
-	//	return true;
-
-	//// MOST LEFT. 가장 왼 라인
-	//if (0 == (_index % 9))
-	//	return true;
-
-	//// MOST RIGHT. 가장 오른 라인
-
-	//// MOST DOWN. 가장 밑 라인 
 
 	return false;
 }

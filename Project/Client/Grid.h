@@ -22,7 +22,7 @@ public:
 	bool	Get_OnObject() { return m_bOnObject; }
 
 private:
-	int		m_iIndex;		// 격자 인덱스
-	bool	m_bOnObject;	// 격자 위에 Object 가 있다면 true
+	int			m_iIndex;		// 격자 인덱스
+	bool		m_bOnObject;	// 격자 위에 Object 가 있다면 true
 };
 

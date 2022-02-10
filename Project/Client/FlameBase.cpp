@@ -5,6 +5,7 @@
 #include "ObjMgr.h"
 
 #include "Fire.h"
+#include "BackGround.h"
 
 CFlameBase::CFlameBase()
 {
@@ -82,11 +83,11 @@ void CFlameBase::Release(void)
 
 void CFlameBase::Create_Fire(void)
 {
-	CObj*		pObj = new CFire;
+	m_pFire = new CFire;
 
-	if (nullptr != pObj)
-		pObj->Initialize();
+	if (nullptr != m_pFire)
+		m_pFire->Initialize();
 
-	pObj->Set_Pos(D3DXVECTOR3(m_tInfo.vPos.x, m_tInfo.vPos.y - 20, 0.f));
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pObj);
+	m_pFire->Set_Pos(D3DXVECTOR3(m_tInfo.vPos.x, m_tInfo.vPos.y - 20, 0.f));
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pFire);
 }

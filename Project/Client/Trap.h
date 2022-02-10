@@ -3,6 +3,8 @@
 
 class CTrap : public CObj
 {
+	enum ACTIVE { ON, OFF, ON_READY, OFF_READY, STOP };
+
 public:
 	CTrap();
 	virtual ~CTrap();
@@ -15,10 +17,13 @@ public:
 	virtual void Release(void) override;
 
 public:
-	bool	Get_Active() { return m_Active; }
-	void	Set_Active(bool _active) { m_Active = _active; }
+	ACTIVE		Get_Active() { return m_Active; }
+	void		Set_Active(ACTIVE _active) { m_Active = _active; }
 
 private:
-	bool	m_Active = true;		// true 이면 가시가 올라옴(Up), false 이면 내려감(Down)
+	void	Active_Trap();
+
+private:
+	ACTIVE		m_Active;		// -1 == ON, 0 == REVERSE, 1 == ON_READY, 2 == OFF 
 };
 

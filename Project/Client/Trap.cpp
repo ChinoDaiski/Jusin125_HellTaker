@@ -2,8 +2,10 @@
 #include "Trap.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "TimeMgr.h"
 
 CTrap::CTrap()
+	: m_Active(STOP)
 {
 	// empty
 }
@@ -15,17 +17,14 @@ CTrap::~CTrap()
 
 HRESULT CTrap::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Trap/Off/off%d.png", L"Off", L"Idle", 1)))
-		return S_FALSE;
-
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Trap/On/on%d.png", L"On", L"Idle", 6)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Trap/trap%d.png", L"Trap", L"Idle", 7)))
 		return S_FALSE;
 
 	m_tInfo.vPos = D3DXVECTOR3(500.f, 130.f, 0.f);
-	m_wstrObjKey = L"Off";
+	m_wstrObjKey = L"Trap";
 	m_fSpeed = 100.f;
 
-	m_tFrame = { 0.f, 6.f, 2.4f };
+	m_tFrame = { 0.f, 7.f, 2.4f };
 
 	return S_OK;
 }
@@ -51,11 +50,7 @@ int CTrap::Update(void)
 
 void CTrap::Late_Update(void)
 {
-	if (m_Active)
-	{
-		m_wstrObjKey = L"On";
-		MoveFrame();
-	}
+	Active_Trap();
 }
 
 void CTrap::Render(void)
@@ -80,4 +75,38 @@ void CTrap::Render(void)
 void CTrap::Release(void)
 {
 	// empty
+}
+
+void CTrap::Active_Trap()
+{
+	switch (m_Active)
+	{
+	case ON:
+		m_tFrame.fFrame += m_tFrame.fMax * (m_tFrame.fFrameSpeed) * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+		if (m_tFrame.fFrame > m_tFrame.fMax)
+		{
+			m_Active = STOP;
+			m_tFrame.fFrame = m_tFrame.fMax - 1;
+		}
+		break;
+	case OFF:
+		m_tFrame.fFrame -= m_tFrame.fMax * (m_tFrame.fFrameSpeed) * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+		if (m_tFrame.fFrame < 1.f)
+		{
+			m_Active = STOP;
+			m_tFrame.fFrame = 0.f;
+		}
+		break;
+	case ON_READY:
+		m_tFrame = { 0.f, 7.f, 2.4f };
+		m_Active = ON;
+		break;
+	case OFF_READY:
+		m_tFrame = { 6.f, 7.f, 2.4f };
+		m_Active = OFF;
+		break;
+	}
+
 }
