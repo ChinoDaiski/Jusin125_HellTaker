@@ -5,8 +5,6 @@
 
 class CBackGround : public CObj
 {
-	enum CHAPTER { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, CHAPTER_END };
-
 public:
 	CBackGround();
 	virtual ~CBackGround();
@@ -29,6 +27,14 @@ private:
 public:
 	GRID_INFO&	Get_GridInfo() { return m_GridInfo; }
 	void		Set_GridInfo(GRID_INFO _GridInfo) { m_GridInfo = _GridInfo; }
+
+	void		Select_Chapter(CHAPTER _chapter) 
+	{ 
+		m_Chapter = _chapter; 
+		m_tFrame.fFrame = (float)m_Chapter; 
+		Map_Init();
+		Create_Grid();
+	}
 
 private:
 	vector<CObj*>	vecGrid;

@@ -28,8 +28,25 @@
 #include "FlameBase.h"
 
 CStage::CStage()
+	: m_chapter(ZERO)
 {
-	// empty
+	CObj* pBackGround = new CBackGround;
+
+	if (nullptr != pBackGround)
+		pBackGround->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pBackGround);
+
+	m_pBackGround = CObjMgr::GetInstance()->Get_Terrain();
+
+	// 플레이어 생성
+	CObj*		pPlayer = new CPlayer;
+
+	if (nullptr != pPlayer)
+		pPlayer->Initialize();
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pPlayer);
+
+	m_pPlayer = CObjMgr::GetInstance()->Get_Player();
 }
 
 CStage::~CStage()
@@ -39,124 +56,8 @@ CStage::~CStage()
 
 HRESULT CStage::Ready_Scene()
 {
-	CObj*		pObj = new CBackGround;
-
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pObj);
-
-	pObj = new CPlayer;
-
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pObj);
-
-	// 아자젤. Azazel
-	pObj = new CAzazel;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 케르베로스. Cerberus
-	pObj = new CCerberus;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-	
-	// 저스티스. Justice
-	pObj = new CJustice;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 루시퍼. Lucifer
-	pObj = new CLucifer;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 말리나. Malina
-	pObj = new CMalina;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 모데우스. Modeus
-	pObj = new CModeus;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 판데모니카. Pandemonica
-	pObj = new CPandemonica;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 즈드라다. Zdrada
-	pObj = new CZdrada;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 저지먼트. Judgement
-	pObj = new CJudgement;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
-
-	// 몬스터. Monster
-	pObj = new CMonster;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
-
-	// 벽. Wall
-	pObj = new CWall;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
-
-	// 키. Key
-	pObj = new CKey;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
-
-	// 상자. Chest
-	pObj = new CChest;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
-
-	// 트랩. Trap
-	pObj = new CTrap;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
-
-	// 플레임베이스. FlameBase
-	pObj = new CFlameBase;
-	if (nullptr != pObj)
-		pObj->Initialize();
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+	// 챕터 초기화
+	Init_Chapter();
 
 	return S_OK;
 }
@@ -190,3 +91,227 @@ CStage* CStage::Create(void)
 
 	return pInstance;
 }
+
+void CStage::Change_NextChapter()
+{
+	switch (m_chapter)
+	{
+	case ZERO:
+		m_chapter = ONE;
+		break;
+	case ONE:
+		m_chapter = TWO;
+		break;
+	case TWO:
+		m_chapter = THREE;
+		break;
+	case THREE:
+		m_chapter = FOUR;
+		break;
+	case FOUR:
+		m_chapter = FIVE;
+		break;
+	case FIVE:
+		m_chapter = SIX;
+		break;
+	case SIX:
+		m_chapter = SEVEN;
+		break;
+	case SEVEN:
+		m_chapter = EIGHT;
+		break;
+	case EIGHT:
+		m_chapter = EIGHT;
+		break;
+	case CHAPTER_END:
+		// TODO : 엔딩 씬(Ending Scene)?
+		break;
+	}
+}
+
+void CStage::Init_Chapter()
+{
+	switch (m_chapter)
+	{
+	case ZERO:
+		Init_ChapterZERO();
+		break;
+	case ONE:
+		Init_ChapterONE();
+		break;
+	case TWO:
+		Init_ChapterTWO();
+		break;
+	case THREE:
+		Init_ChapterTHREE();
+		break;
+	case FOUR:
+		Init_ChapterFOUR();
+		break;
+	case FIVE:
+		Init_ChapterFIVE();
+		break;
+	case SIX:
+		Init_ChapterSIX();
+		break;
+	case SEVEN:
+		Init_ChapterSeven();
+		break;
+	case EIGHT:
+		Init_ChapterEIGHT();
+		break;
+	case CHAPTER_END:
+		// TODO : 엔딩 씬(Ending Scene)?
+		break;
+	}
+
+	m_pBackGround->Release();
+	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(m_chapter);
+
+}
+
+void CStage::Init_ChapterZERO()
+{
+	m_pPlayer->Set_Pos(D3DXVECTOR3(750.f, 250.f, 0.f));
+
+	// 판데모니카. Pandemonica
+	CObj* pObj = new CPandemonica;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(D3DXVECTOR3(750.f, 500.f, 0.f));
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(D3DXVECTOR3(550.f, 400.f, 0.f));
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+}
+
+void CStage::Init_ChapterONE()
+{
+	// 모데우스. Modeus
+	CObj* pObj = new CModeus;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterTWO()
+{
+	// 케르베로스. Cerberus
+	CObj* pObj = new CCerberus;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterTHREE()
+{
+	// 말리나. Malina
+	CObj* pObj = new CMalina;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterFOUR()
+{
+	// 즈드라다. Zdrada
+	CObj* pObj = new CZdrada;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterFIVE()
+{
+	// 아자젤. Azazel
+	CObj* pObj = new CAzazel;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterSIX()
+{
+	// 저스티스. Justice
+	CObj* pObj = new CJustice;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterSeven()
+{
+	// 루시퍼. Lucifer
+	CObj* pObj = new CLucifer;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Init_ChapterEIGHT()
+{
+	// 저지먼트. Judgement
+	CObj* pObj = new CJudgement;
+	if (nullptr != pObj)
+		pObj->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+// 기타 오브젝트 임시 보관용
+/*
+CObj* pObj = nullptr;
+
+// 벽. Wall
+pObj = new CWall;
+if (nullptr != pObj)
+pObj->Initialize();
+
+CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+// 키. Key
+pObj = new CKey;
+if (nullptr != pObj)
+pObj->Initialize();
+
+CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
+
+// 상자. Chest
+pObj = new CChest;
+if (nullptr != pObj)
+pObj->Initialize();
+
+CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
+
+// 트랩. Trap
+pObj = new CTrap;
+if (nullptr != pObj)
+pObj->Initialize();
+
+CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+// 플레임베이스. FlameBase
+pObj = new CFlameBase;
+if (nullptr != pObj)
+pObj->Initialize();
+
+CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+*/

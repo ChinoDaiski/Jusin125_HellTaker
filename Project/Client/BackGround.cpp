@@ -98,7 +98,8 @@ void CBackGround::Render(void)
 
 void CBackGround::Release(void)
 {
-	// empty
+	for_each(vecGrid.begin(), vecGrid.end(), Safe_Delete<CObj*>);
+	vecGrid.clear();
 }
 
 void CBackGround::Create_Grid(void)
@@ -173,7 +174,7 @@ void CBackGround::Map_Init(void)
 		m_GridInfo.iEnd_Index = TILEY - 0;
 		m_GridInfo.jEnd_Index = TILEX - 5;
 		break;
-	case CBackGround::SEVEN:
+	case SEVEN:
 		// TODO : 루시퍼 룸 구현 (Lucifer)
 		Part3_ChapterInit();
 		m_GridInfo.iStart_Index = 2;
@@ -181,7 +182,7 @@ void CBackGround::Map_Init(void)
 		m_GridInfo.iEnd_Index = TILEY + 5;
 		m_GridInfo.jEnd_Index = TILEX - 4;
 		break;
-	case CBackGround::EIGHT:
+	case EIGHT:
 		// empty
 		break;
 	}

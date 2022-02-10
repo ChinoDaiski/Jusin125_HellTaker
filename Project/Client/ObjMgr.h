@@ -16,9 +16,10 @@ private:
 
 public:
 	CObj*			Get_Terrain() { return m_listObject[TERRAIN].front(); }
+	CObj*	Get_Player() { return m_listObject[PLAYER].front(); }
 
 public:
-	void Add_Object(ID eID, CObj* pObject); 
+	void	Add_Object(ID eID, CObj* pObject); 
 
 public:
 	void Update(); 
