@@ -3,7 +3,6 @@
 
 #include "TextureMgr.h"
 #include "ObjMgr.h"
-#include "MyTerrain.h"
 #include "BackGround.h"
 
 #include "Player.h"
@@ -172,14 +171,14 @@ void CStage::Init_Chapter()
 
 void CStage::Init_ChapterZERO()
 {
-	m_pPlayer->Set_Pos(D3DXVECTOR3(750.f, 250.f, 0.f));
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 
 	// 판데모니카. Pandemonica
 	CObj* pObj = new CPandemonica;
 	if (nullptr != pObj)
 	{
 		pObj->Initialize();
-		pObj->Set_Pos(D3DXVECTOR3(750.f, 500.f, 0.f));
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -189,7 +188,27 @@ void CStage::Init_ChapterZERO()
 	if (nullptr != pObj)
 	{
 		pObj->Initialize();
-		pObj->Set_Pos(D3DXVECTOR3(550.f, 400.f, 0.f));
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(22));
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(30));
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(32));
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);

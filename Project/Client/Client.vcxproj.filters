@@ -37,9 +37,6 @@
     <Filter Include="02. Obj">
       <UniqueIdentifier>{d109008a-7f76-4fca-9ad6-4b465912bd1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Obj\00. Terrain">
-      <UniqueIdentifier>{df4e9cca-c6a8-4969-b89e-846106ce506d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Scene">
       <UniqueIdentifier>{28240c0f-9b59-4bf3-ab90-8ca2ce9c9606}</UniqueIdentifier>
     </Filter>
@@ -180,9 +177,6 @@
     <ClInclude Include="TimeMgr.h">
       <Filter>01. Manager\04. TimeMgr</Filter>
     </ClInclude>
-    <ClInclude Include="MyTerrain.h">
-      <Filter>02. Obj\00. Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>02. Obj\01. Player</Filter>
     </ClInclude>
@@ -286,9 +280,6 @@
     </ClCompile>
     <ClCompile Include="TimeMgr.cpp">
       <Filter>01. Manager\04. TimeMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTerrain.cpp">
-      <Filter>02. Obj\00. Terrain</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>02. Obj\01. Player</Filter>

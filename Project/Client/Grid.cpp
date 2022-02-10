@@ -5,6 +5,7 @@
 #include "TextureMgr.h"
 
 CGrid::CGrid()
+	: m_iIndex(0)
 {
 	// empty
 }
@@ -54,6 +55,8 @@ void CGrid::Late_Update(void)
 
 void CGrid::Render(void)
 {
+	TCHAR	szBuf[MIN_STR]{};
+
 	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str());
 
 	if (nullptr == pTexInfo)
@@ -69,6 +72,16 @@ void CGrid::Render(void)
 		&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
 		nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
 		D3DCOLOR_ARGB(150, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+
+	// 타일 인덱스 출력
+	swprintf_s(szBuf, L"%d", m_iIndex);
+	// SETTRANSFORM에 영향을 받음
+	CDevice::GetInstance()->Get_Font()->DrawTextW(CDevice::GetInstance()->Get_Sprite(),
+		szBuf,
+		lstrlen(szBuf),
+		NULL,
+		0,
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 void CGrid::Release(void)

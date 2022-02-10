@@ -181,7 +181,6 @@
     <ClInclude Include="Modeus.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MultiTexture.h" />
-    <ClInclude Include="MyTerrain.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Pandemonica.h" />
@@ -220,7 +219,6 @@
     <ClCompile Include="Modeus.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
-    <ClCompile Include="MyTerrain.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Pandemonica.cpp" />

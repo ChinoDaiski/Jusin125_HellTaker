@@ -14,13 +14,9 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 HWND g_hWnd;
 
-// picture / WINCX 
-// 1920 / 1250 = 1.536 => 10/15 = 0.65104...
-// 1080 / 750 = 1.44 => 10/15 = 0.69444...
+// WindowSize / PictureSize
 extern		float	MAPSIZEX = WINCX / 1920.f;
 extern		float	MAPSIZEY = WINCY / 1080.f;
-
-// WINCX/ TILECX*TILEX = TILE SCALE
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
 ATOM                MyRegisterClass(HINSTANCE hInstance);

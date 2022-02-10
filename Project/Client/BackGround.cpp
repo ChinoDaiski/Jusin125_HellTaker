@@ -94,6 +94,7 @@ void CBackGround::Render(void)
 
 	for (auto& iter : vecGrid)
 		iter->Render();
+
 }
 
 void CBackGround::Release(void)
@@ -104,12 +105,15 @@ void CBackGround::Release(void)
 
 void CBackGround::Create_Grid(void)
 {
+	int iIndex = 0;
+
 	for (int i = m_GridInfo.iStart_Index; i < m_GridInfo.iEnd_Index; ++i)		// Y รเ
 	{
 		for (int j = m_GridInfo.jStart_Index; j < m_GridInfo.jEnd_Index; ++j)	// X รเ
 		{
 			m_pGrid = new CGrid;
 			m_pGrid->Initialize();
+			dynamic_cast<CGrid*>(m_pGrid)->Set_Index(iIndex);
 
 			float fX = float((TILECX * j * m_GridInfo.fCX)) + m_GridInfo.Width;
 			float fY = float((TILECY * i * m_GridInfo.fCY)) + m_GridInfo.Height;
@@ -117,6 +121,7 @@ void CBackGround::Create_Grid(void)
 			m_pGrid->Set_Pos(D3DXVECTOR3(fX, fY, 0.f));
 
 			vecGrid.push_back(m_pGrid);
+			++iIndex;
 		}
 	}
 }
@@ -210,4 +215,24 @@ void CBackGround::Part3_ChapterInit()
 	m_GridInfo.fCY = MAPSIZEY * ((1080.f / TILEY) / 100.f);
 	m_GridInfo.Width = ((TILECX * m_GridInfo.fCX) / 2.f);
 	m_GridInfo.Height = 0.f;
+}
+
+void CBackGround::Select_Chapter(CHAPTER _chapter)
+{
+	m_Chapter = _chapter;
+	m_tFrame.fFrame = (float)m_Chapter;
+	Map_Init();
+	Create_Grid();
+}
+
+D3DXVECTOR3 CBackGround::Find_IndexPos(int _index)
+{
+	int index = 0;
+
+	for (auto& iter : vecGrid)
+	{
+		index = dynamic_cast<CGrid*>(iter)->Get_Index();
+		if (index == _index)
+			return iter->Get_Info().vPos;
+	}
 }

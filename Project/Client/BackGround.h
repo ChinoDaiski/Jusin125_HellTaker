@@ -28,13 +28,9 @@ public:
 	GRID_INFO&	Get_GridInfo() { return m_GridInfo; }
 	void		Set_GridInfo(GRID_INFO _GridInfo) { m_GridInfo = _GridInfo; }
 
-	void		Select_Chapter(CHAPTER _chapter) 
-	{ 
-		m_Chapter = _chapter; 
-		m_tFrame.fFrame = (float)m_Chapter; 
-		Map_Init();
-		Create_Grid();
-	}
+	void		Select_Chapter(CHAPTER _chapter);
+
+	D3DXVECTOR3	Find_IndexPos(int _index);
 
 private:
 	vector<CObj*>	vecGrid;
