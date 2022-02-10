@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99. Etc">
+      <UniqueIdentifier>{8806be31-367d-48f1-b8aa-511b259dbd88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Etc\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="99. Etc\소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="99. Etc\헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="00. MFCBase">
+      <UniqueIdentifier>{ade09ed9-5447-4dfc-a410-245d406f6c8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\00. MainFrm">
+      <UniqueIdentifier>{6389d517-d158-49e3-b29c-13ca1c73da64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView">
+      <UniqueIdentifier>{7e65851a-6f91-43e1-a104-c6abacdb2233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\02. ToolDoc">
+      <UniqueIdentifier>{8dce52d2-7253-4b2f-b318-f7323eacd262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager">
+      <UniqueIdentifier>{b5ca6115-2b20-4186-a174-e25202cd88db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\00. Device">
+      <UniqueIdentifier>{09354be8-4c10-4c1d-ad76-2e4beb2ae7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureMgr">
+      <UniqueIdentifier>{49249594-95ed-4f94-9e1f-dc5ae86acb5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureMgr\Texture">
+      <UniqueIdentifier>{5bbba294-08c8-4ab2-9d71-eb5034116da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureMgr\Texture\00. Single">
+      <UniqueIdentifier>{4794a3f3-4e0c-4491-afba-bafaa89dda0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureMgr\Texture\01. Multi">
+      <UniqueIdentifier>{76245876-488f-41d1-8dd4-d68fabd6eb07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Terrain">
+      <UniqueIdentifier>{35985147-bed2-4ef2-b16f-66a93fc536ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\00. MyForm">
+      <UniqueIdentifier>{9eca0526-0d73-41b4-9aa9-ae70c7305190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\01. MiniView">
+      <UniqueIdentifier>{b2bc7978-99b1-49f0-b703-1dba94b5038f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\00. MyForm\00. UnitTool">
+      <UniqueIdentifier>{06d835f6-1dff-4dd1-98a5-1ff53c6a80c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView">
+      <UniqueIdentifier>{54da526d-d185-4597-aebb-d931f1722709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog">
+      <UniqueIdentifier>{8645c642-8424-4056-9018-5503757ecc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\01. Object">
+      <UniqueIdentifier>{6ffe269a-4669-406f-844e-dcb3b2a1e3bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\02. Brick">
+      <UniqueIdentifier>{e9de22d1-7feb-4c69-ae07-102f6d493201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\03. FlameBase">
+      <UniqueIdentifier>{80b57119-f693-4274-b382-9ae1dfe90a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\00. Character">
+      <UniqueIdentifier>{19dafa3b-021f-4175-8b77-bcd2374eeb73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tool.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>00. MFCBase\00. MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolView.h">
+      <Filter>00. MFCBase\01. ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolDoc.h">
+      <Filter>00. MFCBase\02. ToolDoc</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>01. Manager\00. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>01. Manager\01. TextureMgr\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>01. Manager\01. TextureMgr\Texture\00. Single</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMgr.h">
+      <Filter>01. Manager\01. TextureMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>01. Manager\01. TextureMgr\Texture\01. Multi</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>02. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="MyForm.h">
+      <Filter>00. MFCBase\01. ToolView\00. MyForm</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniView.h">
+      <Filter>00. MFCBase\01. ToolView\01. MiniView</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTool.h">
+      <Filter>00. MFCBase\01. ToolView\00. MyForm\00. UnitTool</Filter>
+    </ClInclude>
+    <ClInclude Include="TabDlg.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFromView.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView</Filter>
+    </ClInclude>
+    <ClInclude Include="TabCharacter.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\00. Character</Filter>
+    </ClInclude>
+    <ClInclude Include="TabObject.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TabBrick.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\02. Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="TabFlameBase.h">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\03. FlameBase</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tool.cpp">
+      <Filter>99. Etc\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99. Etc\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>00. MFCBase\00. MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolView.cpp">
+      <Filter>00. MFCBase\01. ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDoc.cpp">
+      <Filter>00. MFCBase\02. ToolDoc</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>01. Manager\00. Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>01. Manager\01. TextureMgr\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>01. Manager\01. TextureMgr\Texture\00. Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>01. Manager\01. TextureMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>01. Manager\01. TextureMgr\Texture\01. Multi</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>02. Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="MyForm.cpp">
+      <Filter>00. MFCBase\01. ToolView\00. MyForm</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniView.cpp">
+      <Filter>00. MFCBase\01. ToolView\01. MiniView</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTool.cpp">
+      <Filter>00. MFCBase\01. ToolView\00. MyForm\00. UnitTool</Filter>
+    </ClCompile>
+    <ClCompile Include="TabDlg.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFromView.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView</Filter>
+    </ClCompile>
+    <ClCompile Include="TabCharacter.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\00. Character</Filter>
+    </ClCompile>
+    <ClCompile Include="TabObject.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\01. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TabBrick.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\02. Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="TabFlameBase.cpp">
+      <Filter>00. MFCBase\01. ToolView\02. MyFromView\00. TabDialog\03. FlameBase</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Tool.rc">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Tool.rc2">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ToolDoc.ico">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Tool.ico">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99. Etc\리소스 파일</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
