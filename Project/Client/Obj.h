@@ -30,9 +30,12 @@ public:
 	INFO&			Get_Info() { return m_tInfo; }
 
 	void			Set_ObjIndex(int _index) { m_ObjIndex = _index; }
+	int				Get_ObjIndex() { return m_ObjIndex; }
 
 	void		Set_GridState(GRID_STATE _gridstate) { m_GridState = _gridstate; }
 	GRID_STATE	Get_GridState() { return m_GridState; }
+
+	DIR			Get_Dir() { return m_Dir; }
 
 protected:
 	static D3DXVECTOR3			m_vScroll;		// ½ºÅ©·Ñ

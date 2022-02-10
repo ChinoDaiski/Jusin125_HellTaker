@@ -184,7 +184,8 @@ void CStage::Init_ChapterZERO()
 	{
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(43, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(61, ON_OBJECT);
+		pObj->Set_ObjIndex(61);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -196,6 +197,7 @@ void CStage::Init_ChapterZERO()
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(22));
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(22, ON_OBJECT);
+		pObj->Set_ObjIndex(22);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
@@ -207,6 +209,7 @@ void CStage::Init_ChapterZERO()
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(30));
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(30, ON_OBJECT);
+		pObj->Set_ObjIndex(30);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
@@ -218,6 +221,7 @@ void CStage::Init_ChapterZERO()
 		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(32));
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(32, ON_OBJECT);
+		pObj->Set_ObjIndex(32);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
@@ -228,6 +232,7 @@ void CStage::Init_ChapterZERO()
 	{
 		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(36);
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(36, CANT_MOVE);
+		pObj->Set_ObjIndex(36);
 
 		pObj->Initialize();
 		pObj->Set_Pos(tmp);
@@ -243,6 +248,7 @@ void CStage::Init_ChapterZERO()
 	{
 		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(10);
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(10, CANT_MOVE);
+		pObj->Set_ObjIndex(10);
 
 		pObj->Initialize();
 		pObj->Set_Pos(tmp);
@@ -258,6 +264,7 @@ void CStage::Init_ChapterZERO()
 	{
 		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(4);
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(4, CANT_MOVE);
+		pObj->Set_ObjIndex(4);
 
 		pObj->Initialize();
 		pObj->Set_Pos(tmp);
@@ -273,6 +280,7 @@ void CStage::Init_ChapterZERO()
 	{
 		D3DXVECTOR3 tmp = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(43);
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(43, CANT_MOVE);
+		pObj->Set_ObjIndex(43);
 
 		pObj->Initialize();
 		pObj->Set_Pos(tmp);
@@ -281,17 +289,6 @@ void CStage::Init_ChapterZERO()
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
-
-	// Æ®·¦
-	pObj = new CTrap;
-	if (nullptr != pObj)
-	{
-		pObj->Initialize();
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(23));
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(23, ON_OBJECT);
-	}
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
 }
 
 void CStage::Init_ChapterONE()

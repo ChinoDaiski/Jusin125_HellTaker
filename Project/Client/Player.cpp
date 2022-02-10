@@ -77,7 +77,17 @@ int CPlayer::Update(void)
 
 void CPlayer::Late_Update(void)
 {
-	MoveFrame();
+	if (L"Kick" == m_wstrStateKey)
+	{
+		MoveFrame();
+		if (0.f == m_tFrame.fFrame)
+		{
+			m_wstrStateKey = L"Idle";
+			m_tFrame = { 0.f, 12.f };
+		}
+	}
+	else
+		MoveFrame();
 }
 
 void CPlayer::Render(void)
@@ -110,6 +120,8 @@ void CPlayer::Key_Input(void)
 	// 윗쪽 방향키. UP
 	if (CKeyMgr::GetInstance()->Key_Down(VK_UP))
 	{
+		m_Dir = DIR_UP;
+
 		if (DontMove(m_ObjIndex -
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
@@ -122,13 +134,14 @@ void CPlayer::Key_Input(void)
 		Set_ObjIndex(m_ObjIndex -
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
-		m_Dir = DIR_UP;
 
 		--m_iHp;
 	}
 	// 아래쪽 방향키. DOWN
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
 	{
+		m_Dir = DIR_DOWN;
+
 		if (DontMove(m_ObjIndex +
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
@@ -141,33 +154,34 @@ void CPlayer::Key_Input(void)
 		Set_ObjIndex(m_ObjIndex +
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
-		m_Dir = DIR_DOWN;
 
 		--m_iHp;
 	}
 	// 왼쪽 방향키. LEFT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
 	{
+		m_Dir = DIR_LEFT;
+		m_PreDir = DIR_LEFT;
+
 		if (DontMove(m_ObjIndex - 1))
 			return;
 
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
 		Set_ObjIndex(m_ObjIndex - 1);
-		m_Dir = DIR_LEFT;
-		m_PreDir = DIR_LEFT;
 
 		--m_iHp;
 	}
 	// 오른쪽 방향키. RIGHT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_RIGHT))
 	{
+		m_Dir = DIR_RIGHT;
+		m_PreDir = DIR_RIGHT;
+
 		if (DontMove(m_ObjIndex + 1))
 			return;
 
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
 		Set_ObjIndex(m_ObjIndex + 1);
-		m_Dir = DIR_RIGHT;
-		m_PreDir = DIR_RIGHT;
 
 		--m_iHp;
 	}
@@ -178,6 +192,53 @@ bool CPlayer::DontMove(int _index)
 	// 갈 수 없는 타일인지 판단
 	if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 		return true;
+
+	// 오브젝트가 위에 있는지 판단
+	if (ON_OBJECT == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
+	{
+		m_wstrStateKey = L"Kick";
+		m_tFrame = { 0.f, 13.f, 2.4f };
+
+		// 좌
+		if (DIR_LEFT == m_Dir)
+		{
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index - 1);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - 1, ON_OBJECT);
+		}
+		else if (DIR_RIGHT == m_Dir)
+		{
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index + 1);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + 1, ON_OBJECT);
+		}
+		else if (DIR_UP == m_Dir)
+		{
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
+				_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(
+				_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index), ON_OBJECT);
+		}
+		else if (DIR_DOWN == m_Dir)
+		{
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
+				_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(
+				_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index), ON_OBJECT);
+		}
+	}
 
 	return false;
 }

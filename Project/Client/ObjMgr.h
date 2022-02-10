@@ -22,6 +22,8 @@ public:
 	void	Add_Object(ID eID, CObj* pObject); 
 	void	Delete_ID(ID eID);
 
+	CObj*	Get_IndexObject(int _index);
+
 public:
 	void Update(); 
 	void Late_Update(); 
