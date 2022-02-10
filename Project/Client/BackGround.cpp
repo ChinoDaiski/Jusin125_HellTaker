@@ -180,7 +180,6 @@ void CBackGround::Map_Init(void)
 		m_GridInfo.jEnd_Index = TILEX - 5;
 		break;
 	case SEVEN:
-		// TODO : 루시퍼 룸 구현 (Lucifer)
 		Part3_ChapterInit();
 		m_GridInfo.iStart_Index = 2;
 		m_GridInfo.jStart_Index = 4;
@@ -233,6 +232,8 @@ D3DXVECTOR3 CBackGround::Find_IndexPos(int _index)
 	{
 		index = dynamic_cast<CGrid*>(iter)->Get_Index();
 		if (index == _index)
+		{
 			return iter->Get_Info().vPos;
+		}
 	}
 }

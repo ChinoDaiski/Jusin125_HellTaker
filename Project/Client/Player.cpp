@@ -5,6 +5,8 @@
 #include "TextureMgr.h"
 #include "KeyMgr.h"
 
+#include "BackGround.h"
+
 CPlayer::CPlayer()
 {
 	// empty
@@ -41,6 +43,8 @@ HRESULT CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 {
+	Key_Input();
+
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);
@@ -93,21 +97,25 @@ void CPlayer::Key_Input(void)
 	// 윗쪽 방향키. UP
 	if (CKeyMgr::GetInstance()->Key_Down(VK_UP))
 	{
-		// TODO : 인덱스 비교하여 충돌처리/이동
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 9);
+		Set_ObjIndex(m_ObjIndex - 9);
 	}
 	// 아래쪽 방향키. DOWN
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
 	{
-		// TODO : 인덱스 비교하여 충돌처리/이동
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 9);
+		Set_ObjIndex(m_ObjIndex + 9);
 	}
 	// 왼쪽 방향키. LEFT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
 	{
-		// TODO : 인덱스 비교하여 충돌처리/이동
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
+		Set_ObjIndex(m_ObjIndex - 1);
 	}
 	// 오른쪽 방향키. RIGHT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_RIGHT))
 	{
-		// TODO : 인덱스 비교하여 충돌처리/이동
+		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
+		Set_ObjIndex(m_ObjIndex + 1);
 	}
 }

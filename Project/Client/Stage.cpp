@@ -46,6 +46,7 @@ CStage::CStage()
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pPlayer);
 
 	m_pPlayer = CObjMgr::GetInstance()->Get_Player();
+	dynamic_cast<CPlayer*>(m_pPlayer)->Set_GroundPtr(m_pBackGround);
 }
 
 CStage::~CStage()
@@ -57,7 +58,6 @@ HRESULT CStage::Ready_Scene()
 {
 	// 챕터 초기화
 	Init_Chapter();
-
 	return S_OK;
 }
 
@@ -93,6 +93,10 @@ CStage* CStage::Create(void)
 
 void CStage::Change_NextChapter()
 {
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
+	m_pBackGround->Release();
+
 	switch (m_chapter)
 	{
 	case ZERO:
@@ -164,14 +168,13 @@ void CStage::Init_Chapter()
 		break;
 	}
 
-	m_pBackGround->Release();
 	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(m_chapter);
-
 }
 
 void CStage::Init_ChapterZERO()
 {
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+	m_pPlayer->Set_ObjIndex(15);
 
 	// 판데모니카. Pandemonica
 	CObj* pObj = new CPandemonica;
@@ -216,20 +219,30 @@ void CStage::Init_ChapterZERO()
 
 void CStage::Init_ChapterONE()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15 - 9));
+
 	// 모데우스. Modeus
 	CObj* pObj = new CModeus;
 	if (nullptr != pObj)
+	{
 		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68 - 9));
+	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
 }
 
 void CStage::Init_ChapterTWO()
 {
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(0));
+
 	// 케르베로스. Cerberus
 	CObj* pObj = new CCerberus;
 	if (nullptr != pObj)
+	{
 		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
+	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
 }

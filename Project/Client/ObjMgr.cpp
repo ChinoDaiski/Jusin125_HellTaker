@@ -22,6 +22,13 @@ void CObjMgr::Add_Object(ID eID, CObj * pObject)
 	m_listObject[eID].emplace_back(pObject); 
 }
 
+void CObjMgr::Delete_ID(ID eID)
+{
+	for (auto& iter : m_listObject[eID])
+		Safe_Delete<CObj*>(iter);
+	m_listObject[eID].clear();
+}
+
 void CObjMgr::Update()
 {
 	for (int i = 0 ; i < END; ++i)
