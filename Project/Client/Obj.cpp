@@ -6,7 +6,8 @@ D3DXVECTOR3 CObj::m_vScroll{};
 
 CObj::CObj()
 	: m_bDead(false), m_iHp(10), m_ObjIndex(0)
-	, m_Dir(DIR_END), m_GridState(GRID_END)
+	, m_Dir(DIR_END), m_GridState(GRID_END) 
+	, m_fDistance(0.f), m_fAngle(0.f)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	D3DXMatrixIdentity(&m_tInfo.matWorld);
@@ -15,6 +16,8 @@ CObj::CObj()
 	m_tFrame.fFrameSpeed = 1.3f;		// Default FrameSpeed
 
 	m_tInfo.vLook = D3DXVECTOR3(1.f, 0.f, 0.f);
+
+	m_vFlag = D3DXVECTOR3(0.f, 0.f, 0.f);
 }
 
 

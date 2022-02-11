@@ -55,5 +55,9 @@ protected:
 	DIR			m_Dir;					// 오브젝트 방향
 
 	GRID_STATE	m_GridState;			// 격자의 속성
+
+	D3DXVECTOR3	m_vFlag;				// 가야할 곳의 위치 저장
+	float		m_fDistance;			// m_Flag 와의 거리
+	float		m_fAngle;				// 가야할 곳과의 각도
 };
 

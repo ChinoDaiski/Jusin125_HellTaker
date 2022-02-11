@@ -4,6 +4,7 @@
 #include "Device.h"
 #include "TextureMgr.h"
 #include "KeyMgr.h"
+#include "TimeMgr.h"
 
 #include "BackGround.h"
 
@@ -11,7 +12,7 @@
 #include "HitEffect.h"
 
 CPlayer::CPlayer()
-	: moveCount(0)
+	: moveCount(0), moving(false)
 {
 	// empty
 }
@@ -39,10 +40,9 @@ HRESULT CPlayer::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Move/move%d.png", L"Player", L"Move", 6)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(50.f, 650.f, 0.f);
 	m_wstrObjKey = L"Player";
 	m_wstrStateKey = L"Idle";
-	m_fSpeed = 100.f;
+	m_fSpeed = 800.f;
 
 	m_tFrame = { 0.f, 12.f };
 
@@ -55,6 +55,22 @@ HRESULT CPlayer::Initialize(void)
 int CPlayer::Update(void)
 {
 	Key_Input();
+
+	if (true == moving)
+	{
+		Moving();
+
+		if(5.f >= m_fDistance)
+		{
+			m_tInfo.vPos = m_vFlag;
+			moving = false;
+		}
+		else
+		{
+			m_tInfo.vPos.x += m_fSpeed * cosf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
+			m_tInfo.vPos.y -= m_fSpeed * sinf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
+		}
+	}
 
 	D3DXMATRIX	matTrans, matScale;
 
@@ -79,7 +95,7 @@ int CPlayer::Update(void)
 	}
 
 	m_tInfo.matWorld = matScale * matTrans;
-	
+
 	return OBJ_NOEVENT;
 }
 
@@ -137,7 +153,7 @@ void CPlayer::Key_Input(void)
 
 		Create_MoveEffect(m_tInfo.vPos);
 
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
+		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
 		(m_ObjIndex - 
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index - 
 			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
@@ -146,6 +162,7 @@ void CPlayer::Key_Input(void)
 			dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
 
 		--m_iHp;
+		moving = true;
 	}
 	// 아래쪽 방향키. DOWN
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_DOWN))
@@ -159,7 +176,7 @@ void CPlayer::Key_Input(void)
 
 		Create_MoveEffect(m_tInfo.vPos);
 
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
+		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
 		(m_ObjIndex +
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
@@ -168,6 +185,7 @@ void CPlayer::Key_Input(void)
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
 
 		--m_iHp;
+		moving = true;
 	}
 	// 왼쪽 방향키. LEFT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_LEFT))
@@ -180,10 +198,12 @@ void CPlayer::Key_Input(void)
 
 		Create_MoveEffect(m_tInfo.vPos);
 
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
+		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
+		//m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
 		Set_ObjIndex(m_ObjIndex - 1);
 
 		--m_iHp;
+		moving = true;
 	}
 	// 오른쪽 방향키. RIGHT
 	else if (CKeyMgr::GetInstance()->Key_Down(VK_RIGHT))
@@ -196,10 +216,12 @@ void CPlayer::Key_Input(void)
 
 		Create_MoveEffect(m_tInfo.vPos);
 
-		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
+		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
+		//m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
 		Set_ObjIndex(m_ObjIndex + 1);
 
 		--m_iHp;
+		moving = true;
 	}
 }
 
@@ -227,6 +249,7 @@ bool CPlayer::DontMove(int _index)
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - 1, ON_OBJECT);
 		}
+		// 우
 		else if (DIR_RIGHT == m_Dir)
 		{
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
@@ -235,6 +258,7 @@ bool CPlayer::DontMove(int _index)
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + 1, ON_OBJECT);
 		}
+		// 상
 		else if (DIR_UP == m_Dir)
 		{
 			pushPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
@@ -252,6 +276,7 @@ bool CPlayer::DontMove(int _index)
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
 		}
+		// 하
 		else if (DIR_DOWN == m_Dir)
 		{
 			pushPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
@@ -273,7 +298,7 @@ bool CPlayer::DontMove(int _index)
 		return true;
 	}
 
-	m_tFrame = { 0.f, 6.f, 3.f };
+	m_tFrame = { 0.f, 6.f, 2.f };
 	m_wstrStateKey = L"Move";
 
 	return false;
@@ -323,4 +348,25 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	pEffect->Set_Pos(_pos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Moving(void)
+{
+	m_tInfo.vDir = m_vFlag - m_tInfo.vPos;
+
+	D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+	D3DXVec3Normalize(&m_tInfo.vLook, &m_tInfo.vLook);
+
+	float		fDot = D3DXVec3Dot(&m_tInfo.vLook, &m_tInfo.vDir);
+
+	m_fAngle = acosf(fDot);
+
+	if (m_tInfo.vPos.y < m_vFlag.y)
+		m_fAngle = 2.f * D3DX_PI - m_fAngle;
+
+	float	fWidth = m_vFlag.x - m_tInfo.vPos.x;
+	float	fHeight = m_vFlag.y - m_tInfo.vPos.y;
+
+	// 현재 거리 계산
+	m_fDistance = sqrtf(fWidth * fWidth + fHeight * fHeight);
 }
