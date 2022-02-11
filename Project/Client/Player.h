@@ -23,10 +23,13 @@ private:
 	bool		DontMove(int _index);			// 필드의 끝에 있을 때 움직이지 않음
 
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
+	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;
 	DIR				m_PreDir;		// 이전 방향
+
+	int				moveCount;		// MoveEffect 카운트 (0~3 반복)
 };
 

@@ -29,7 +29,6 @@ HRESULT CHitEffect::Initialize(void)
 	(TEX_MULTI, L"../Texture/Player/Effect/HitEffect/Small/Right/SmallRight%d.png", L"SmallRight", L"Idle", 4)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(0.f, 0.f, 0.f);
 	m_wstrObjKey = L"BigLeft";
 	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;

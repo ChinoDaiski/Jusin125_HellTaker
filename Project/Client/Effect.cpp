@@ -45,7 +45,7 @@ void CEffect::Late_Update(void)
 	MoveFrame();
 	
 	// 프레임이 끝나면 이펙트 객체 삭제
-	if (m_tFrame.fMax - 1 < m_tFrame.fFrame)
+	if (m_tFrame.fMax - 0.5f < m_tFrame.fFrame)
 		m_bDead = true;
 }
 

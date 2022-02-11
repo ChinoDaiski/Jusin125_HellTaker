@@ -11,6 +11,7 @@
 #include "HitEffect.h"
 
 CPlayer::CPlayer()
+	: moveCount(0)
 {
 	// empty
 }
@@ -32,6 +33,10 @@ HRESULT CPlayer::Initialize(void)
 
 	// Clear
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Clear/clear%d.png", L"Player", L"Clear", 19)))
+		return S_FALSE;
+
+	// Move
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Player/Move/move%d.png", L"Player", L"Move", 6)))
 		return S_FALSE;
 
 	m_tInfo.vPos = D3DXVECTOR3(50.f, 650.f, 0.f);
@@ -80,7 +85,7 @@ int CPlayer::Update(void)
 
 void CPlayer::Late_Update(void)
 {
-	if (L"Kick" == m_wstrStateKey)
+	if (L"Kick" == m_wstrStateKey || L"Move" == m_wstrStateKey)
 	{
 		MoveFrame();
 		if (0.f == m_tFrame.fFrame)
@@ -130,6 +135,8 @@ void CPlayer::Key_Input(void)
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
 			return;
 
+		Create_MoveEffect(m_tInfo.vPos);
+
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
 		(m_ObjIndex - 
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index - 
@@ -150,6 +157,8 @@ void CPlayer::Key_Input(void)
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
 			return;
 
+		Create_MoveEffect(m_tInfo.vPos);
+
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos
 		(m_ObjIndex +
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
@@ -169,6 +178,8 @@ void CPlayer::Key_Input(void)
 		if (DontMove(m_ObjIndex - 1))
 			return;
 
+		Create_MoveEffect(m_tInfo.vPos);
+
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
 		Set_ObjIndex(m_ObjIndex - 1);
 
@@ -182,6 +193,8 @@ void CPlayer::Key_Input(void)
 
 		if (DontMove(m_ObjIndex + 1))
 			return;
+
+		Create_MoveEffect(m_tInfo.vPos);
 
 		m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
 		Set_ObjIndex(m_ObjIndex + 1);
@@ -260,6 +273,9 @@ bool CPlayer::DontMove(int _index)
 		return true;
 	}
 
+	m_tFrame = { 0.f, 6.f, 3.f };
+	m_wstrStateKey = L"Move";
+
 	return false;
 }
 
@@ -275,6 +291,32 @@ void CPlayer::Create_HitEffect(D3DXVECTOR3 _pos)
 		break;
 	case DIR_RIGHT:
 		pEffect->Set_ObjKey(L"BigRight");
+		break;
+	}
+
+	pEffect->Set_Pos(_pos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
+{
+	CObj*	pEffect = new CMoveEffect;
+	pEffect->Initialize();
+
+	switch (moveCount)
+	{
+	case 0:
+		pEffect->Set_ObjKey(L"MoveCase0");
+		++moveCount;
+		break;
+	case 1:
+		pEffect->Set_ObjKey(L"MoveCase1");
+		++moveCount;
+		break;
+	case 2:
+		pEffect->Set_ObjKey(L"MoveCase2");
+		moveCount = 0;
 		break;
 	}
 

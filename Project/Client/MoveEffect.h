@@ -9,5 +9,6 @@ public:
 
 public:
 	virtual HRESULT Initialize(void) override;
+	virtual void Render(void) override;
 };
 
