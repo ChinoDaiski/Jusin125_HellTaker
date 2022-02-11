@@ -17,6 +17,7 @@ public:
 
 public:
 	const wstring& GetObjKey(void) const { return m_wstrObjKey; }
+	void			Set_ObjKey(wstring _ObjKey) { m_wstrObjKey = _ObjKey; }
 	void			MoveFrame(void);
 
 public:

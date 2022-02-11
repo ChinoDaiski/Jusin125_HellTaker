@@ -168,9 +168,11 @@
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FlameBase.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="HitEffect.h" />
     <ClInclude Include="Judgement.h" />
     <ClInclude Include="Justice.h" />
     <ClInclude Include="Key.h" />
@@ -180,6 +182,7 @@
     <ClInclude Include="Malina.h" />
     <ClInclude Include="Modeus.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MoveEffect.h" />
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
@@ -206,9 +209,11 @@
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FlameBase.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Judgement.cpp" />
     <ClCompile Include="Justice.cpp" />
     <ClCompile Include="Key.cpp" />
@@ -218,6 +223,7 @@
     <ClCompile Include="Malina.cpp" />
     <ClCompile Include="Modeus.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />

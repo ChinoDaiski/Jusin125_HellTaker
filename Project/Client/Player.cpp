@@ -7,6 +7,9 @@
 
 #include "BackGround.h"
 
+#include "MoveEffect.h"
+#include "HitEffect.h"
+
 CPlayer::CPlayer()
 {
 	// empty
@@ -199,9 +202,13 @@ bool CPlayer::DontMove(int _index)
 		m_wstrStateKey = L"Kick";
 		m_tFrame = { 0.f, 13.f, 2.4f };
 
+		D3DXVECTOR3 pushPos;
+		int			pushIndex;
+
 		// аб
 		if (DIR_LEFT == m_Dir)
 		{
+			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index - 1);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
@@ -209,6 +216,7 @@ bool CPlayer::DontMove(int _index)
 		}
 		else if (DIR_RIGHT == m_Dir)
 		{
+			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index + 1);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
@@ -216,29 +224,61 @@ bool CPlayer::DontMove(int _index)
 		}
 		else if (DIR_UP == m_Dir)
 		{
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
-				_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
-					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(
+			pushPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
 				_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+
+			pushIndex = _index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index);
+
+			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
+
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
+
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
-				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index), ON_OBJECT);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
 		}
 		else if (DIR_DOWN == m_Dir)
 		{
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
-				_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
-					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(
+			pushPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(
 				_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 					dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index));
+
+			pushIndex = _index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
+				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index);
+
+			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
+
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
+
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
-				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index), ON_OBJECT);
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
 		}
+
+		return true;
 	}
 
 	return false;
+}
+
+void CPlayer::Create_HitEffect(D3DXVECTOR3 _pos)
+{
+	CObj*	pEffect = new CHitEffect;
+	pEffect->Initialize();
+
+	switch (m_PreDir)
+	{
+	case DIR_LEFT:
+		pEffect->Set_ObjKey(L"BigLeft");
+		break;
+	case DIR_RIGHT:
+		pEffect->Set_ObjKey(L"BigRight");
+		break;
+	}
+
+	pEffect->Set_Pos(_pos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

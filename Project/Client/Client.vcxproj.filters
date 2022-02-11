@@ -121,6 +121,15 @@
     <Filter Include="02. Obj\00. BackGround\00. Grid">
       <UniqueIdentifier>{089f40ca-b19a-412d-ba92-acbf189a75b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect">
+      <UniqueIdentifier>{0c42fa79-6c29-4a22-bbd3-d7d83eb2f2a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. Effect\00. MoveEffect">
+      <UniqueIdentifier>{c7d66b10-63dc-472e-b698-5e5346defc55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. Effect\01. HitEffect">
+      <UniqueIdentifier>{1fd3a443-02ac-4c8e-84df-a20da5ed2af8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -237,6 +246,15 @@
     <ClInclude Include="Grid.h">
       <Filter>02. Obj\00. BackGround\00. Grid</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>02. Obj\04. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEffect.h">
+      <Filter>02. Obj\04. Effect\00. MoveEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="HitEffect.h">
+      <Filter>02. Obj\04. Effect\01. HitEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -340,6 +358,15 @@
     </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>02. Obj\00. BackGround\00. Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>02. Obj\04. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEffect.cpp">
+      <Filter>02. Obj\04. Effect\00. MoveEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="HitEffect.cpp">
+      <Filter>02. Obj\04. Effect\01. HitEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

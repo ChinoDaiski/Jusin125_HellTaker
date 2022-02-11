@@ -22,6 +22,8 @@ private:
 	void		Key_Input(void);				// 방향키 입력
 	bool		DontMove(int _index);			// 필드의 끝에 있을 때 움직이지 않음
 
+	void		Create_HitEffect(D3DXVECTOR3 _pos);
+
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;
