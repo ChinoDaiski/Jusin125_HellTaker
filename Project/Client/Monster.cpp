@@ -21,10 +21,9 @@ HRESULT CMonster::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/MapObject/Monster/Idle/idle%d.png", L"Monster", L"Idle", 12)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(80.f, 130.f, 0.f);
 	m_wstrObjKey = L"Monster";
 	m_wstrStateKey = L"Idle";
-	m_fSpeed = 100.f;
+	m_fSpeed = 800.f;
 
 	m_tFrame = { 0.f, 12.f, 1.4f };
 
@@ -33,6 +32,16 @@ HRESULT CMonster::Initialize(void)
 
 int CMonster::Update(void)
 {
+	if (true == moving)
+	{
+		if (L"Idle" == m_wstrStateKey)
+		{
+			m_tFrame = { 0.f, 6.f, 2.f };
+			m_wstrStateKey = L"Hit";
+		}
+		Moving();
+	}
+
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);
@@ -53,18 +62,14 @@ int CMonster::Update(void)
 void CMonster::Late_Update(void)
 {
 	// Hit Frame
-	if (m_Hit)
+	if (L"Hit" == m_wstrStateKey)
 	{
-		// Hit Frame End
-		if (m_tFrame.fFrame > 5.f)
+		MoveFrame();
+		if (0.f == m_tFrame.fFrame)
 		{
-			m_Hit = false;
-			m_tFrame.fFrame = 0.f;
-			m_tFrame = { 0.f, 12.f, 1.4f };
 			m_wstrStateKey = L"Idle";
-		}
-		else
-			MoveFrame();
+			m_tFrame = { 0.f, 12.f, 1.4f };
+		}		
 	}
 	// Idle Frame
 	else 
@@ -94,11 +99,4 @@ void CMonster::Render(void)
 void CMonster::Release(void)
 {
 	// empty
-}
-
-void CMonster::Set_Hit()
-{
-	m_Hit = true;
-	m_tFrame = { 0.f, 6.f, 2.f };
-	m_wstrStateKey = L"Hit";
 }

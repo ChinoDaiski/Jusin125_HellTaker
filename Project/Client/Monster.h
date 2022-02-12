@@ -14,12 +14,7 @@ public:
 	virtual void Render(void) override;
 	virtual void Release(void) override;
 
-public:
-	void	Set_Hit();
-
 private:
 	wstring		m_wstrStateKey = L"";
-
-	bool		m_Hit = false;		// 타격받을 때 true
 };
 

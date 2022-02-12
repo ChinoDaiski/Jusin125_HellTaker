@@ -12,7 +12,7 @@
 #include "HitEffect.h"
 
 CPlayer::CPlayer()
-	: moveCount(0), moving(false)
+	: moveCount(0)
 {
 	// empty
 }
@@ -57,20 +57,7 @@ int CPlayer::Update(void)
 	Key_Input();
 
 	if (true == moving)
-	{
 		Moving();
-
-		if(5.f >= m_fDistance)
-		{
-			m_tInfo.vPos = m_vFlag;
-			moving = false;
-		}
-		else
-		{
-			m_tInfo.vPos.x += m_fSpeed * cosf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
-			m_tInfo.vPos.y -= m_fSpeed * sinf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
-		}
-	}
 
 	D3DXMATRIX	matTrans, matScale;
 
@@ -244,7 +231,8 @@ bool CPlayer::DontMove(int _index)
 		if (DIR_LEFT == m_Dir)
 		{
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index - 1);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - 1, ON_OBJECT);
@@ -253,7 +241,8 @@ bool CPlayer::DontMove(int _index)
 		else if (DIR_RIGHT == m_Dir)
 		{
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index + 1);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + 1, ON_OBJECT);
@@ -270,7 +259,8 @@ bool CPlayer::DontMove(int _index)
 
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
 
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
@@ -288,7 +278,8 @@ bool CPlayer::DontMove(int _index)
 
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Pos(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
+			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
 			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
 
 			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
@@ -348,25 +339,4 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	pEffect->Set_Pos(_pos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
-}
-
-void CPlayer::Moving(void)
-{
-	m_tInfo.vDir = m_vFlag - m_tInfo.vPos;
-
-	D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
-	D3DXVec3Normalize(&m_tInfo.vLook, &m_tInfo.vLook);
-
-	float		fDot = D3DXVec3Dot(&m_tInfo.vLook, &m_tInfo.vDir);
-
-	m_fAngle = acosf(fDot);
-
-	if (m_tInfo.vPos.y < m_vFlag.y)
-		m_fAngle = 2.f * D3DX_PI - m_fAngle;
-
-	float	fWidth = m_vFlag.x - m_tInfo.vPos.x;
-	float	fHeight = m_vFlag.y - m_tInfo.vPos.y;
-
-	// 현재 거리 계산
-	m_fDistance = sqrtf(fWidth * fWidth + fHeight * fHeight);
 }

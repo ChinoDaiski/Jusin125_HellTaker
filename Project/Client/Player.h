@@ -25,14 +25,11 @@ private:
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
-	void		Moving(void);		// 움직이는 중일 때
-
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;
 	DIR				m_PreDir;		// 이전 방향
 
 	int				moveCount;		// MoveEffect 카운트 (0~3 반복)
-	bool			moving;			// 움직이는 상태면 true
 };
 
