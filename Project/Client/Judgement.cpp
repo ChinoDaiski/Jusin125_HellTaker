@@ -24,13 +24,13 @@ HRESULT CJudgement::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Judgement/Jump/Jump%d.png", L"Judgement", L"Jump", 9)))
 		return S_FALSE;
 
-	m_tInfo.vPos = D3DXVECTOR3(1030.f, 34.f, 0.f);
 	m_wstrObjKey = L"Judgement";
 	m_wstrStateKey = L"Idle";
 	m_fSpeed = 100.f;
 
 	m_tFrame = { 0.f, 12.f };
 
+	Create_LoveSign();
 	Set_Jump();
 
 	return S_OK;

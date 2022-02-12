@@ -169,6 +169,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Evil.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FlameBase.h" />
     <ClInclude Include="Grid.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Justice.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMgr.h" />
+    <ClInclude Include="LoveSign.h" />
     <ClInclude Include="Lucifer.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Malina.h" />
@@ -210,6 +212,7 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Evil.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FlameBase.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="Justice.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
+    <ClCompile Include="LoveSign.cpp" />
     <ClCompile Include="Lucifer.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Malina.cpp" />

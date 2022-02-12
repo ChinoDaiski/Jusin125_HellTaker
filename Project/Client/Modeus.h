@@ -1,7 +1,7 @@
 #pragma once
-#include "Obj.h"
+#include "Evil.h"
 
-class CModeus : public CObj
+class CModeus : public CEvil
 {
 public:
 	CModeus();
@@ -9,9 +9,10 @@ public:
 
 public:
 	virtual HRESULT Initialize(void) override;
-	virtual int Update(void) override;
-	virtual void Late_Update(void) override;
-	virtual void Render(void) override;
-	virtual void Release(void) override;
+	virtual int Update(void);
+	virtual void Late_Update(void);
+	virtual void Render(void);
+	virtual void Release(void);
+
 };
 

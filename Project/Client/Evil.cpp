@@ -1,35 +1,31 @@
 #include "stdafx.h"
-#include "Zdrada.h"
+#include "Evil.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "ObjMgr.h"
 
-CZdrada::CZdrada()
+#include "LoveSign.h"
+
+CEvil::CEvil()
+	: m_pLoveSign(nullptr)
 {
 	// empty
 }
 
-CZdrada::~CZdrada()
+CEvil::~CEvil()
 {
-	Release();
+	// empty
 }
 
-HRESULT CZdrada::Initialize(void)
+HRESULT CEvil::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/Zdrada/zdrada%d.png", L"Zdrada", L"Idle", 12)))
-		return S_FALSE;
-
-	m_wstrObjKey = L"Zdrada";
-	m_fSpeed = 100.f;
-
-	m_tFrame = { 0.f, 12.f };
-
-	Create_LoveSign();
-
 	return S_OK;
 }
 
-int CZdrada::Update(void)
+int CEvil::Update(void)
 {
+	m_pLoveSign->Set_Pos(m_tInfo.vPos - D3DXVECTOR3{ 30.f, 30.f, 0.f });
+
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);
@@ -47,12 +43,12 @@ int CZdrada::Update(void)
 	return OBJ_NOEVENT;
 }
 
-void CZdrada::Late_Update(void)
+void CEvil::Late_Update(void)
 {
 	MoveFrame();
 }
 
-void CZdrada::Render(void)
+void CEvil::Render(void)
 {
 	const TEXINFO*		pTexInfo = CTextureMgr::GetInstance()->Get_Texture(m_wstrObjKey.c_str(), L"Idle", (int)m_tFrame.fFrame);
 
@@ -71,7 +67,16 @@ void CZdrada::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 }
 
-void CZdrada::Release(void)
+void CEvil::Release(void)
 {
 	// empty
+}
+
+void CEvil::Create_LoveSign()
+{
+	m_pLoveSign = new CLoveSign;
+	m_pLoveSign->Initialize();
+	m_pLoveSign->Set_Pos(m_tInfo.vPos - D3DXVECTOR3{ 30.f, 30.f, 0.f });
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pLoveSign);
 }

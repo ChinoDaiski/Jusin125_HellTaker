@@ -1,7 +1,7 @@
 #pragma once
-#include "Obj.h"
+#include "Evil.h"
 
-class CJudgement : public CObj
+class CJudgement : public CEvil
 {
 public:
 	CJudgement();
@@ -9,10 +9,11 @@ public:
 
 public:
 	virtual HRESULT Initialize(void) override;
-	virtual int Update(void) override;
-	virtual void Late_Update(void) override;
-	virtual void Render(void) override;
-	virtual void Release(void) override;
+	virtual int Update(void);
+	virtual void Late_Update(void);
+	virtual void Render(void);
+	virtual void Release(void);
+
 
 public:
 	void	Set_Jump();

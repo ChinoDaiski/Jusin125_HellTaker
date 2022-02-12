@@ -182,8 +182,8 @@ void CStage::Init_ChapterZERO()
 	CObj* pObj = new CPandemonica;
 	if (nullptr != pObj)
 	{
-		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
+		pObj->Initialize();
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(61, ON_OBJECT);
 		pObj->Set_ObjIndex(61);
 	}

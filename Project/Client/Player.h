@@ -28,6 +28,7 @@ private:
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;
+	CObj*			m_pLoveSign;	// 하트말풍선
 	DIR				m_PreDir;		// 이전 방향
 
 	int				moveCount;		// MoveEffect 카운트 (0~3 반복)
