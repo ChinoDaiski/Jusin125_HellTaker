@@ -15,7 +15,7 @@ public:
 	virtual void		Render(void)PURE;
 	virtual void		Release(void)PURE;
 
-	virtual void		Moving();
+	virtual void		Moving();			// 이동 자연스럽게 하기
 
 public:
 	const wstring& GetObjKey(void) const { return m_wstrObjKey; }

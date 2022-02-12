@@ -340,3 +340,7 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }
+
+void CPlayer::Check_Goal()
+{
+}

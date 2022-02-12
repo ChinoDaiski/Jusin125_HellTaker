@@ -25,6 +25,8 @@ private:
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
+	void		Check_Goal();		// 플레이어의 챕터 클리어 확인
+
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;

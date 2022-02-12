@@ -39,6 +39,8 @@ CObj* CObjMgr::Get_IndexObject(int _index)
 				return (*iter);
 		}
 	}
+
+	return nullptr;
 }
 
 void CObjMgr::Update()

@@ -63,6 +63,14 @@ HRESULT CStage::Ready_Scene()
 
 void CStage::Update_Scene()
 {
+	// 골 인덱스인지 확인
+	if (g_iGoalIndex == m_pPlayer->Get_ObjIndex())
+	{
+		// TODO : 대화문 후 다음 챕터로 전환
+		Change_NextChapter();
+		Init_Chapter();
+	}
+
 	CObjMgr::GetInstance()->Update();
 }
 
@@ -95,6 +103,8 @@ void CStage::Change_NextChapter()
 {
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
 	
 	switch (m_chapter)
 	{
@@ -175,6 +185,9 @@ void CStage::Init_Chapter()
 
 void CStage::Init_ChapterZERO()
 {
+	// 골 인덱스 60
+	g_iGoalIndex = 60;
+
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 	m_pPlayer->Set_ObjIndex(15);
 
@@ -289,19 +302,74 @@ void CStage::Init_ChapterZERO()
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(47));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(47, ON_OBJECT);
+		pObj->Set_ObjIndex(47);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(50));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(50, ON_OBJECT);
+		pObj->Set_ObjIndex(50);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(56));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(56, ON_OBJECT);
+		pObj->Set_ObjIndex(56);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(58));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(58, ON_OBJECT);
+		pObj->Set_ObjIndex(58);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
 }
 
 void CStage::Init_ChapterONE()
 {
+	// 골 인덱스 59
+	g_iGoalIndex = 59;
+
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
 	m_pPlayer->Set_ObjIndex(55);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
 
 	// 모데우스. Modeus
 	CObj* pObj = new CModeus;
 	if (nullptr != pObj)
 	{
-		pObj->Initialize();
 		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
+		pObj->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(68, ON_OBJECT);
+		pObj->Set_ObjIndex(68);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -309,15 +377,39 @@ void CStage::Init_ChapterONE()
 
 void CStage::Init_ChapterTWO()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	// 골 인덱스 17
+	g_iGoalIndex = 17;
 
-	// 케르베로스. Cerberus
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
+	m_pPlayer->Set_ObjIndex(38);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
+
+	// 케르베로스 1. Cerberus
 	CObj* pObj = new CCerberus;
 	if (nullptr != pObj)
 	{
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(14));
 		pObj->Initialize();
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
+	// 케르베로스 2. Cerberus
+	pObj = new CCerberus;
+	if (nullptr != pObj)
+	{
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+		pObj->Initialize();
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+
+	// 케르베로스 3. Cerberus
+	pObj = new CCerberus;
+	if (nullptr != pObj)
+	{
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(16));
+		pObj->Initialize();
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
@@ -400,44 +492,3 @@ void CStage::Init_ChapterEIGHT()
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
 }
-
-// 기타 오브젝트 임시 보관용
-/*
-CObj* pObj = nullptr;
-
-// 벽. Wall
-pObj = new CWall;
-if (nullptr != pObj)
-pObj->Initialize();
-
-CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
-
-// 키. Key
-pObj = new CKey;
-if (nullptr != pObj)
-pObj->Initialize();
-
-CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
-
-// 상자. Chest
-pObj = new CChest;
-if (nullptr != pObj)
-pObj->Initialize();
-
-CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, pObj);
-
-// 트랩. Trap
-pObj = new CTrap;
-if (nullptr != pObj)
-pObj->Initialize();
-
-CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
-
-// 플레임베이스. FlameBase
-pObj = new CFlameBase;
-if (nullptr != pObj)
-pObj->Initialize();
-
-CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
-
-*/

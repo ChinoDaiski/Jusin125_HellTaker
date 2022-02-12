@@ -21,7 +21,7 @@ HRESULT CWall::Initialize(void)
 
 	m_tInfo.vPos = D3DXVECTOR3(190.f, 130.f, 0.f);
 	m_wstrObjKey = L"Wall";
-	m_fSpeed = 100.f;
+	m_fSpeed = 800.f;
 
 	// m_tFrame = { 0.f, 12.f };
 
@@ -30,6 +30,9 @@ HRESULT CWall::Initialize(void)
 
 int CWall::Update(void)
 {
+	if (true == moving)
+		Moving();
+
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);

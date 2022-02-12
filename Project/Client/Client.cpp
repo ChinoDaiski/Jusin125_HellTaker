@@ -15,8 +15,11 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 HWND g_hWnd;
 
 // WindowSize / PictureSize
-extern		float	MAPSIZEX = WINCX / 1920.f;
-extern		float	MAPSIZEY = WINCY / 1080.f;
+float	MAPSIZEX = WINCX / 1920.f;
+float	MAPSIZEY = WINCY / 1080.f;
+
+// 목적지의 인덱스 저장 (씬체인지 용)
+int			g_iGoalIndex = 0;
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
 ATOM                MyRegisterClass(HINSTANCE hInstance);

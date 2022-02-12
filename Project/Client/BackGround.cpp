@@ -232,10 +232,10 @@ D3DXVECTOR3 CBackGround::Find_IndexPos(int _index)
 	{
 		index = dynamic_cast<CGrid*>(iter)->Get_Index();
 		if (index == _index)
-		{
 			return iter->Get_Info().vPos;
-		}
 	}
+
+	return D3DXVECTOR3 {0.f,0.f,0.f};
 }
 
 GRID_STATE CBackGround::Find_IndexBlock(int _index)
@@ -246,10 +246,10 @@ GRID_STATE CBackGround::Find_IndexBlock(int _index)
 	{
 		index = dynamic_cast<CGrid*>(iter)->Get_Index();
 		if (index == _index)
-		{
 			return iter->Get_GridState();
-		}
 	}
+
+	return CAN_MOVE;
 }
 
 void CBackGround::Set_GridState(int _index, GRID_STATE _gridState)

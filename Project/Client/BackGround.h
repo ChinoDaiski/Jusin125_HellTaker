@@ -30,8 +30,8 @@ public:
 
 	void		Select_Chapter(CHAPTER _chapter);
 
-	D3DXVECTOR3	Find_IndexPos(int _index);
-	GRID_STATE	Find_IndexBlock(int _index);
+	D3DXVECTOR3	Find_IndexPos(int _index);			// 매개변수 인덱스와 같은 인덱스를 가진 그리드의 vPos 반환
+	GRID_STATE	Find_IndexBlock(int _index);		// 매개변수 인덱스와 같은 인덱스를 가진 그리드의 GRID_STATE 속성 반환
 	void		Set_GridState(int _index, GRID_STATE _gridState);
 
 private:

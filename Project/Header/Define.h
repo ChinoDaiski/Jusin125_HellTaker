@@ -51,3 +51,4 @@
 extern		HWND	g_hWnd;
 extern		float	MAPSIZEX;
 extern		float	MAPSIZEY;
+extern		int		g_iGoalIndex;
