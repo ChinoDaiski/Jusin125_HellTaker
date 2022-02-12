@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ObjMgr.h"
 #include "Obj.h"
+#include "Evil.h"
 
 IMPLEMENT_SINGLETON(CObjMgr)
 
@@ -12,6 +13,14 @@ CObjMgr::CObjMgr()
 CObjMgr::~CObjMgr()
 {
 	Release(); 
+}
+
+void CObjMgr::Set_EvilWhite()
+{
+	for (auto& iter = m_listObject[EVIL].begin(); iter != m_listObject[EVIL].end(); ++iter)
+	{
+		dynamic_cast<CEvil*>(*iter)->Set_White(true);
+	}
 }
 
 void CObjMgr::Add_Object(ID eID, CObj * pObject)

@@ -88,7 +88,25 @@ int CPlayer::Update(void)
 
 void CPlayer::Late_Update(void)
 {
-	if (L"Kick" == m_wstrStateKey || L"Move" == m_wstrStateKey)
+	if(L"Idle" == m_wstrStateKey)
+		MoveFrame();
+	else if (L"Clear" == m_wstrStateKey)
+	{
+		if(m_tFrame.fFrame <= 5.f)
+			MoveFrame();
+		else 
+		{
+			m_tFrame.fFrameSpeed = 0.8f;
+			MoveFrame();
+		}
+
+		if (0.f == m_tFrame.fFrame)
+		{
+			m_wstrStateKey = L"Idle";
+			m_tFrame = { 0.f, 12.f };
+		}
+	}
+	else
 	{
 		MoveFrame();
 		if (0.f == m_tFrame.fFrame)
@@ -97,8 +115,6 @@ void CPlayer::Late_Update(void)
 			m_tFrame = { 0.f, 12.f };
 		}
 	}
-	else
-		MoveFrame();
 }
 
 void CPlayer::Render(void)
@@ -339,8 +355,4 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	pEffect->Set_Pos(_pos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
-}
-
-void CPlayer::Check_Goal()
-{
 }

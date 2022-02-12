@@ -133,6 +133,9 @@
     <Filter Include="02. Obj\04. Effect\02. LoveSign">
       <UniqueIdentifier>{8ed0085a-6dc4-4dbd-9a04-e5e099c6513a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\03. LoveBomb">
+      <UniqueIdentifier>{22f8b904-3cd4-498a-973e-72449e65ce36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -264,6 +267,9 @@
     <ClInclude Include="Evil.h">
       <Filter>02. Obj\02. Evil</Filter>
     </ClInclude>
+    <ClInclude Include="LoveBomb.h">
+      <Filter>02. Obj\04. Effect\03. LoveBomb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -382,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="Evil.cpp">
       <Filter>02. Obj\02. Evil</Filter>
+    </ClCompile>
+    <ClCompile Include="LoveBomb.cpp">
+      <Filter>02. Obj\04. Effect\03. LoveBomb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

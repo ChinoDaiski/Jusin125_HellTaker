@@ -178,6 +178,7 @@
     <ClInclude Include="Justice.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMgr.h" />
+    <ClInclude Include="LoveBomb.h" />
     <ClInclude Include="LoveSign.h" />
     <ClInclude Include="Lucifer.h" />
     <ClInclude Include="MainGame.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="Justice.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
+    <ClCompile Include="LoveBomb.cpp" />
     <ClCompile Include="LoveSign.cpp" />
     <ClCompile Include="Lucifer.cpp" />
     <ClCompile Include="MainGame.cpp" />

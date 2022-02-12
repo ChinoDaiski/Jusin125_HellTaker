@@ -18,6 +18,8 @@ public:
 	CObj*			Get_Terrain() { return m_listObject[TERRAIN].front(); }
 	CObj*			Get_Player() { return m_listObject[PLAYER].front(); }
 
+	void			Set_EvilWhite();
+
 public:
 	void	Add_Object(ID eID, CObj* pObject); 
 	void	Delete_ID(ID eID);

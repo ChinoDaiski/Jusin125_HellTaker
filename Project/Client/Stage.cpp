@@ -66,9 +66,22 @@ void CStage::Update_Scene()
 	// 골 인덱스인지 확인
 	if (g_iGoalIndex == m_pPlayer->Get_ObjIndex())
 	{
-		// TODO : 대화문 후 다음 챕터로 전환
-		Change_NextChapter();
-		Init_Chapter();
+		// TODO : 대화문 추가
+
+		// 선택완료시 플레이어 클리어 모션
+		/*for (auto& iter : m_pEvil)
+		{
+			if (nullptr != iter)
+				dynamic_cast<CEvil*>(iter)->Set_White(true);
+		}*/
+		CObjMgr::GetInstance()->Set_EvilWhite();
+
+		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.1f));
+		dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
+
+		// 다음 챕터로 전환
+		// Change_NextChapter();
+		// Init_Chapter();
 	}
 
 	CObjMgr::GetInstance()->Update();
@@ -192,19 +205,19 @@ void CStage::Init_ChapterZERO()
 	m_pPlayer->Set_ObjIndex(15);
 
 	// 판데모니카. Pandemonica
-	CObj* pObj = new CPandemonica;
-	if (nullptr != pObj)
+	CObj* pEvil = new CPandemonica;
+	if (nullptr != pEvil)
 	{
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
-		pObj->Initialize();
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
+		pEvil->Initialize();
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(61, ON_OBJECT);
-		pObj->Set_ObjIndex(61);
+		pEvil->Set_ObjIndex(61);
 	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 
 	// 몬스터. Monster
-	pObj = new CMonster;
+	CObj* pObj = new CMonster;
 	if (nullptr != pObj)
 	{
 		pObj->Initialize();
@@ -363,16 +376,16 @@ void CStage::Init_ChapterONE()
 	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
 
 	// 모데우스. Modeus
-	CObj* pObj = new CModeus;
-	if (nullptr != pObj)
+	CObj* pEvil = new CModeus;
+	if (nullptr != pEvil)
 	{
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
-		pObj->Initialize();
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
+		pEvil->Initialize();
 		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(68, ON_OBJECT);
-		pObj->Set_ObjIndex(68);
+		pEvil->Set_ObjIndex(68);
 	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterTWO()
@@ -385,34 +398,34 @@ void CStage::Init_ChapterTWO()
 	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
 
 	// 케르베로스 1. Cerberus
-	CObj* pObj = new CCerberus;
-	if (nullptr != pObj)
+	CObj* pEvil = new CCerberus;
+	if (nullptr != pEvil)
 	{
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(14));
-		pObj->Initialize();
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(14));
+		pEvil->Initialize();
 	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 
 	// 케르베로스 2. Cerberus
-	pObj = new CCerberus;
-	if (nullptr != pObj)
+	pEvil = new CCerberus;
+	if (nullptr != pEvil)
 	{
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-		pObj->Initialize();
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
+		pEvil->Initialize();
 	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 
 	// 케르베로스 3. Cerberus
-	pObj = new CCerberus;
-	if (nullptr != pObj)
+	pEvil = new CCerberus;
+	if (nullptr != pEvil)
 	{
-		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(16));
-		pObj->Initialize();
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(16));
+		pEvil->Initialize();
 	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterTHREE()
