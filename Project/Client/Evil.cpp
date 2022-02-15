@@ -7,6 +7,8 @@
 
 #include "LoveSign.h"
 #include "LoveBomb.h"
+#include "Shine.h"
+#include "Heart.h"
 
 CEvil::CEvil()
 	: m_pLoveSign(nullptr), m_pLoveBomb(nullptr)
@@ -115,4 +117,22 @@ void CEvil::Create_LoveBomb()
 	m_pLoveBomb->Set_Pos(m_tInfo.vPos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pLoveBomb);
+}
+
+void CEvil::Create_Shine()
+{
+	CObj* pShine = new CShine;
+	pShine->Initialize();
+	pShine->Set_Pos(m_tInfo.vPos - D3DXVECTOR3{ 30.f, 0.f, 0.f });
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pShine);
+}
+
+void CEvil::Create_Heart()
+{
+	CObj* pHeart = new CHeart;
+	pHeart->Initialize();
+	pHeart->Set_Pos(m_tInfo.vPos + D3DXVECTOR3{ 30.f, 0.f, 0.f });
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pHeart);
 }

@@ -173,6 +173,7 @@
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FlameBase.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="Heart.h" />
     <ClInclude Include="HitEffect.h" />
     <ClInclude Include="Judgement.h" />
     <ClInclude Include="Justice.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Shine.h" />
     <ClInclude Include="SingleTexture.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
@@ -217,6 +219,7 @@
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FlameBase.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Heart.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Judgement.cpp" />
     <ClCompile Include="Justice.cpp" />
@@ -237,6 +240,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Shine.cpp" />
     <ClCompile Include="SingleTexture.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">

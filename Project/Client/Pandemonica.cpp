@@ -24,6 +24,8 @@ HRESULT CPandemonica::Initialize(void)
 	m_tFrame = { 0.f, 12.f };
 
 	Create_LoveSign();
+	Create_Heart();
+	Create_Shine();
 
 	return S_OK;
 }

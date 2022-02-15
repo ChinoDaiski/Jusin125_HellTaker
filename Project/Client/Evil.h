@@ -20,6 +20,8 @@ public:
 protected:
 	void		Create_LoveSign();
 	void		Create_LoveBomb();
+	void		Create_Shine();
+	void		Create_Heart();
 
 private:
 	CObj*	m_pLoveSign;

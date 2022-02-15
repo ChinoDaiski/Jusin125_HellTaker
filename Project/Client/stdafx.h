@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <time.h>
 
 
 #ifdef _DEBUG

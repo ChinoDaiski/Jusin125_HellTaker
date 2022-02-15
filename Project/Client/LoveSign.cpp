@@ -14,7 +14,7 @@ CLoveSign::~CLoveSign()
 HRESULT CLoveSign::Initialize(void)
 {
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture
-	(TEX_MULTI, L"../Texture/Player/Effect/LoveSign/LoveSign%d.png", L"LoveSign", L"Idle", 1)))
+	(TEX_MULTI, L"../Texture/Evil/Effect/LoveSign/LoveSign%d.png", L"LoveSign", L"Idle", 1)))
 		return S_FALSE;
 
 	m_wstrObjKey = L"LoveSign";

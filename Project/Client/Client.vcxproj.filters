@@ -136,6 +136,12 @@
     <Filter Include="02. Obj\04. Effect\03. LoveBomb">
       <UniqueIdentifier>{22f8b904-3cd4-498a-973e-72449e65ce36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\04. Shine">
+      <UniqueIdentifier>{46d146cc-3af6-4f65-ac9a-87236706539f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Obj\04. Effect\05. Heart">
+      <UniqueIdentifier>{8d31e602-f598-4679-9ac2-990bb1fa3a19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -270,6 +276,12 @@
     <ClInclude Include="LoveBomb.h">
       <Filter>02. Obj\04. Effect\03. LoveBomb</Filter>
     </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>02. Obj\04. Effect\05. Heart</Filter>
+    </ClInclude>
+    <ClInclude Include="Shine.h">
+      <Filter>02. Obj\04. Effect\04. Shine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -391,6 +403,12 @@
     </ClCompile>
     <ClCompile Include="LoveBomb.cpp">
       <Filter>02. Obj\04. Effect\03. LoveBomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>02. Obj\04. Effect\05. Heart</Filter>
+    </ClCompile>
+    <ClCompile Include="Shine.cpp">
+      <Filter>02. Obj\04. Effect\04. Shine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

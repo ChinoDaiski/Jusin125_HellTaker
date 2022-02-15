@@ -20,7 +20,7 @@ HRESULT CLoveBomb::Initialize(void)
 	m_wstrObjKey = L"LoveBomb";
 	m_wstrStateKey = L"Idle";
 
-	m_tFrame = { 0.f, 15.f, 1.4f };
+	m_tFrame = { 0.f, 15.f, 0.5f };
 
 	return S_OK;
 }
