@@ -2,6 +2,7 @@
 #include "Shine.h"
 
 #include "ObjMgr.h"
+#include "TimeMgr.h"
 
 CShine::CShine()
 {
@@ -28,15 +29,19 @@ HRESULT CShine::Initialize(void)
 
 	moving = true;
 	m_fSpeed = 120.f;
+	m_fDeadCount = 0.f;
 
 	return S_OK;
 }
 
 int CShine::Update(void)
 {
-	if (true == moving)
-		Moving();
-	else
+	Move();
+
+	m_fDeadCount += 5.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+	// 5.f * 0.5f == 스피드
+
+	if (m_fDeadCount >= 6.f)
 		m_bDead = true;
 
 	if (true == m_bDead)
@@ -92,4 +97,37 @@ void CShine::Render(void)
 			nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
 			D3DCOLOR_ARGB(200, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 	}
+}
+
+void CShine::Move()
+{
+	if (true == m_bPink)
+		PinkMove();
+	else
+	{
+		if (true == moving)
+			Moving();
+		else
+			m_bDead = true;
+	}
+}
+
+void CShine::PinkMove()
+{
+	m_fSpeed = 5.f;
+
+	m_tInfo.vDir = m_vFlag - m_tInfo.vPos;
+
+	D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+	D3DXVec3Normalize(&m_tInfo.vLook, &m_tInfo.vLook);
+
+	float		fDot = D3DXVec3Dot(&m_tInfo.vLook, &m_tInfo.vDir);
+
+	m_fAngle = acosf(fDot) - D3DXToRadian(180.f);
+
+	if (m_tInfo.vPos.y < m_vFlag.y)
+		m_fAngle = 2.f * D3DX_PI - m_fAngle;
+
+	m_tInfo.vPos.x += m_fSpeed * cosf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
+	m_tInfo.vPos.y -= m_fSpeed * sinf(m_fAngle) * CTimeMgr::GetInstance()->Get_TimeDelta();
 }

@@ -17,9 +17,14 @@ public:
 	void	Set_Pink(bool _pink) { m_bPink = _pink; }
 
 private:
+	void	Move();				// 움직임 관리 함수
+	void	PinkMove();			// 핑크 상태일 때 움직임
+
+private:
 	bool	m_bPink = false;
 
 	// 난수값 저장
 	float	m_fRandom;
+	float	m_fDeadCount;
 };
 

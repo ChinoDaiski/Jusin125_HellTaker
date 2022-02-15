@@ -38,8 +38,8 @@ int CHeart::Update(void)
 {
 	Moving();
 
-	m_fDeadCount += 6.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
-	// 4.f * 0.5f == 스피드
+	m_fDeadCount += 5.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+	// 5.f * 0.5f == 스피드
 
 	if (m_fDeadCount >= 6.f)
 		m_bDead = true;

@@ -10,11 +10,13 @@
 #include "Shine.h"
 #include "Heart.h"
 
+#include "Player.h"
+
 CEvil::CEvil()
 	: m_pLoveSign(nullptr), m_pLoveBomb(nullptr)
 	, m_fDeadCount(0.f), m_White(false)
 {
-	// empty
+	m_pPlayer = CObjMgr::GetInstance()->Get_Player();
 }
 
 CEvil::~CEvil()
@@ -30,26 +32,17 @@ HRESULT CEvil::Initialize(void)
 int CEvil::Update(void)
 {
 	if (true == m_White)
-	{
-		if (0.f == m_fDeadCount)
-		{
-			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
-
-			for (int i = 0; i < 30; ++i)
-				Create_Shine();
-		}
-		
-		m_fDeadCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();		// 4.f * 0.5f == 스피드
-	}
-
-	if (m_fDeadCount >= 6.f)
-		m_bDead = true;
+		ClearMotion();
 
 	if (true == m_bDead)
 	{
+		// 이펙트 생성
 		Create_LoveBomb();
 
-		for (int i = 0; i < 30; ++i)
+		for (int i = 0; i < 20; ++i)
+			Create_Shine(true);
+
+		for (int i = 0; i < 40; ++i)
 			Create_Heart();
 		
 		return OBJ_DEAD;
@@ -114,6 +107,25 @@ void CEvil::Release(void)
 	// empty
 }
 
+void CEvil::ClearMotion()
+{
+	if (0.f == m_fDeadCount)
+	{
+		m_pLoveSign->Set_Damage();
+
+		for (int i = 0; i < 50; ++i)
+			Create_Shine();
+	}
+
+	m_fDeadCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();		// 4.f * 0.5f == 스피드
+
+	if (m_fDeadCount >= 5.4f)
+		dynamic_cast<CPlayer*>(m_pPlayer)->Set_Crush(true);
+
+	if (m_fDeadCount >= 6.f)
+		m_bDead = true;
+}
+
 void CEvil::Create_LoveSign()
 {
 	m_pLoveSign = new CLoveSign;
@@ -155,6 +167,34 @@ void CEvil::Create_Shine()
 	pShine->Initialize();
 	pShine->Set_Flag(m_tInfo.vPos);
 	pShine->Set_Pos(random);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pShine);
+}
+
+void CEvil::Create_Shine(bool _pink)
+{
+	D3DXVECTOR3 random;
+	float fDistance;
+
+	while (true)
+	{
+		random = m_tInfo.vPos - D3DXVECTOR3{ rand() % 300 - 150.f, rand() % 300 - 150.f, 0.f };
+
+		float	fWidth = m_tInfo.vPos.x - random.x;
+		float	fHeight = m_tInfo.vPos.y - random.y;
+
+		// 현재 거리 계산
+		fDistance = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+		if (fDistance >= 70.f && fDistance <= 140.f)
+			break;
+	}
+
+	CObj* pShine = new CShine;
+	pShine->Initialize();
+	pShine->Set_Flag(m_tInfo.vPos);
+	pShine->Set_Pos(random);
+	dynamic_cast<CShine*>(pShine)->Set_Pink(_pink);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pShine);
 }

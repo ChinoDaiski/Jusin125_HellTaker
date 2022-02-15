@@ -12,7 +12,7 @@
 #include "HitEffect.h"
 
 CPlayer::CPlayer()
-	: moveCount(0)
+	: moveCount(0), m_fClearCount(0.f)
 {
 	// empty
 }
@@ -91,21 +91,7 @@ void CPlayer::Late_Update(void)
 	if(L"Idle" == m_wstrStateKey)
 		MoveFrame();
 	else if (L"Clear" == m_wstrStateKey)
-	{
-		if(m_tFrame.fFrame <= 5.f)
-			MoveFrame();
-		else 
-		{
-			m_tFrame.fFrameSpeed = 0.8f;
-			MoveFrame();
-		}
-
-		if (0.f == m_tFrame.fFrame)
-		{
-			m_wstrStateKey = L"Idle";
-			m_tFrame = { 0.f, 12.f };
-		}
-	}
+		ClearMotion();
 	else
 	{
 		MoveFrame();
@@ -202,7 +188,6 @@ void CPlayer::Key_Input(void)
 		Create_MoveEffect(m_tInfo.vPos);
 
 		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
-		//m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex - 1);
 		Set_ObjIndex(m_ObjIndex - 1);
 
 		--m_iHp;
@@ -220,7 +205,6 @@ void CPlayer::Key_Input(void)
 		Create_MoveEffect(m_tInfo.vPos);
 
 		m_vFlag = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
-		//m_tInfo.vPos = dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(m_ObjIndex + 1);
 		Set_ObjIndex(m_ObjIndex + 1);
 
 		--m_iHp;
@@ -309,6 +293,32 @@ bool CPlayer::DontMove(int _index)
 	m_wstrStateKey = L"Move";
 
 	return false;
+}
+
+void CPlayer::ClearMotion()
+{
+	// Clear 프레임 1단계
+	if (m_tFrame.fFrame <= 5.f)
+		MoveFrame();
+	// Clear 프레임 2~3단계
+	else if (true == m_bCrush)
+	{
+		// Clear 프레임 2단계
+		if (m_tFrame.fFrame <= 11.f)
+			MoveFrame();
+		// Clear 프레임 3단계 준비
+		else
+			m_fClearCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+		// Clear 프레임 3단계
+		if (m_fClearCount >= 3.f)
+		{
+			if (m_tFrame.fFrame >= 18.f)
+				m_tFrame.fFrame = 14.f;
+
+			MoveFrame();
+		}
+	}
 }
 
 void CPlayer::Create_HitEffect(D3DXVECTOR3 _pos)

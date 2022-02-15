@@ -15,6 +15,14 @@ CObjMgr::~CObjMgr()
 	Release(); 
 }
 
+bool CObjMgr::Get_Empty(ID eID)
+{
+	if (m_listObject[eID].empty())
+		return true;
+
+	return false;
+}
+
 void CObjMgr::Set_EvilWhite()
 {
 	for (auto& iter = m_listObject[EVIL].begin(); iter != m_listObject[EVIL].end(); ++iter)

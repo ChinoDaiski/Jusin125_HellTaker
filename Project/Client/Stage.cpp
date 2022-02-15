@@ -76,8 +76,11 @@ void CStage::Update_Scene()
 		}*/
 		CObjMgr::GetInstance()->Set_EvilWhite();
 
-		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.1f));
-		dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
+		if (L"Idle" == dynamic_cast<CPlayer*>(m_pPlayer)->Get_StateKey())
+		{
+			dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
+			m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.6f));
+		}
 
 		// 다음 챕터로 전환
 		// Change_NextChapter();

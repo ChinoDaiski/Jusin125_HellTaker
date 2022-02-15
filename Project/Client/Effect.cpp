@@ -3,7 +3,7 @@
 
 CEffect::CEffect()
 {
-	// empty
+	m_iHp = 1;
 }
 
 CEffect::~CEffect()

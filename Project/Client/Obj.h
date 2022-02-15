@@ -18,7 +18,7 @@ public:
 	virtual void		Moving();			// 이동 자연스럽게 하기
 
 public:
-	const wstring& GetObjKey(void) const { return m_wstrObjKey; }
+	const wstring&	GetObjKey(void) const { return m_wstrObjKey; }
 	void			Set_ObjKey(wstring _ObjKey) { m_wstrObjKey = _ObjKey; }
 	void			MoveFrame(void);
 
@@ -37,8 +37,8 @@ public:
 	void			Set_ObjIndex(int _index) { m_ObjIndex = _index; }
 	int				Get_ObjIndex() { return m_ObjIndex; }
 
-	void		Set_GridState(GRID_STATE _gridstate) { m_GridState = _gridstate; }
-	GRID_STATE	Get_GridState() { return m_GridState; }
+	void			Set_GridState(GRID_STATE _gridstate) { m_GridState = _gridstate; }
+	GRID_STATE		Get_GridState() { return m_GridState; }
 
 	DIR				Get_Dir() { return m_Dir; }
 

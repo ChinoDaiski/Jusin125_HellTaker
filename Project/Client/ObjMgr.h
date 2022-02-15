@@ -17,6 +17,8 @@ private:
 public:
 	CObj*			Get_Terrain() { return m_listObject[TERRAIN].front(); }
 	CObj*			Get_Player() { return m_listObject[PLAYER].front(); }
+	
+	bool			Get_Empty(ID eID);
 
 	void			Set_EvilWhite();
 
