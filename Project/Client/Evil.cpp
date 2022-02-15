@@ -30,8 +30,17 @@ HRESULT CEvil::Initialize(void)
 int CEvil::Update(void)
 {
 	if (true == m_White)
-		m_fDeadCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
-	// 4.f * 0.5f == 스피드
+	{
+		if (0.f == m_fDeadCount)
+		{
+			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
+
+			for (int i = 0; i < 30; ++i)
+				Create_Shine();
+		}
+		
+		m_fDeadCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();		// 4.f * 0.5f == 스피드
+	}
 
 	if (m_fDeadCount >= 6.f)
 		m_bDead = true;
@@ -39,6 +48,10 @@ int CEvil::Update(void)
 	if (true == m_bDead)
 	{
 		Create_LoveBomb();
+
+		for (int i = 0; i < 30; ++i)
+			Create_Heart();
+		
 		return OBJ_DEAD;
 	}
 
@@ -121,18 +134,54 @@ void CEvil::Create_LoveBomb()
 
 void CEvil::Create_Shine()
 {
+	D3DXVECTOR3 random;
+	float fDistance;
+	
+	while (true)
+	{
+		random = m_tInfo.vPos - D3DXVECTOR3{ rand() % 300 - 150.f, rand() % 300 - 150.f, 0.f };
+
+		float	fWidth = m_tInfo.vPos.x - random.x;
+		float	fHeight = m_tInfo.vPos.y - random.y;
+
+		// 현재 거리 계산
+		fDistance = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+		if (fDistance >= 70.f && fDistance <= 140.f)
+			break;
+	}
+
 	CObj* pShine = new CShine;
 	pShine->Initialize();
-	pShine->Set_Pos(m_tInfo.vPos - D3DXVECTOR3{ 30.f, 0.f, 0.f });
+	pShine->Set_Flag(m_tInfo.vPos);
+	pShine->Set_Pos(random);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pShine);
 }
 
 void CEvil::Create_Heart()
 {
+	D3DXVECTOR3 random;
+	float fDistance;
+
+	while (true)
+	{
+		random = m_tInfo.vPos - D3DXVECTOR3{ rand() % 300 - 150.f, rand() % 300 - 150.f, 0.f };
+
+		float	fWidth = m_tInfo.vPos.x - random.x;
+		float	fHeight = m_tInfo.vPos.y - random.y;
+
+		// 현재 거리 계산
+		fDistance = sqrtf(fWidth * fWidth + fHeight * fHeight);
+
+		if (fDistance >= 70.f && fDistance <= 200.f)
+			break;
+	}
+
 	CObj* pHeart = new CHeart;
 	pHeart->Initialize();
-	pHeart->Set_Pos(m_tInfo.vPos + D3DXVECTOR3{ 30.f, 0.f, 0.f });
+	pHeart->Set_Flag(m_tInfo.vPos);
+	pHeart->Set_Pos(random);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pHeart);
 }

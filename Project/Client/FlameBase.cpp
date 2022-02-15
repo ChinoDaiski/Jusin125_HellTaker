@@ -89,5 +89,5 @@ void CFlameBase::Create_Fire(void)
 		m_pFire->Initialize();
 
 	m_pFire->Set_Pos(D3DXVECTOR3(m_tInfo.vPos.x, m_tInfo.vPos.y - 20, 0.f));
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pFire);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVENT_OBJ, m_pFire);
 }

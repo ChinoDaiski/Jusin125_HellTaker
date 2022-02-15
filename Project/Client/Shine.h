@@ -18,5 +18,8 @@ public:
 
 private:
 	bool	m_bPink = false;
+
+	// 난수값 저장
+	float	m_fRandom;
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Shine.h"
 
+#include "ObjMgr.h"
 
 CShine::CShine()
 {
@@ -23,13 +24,21 @@ HRESULT CShine::Initialize(void)
 
 	m_tFrame = { 0.f, 1.f, 0.5f };
 
-	m_bPink = true;
+	m_fRandom = (rand() % 2 + 1.f);
+
+	moving = true;
+	m_fSpeed = 120.f;
 
 	return S_OK;
 }
 
 int CShine::Update(void)
 {
+	if (true == moving)
+		Moving();
+	else
+		m_bDead = true;
+
 	if (true == m_bDead)
 		return OBJ_DEAD;
 
@@ -43,7 +52,7 @@ int CShine::Update(void)
 		m_tInfo.vPos.y + CObj::m_vScroll.y,
 		0.f);
 
-	D3DXMatrixScaling(&matScale, (rand() % 2 + 1.f) * MAPSIZEX, (rand() % 2 + 1.f) * MAPSIZEY, 1.f);
+	D3DXMatrixScaling(&matScale, m_fRandom * MAPSIZEX, m_fRandom * MAPSIZEY, 1.f);
 
 	m_tInfo.matWorld = matScale * matTrans;
 
@@ -81,6 +90,6 @@ void CShine::Render(void)
 			nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
 			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
 			nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
-			D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+			D3DCOLOR_ARGB(200, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 	}
 }
