@@ -11,7 +11,7 @@ CHeart::CHeart()
 
 CHeart::~CHeart()
 {
-	// empty
+	Release();
 }
 
 HRESULT CHeart::Initialize(void)

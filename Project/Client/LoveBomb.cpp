@@ -8,7 +8,7 @@ CLoveBomb::CLoveBomb()
 
 CLoveBomb::~CLoveBomb()
 {
-	// empty
+	Release();
 }
 
 HRESULT CLoveBomb::Initialize(void)

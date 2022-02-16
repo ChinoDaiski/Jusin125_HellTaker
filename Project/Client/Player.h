@@ -29,6 +29,7 @@ private:
 
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
+	void		Create_DeathEffect();
 
 private:
 	wstring			m_wstrStateKey = L"";

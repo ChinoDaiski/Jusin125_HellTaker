@@ -142,6 +142,9 @@
     <Filter Include="02. Obj\04. Effect\05. Heart">
       <UniqueIdentifier>{8d31e602-f598-4679-9ac2-990bb1fa3a19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\06. Death">
+      <UniqueIdentifier>{adcd2dee-09d9-4084-aeab-c06d67049539}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -282,6 +285,9 @@
     <ClInclude Include="Shine.h">
       <Filter>02. Obj\04. Effect\04. Shine</Filter>
     </ClInclude>
+    <ClInclude Include="DeathEffect.h">
+      <Filter>02. Obj\04. Effect\06. Death</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -409,6 +415,9 @@
     </ClCompile>
     <ClCompile Include="Shine.cpp">
       <Filter>02. Obj\04. Effect\04. Shine</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathEffect.cpp">
+      <Filter>02. Obj\04. Effect\06. Death</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

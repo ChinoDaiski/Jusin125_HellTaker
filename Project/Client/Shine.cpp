@@ -11,7 +11,7 @@ CShine::CShine()
 
 CShine::~CShine()
 {
-	// empty
+	Release();
 }
 
 HRESULT CShine::Initialize(void)

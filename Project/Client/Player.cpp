@@ -10,6 +10,7 @@
 
 #include "MoveEffect.h"
 #include "HitEffect.h"
+#include "DeathEffect.h"
 
 CPlayer::CPlayer()
 	: moveCount(0), m_fClearCount(0.f)
@@ -54,6 +55,15 @@ HRESULT CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 {
+	if (m_iHp <= 0)
+		m_bDead = true;
+
+	if (true == m_bDead)
+	{
+		Create_DeathEffect();
+		return OBJ_DEAD;
+	}
+
 	Key_Input();
 
 	if (true == moving)
@@ -363,6 +373,15 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	}
 
 	pEffect->Set_Pos(_pos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Create_DeathEffect()
+{
+	CObj*	pEffect = new CDeathEffect;
+	pEffect->Set_Pos(D3DXVECTOR3{ WINCX >> 1, WINCY >> 1, 0.f });
+	pEffect->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

@@ -167,6 +167,7 @@
     <ClInclude Include="Cerberus.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="DeathEffect.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Evil.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="Cerberus.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="DeathEffect.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Evil.cpp" />

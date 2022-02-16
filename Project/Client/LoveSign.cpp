@@ -8,7 +8,7 @@ CLoveSign::CLoveSign()
 
 CLoveSign::~CLoveSign()
 {
-	// empty
+	Release();
 }
 
 HRESULT CLoveSign::Initialize(void)

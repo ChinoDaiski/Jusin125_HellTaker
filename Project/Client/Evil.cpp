@@ -113,7 +113,7 @@ void CEvil::ClearMotion()
 	{
 		m_pLoveSign->Set_Damage();
 
-		for (int i = 0; i < 50; ++i)
+		for (int i = 0; i < 30; ++i)
 			Create_Shine();
 	}
 
