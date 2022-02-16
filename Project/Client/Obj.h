@@ -29,6 +29,11 @@ public:
 			m_bDead = true;
 	}
 
+	void			Set_Hp(int _hp) { m_iHp = _hp; }
+	void			Set_Dead(bool _dead) { m_bDead = _dead; }
+	bool			Get_Dead(void) { return m_bDead; }
+
+	FRAME&			Get_Frame() { return m_tFrame; }
 	void			Set_fFrame(FRAME _fFrame) { m_tFrame = _fFrame; }
 
 	void			Set_Pos(D3DXVECTOR3 _vecPos) { m_tInfo.vPos = _vecPos; }

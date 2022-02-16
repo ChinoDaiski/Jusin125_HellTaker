@@ -33,10 +33,15 @@ private:
 	void	Init_ChapterSeven();
 	void	Init_ChapterEIGHT();
 
+	void	Create_DeathEffect();
+
 private:
 	CObj*	m_pPlayer;		// 플레이어
 	CObj*	m_pBackGround;	// 백그라운드 보관
+	CObj*	m_pDeath;		// 데스 이펙트
 	CHAPTER	m_chapter;		// 챕터 저장
+
+	int		m_ChapterHp;	// 챕터별 플레이어의 Hp 맥스 저장
 
 };
 

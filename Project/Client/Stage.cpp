@@ -6,6 +6,7 @@
 #include "BackGround.h"
 
 #include "Player.h"
+#include "DeathEffect.h"
 
 // Evil
 #include "Azazel.h"
@@ -27,7 +28,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ZERO)
+	: m_chapter(ZERO), m_pDeath(nullptr), m_ChapterHp(0)
 {
 	CObj* pBackGround = new CBackGround;
 
@@ -39,13 +40,12 @@ CStage::CStage()
 	m_pBackGround = CObjMgr::GetInstance()->Get_Terrain();
 
 	// 플레이어 생성
-	CObj*		pPlayer = new CPlayer;
+	m_pPlayer = new CPlayer;
 
-	if (nullptr != pPlayer)
-		pPlayer->Initialize();
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, pPlayer);
+	if (nullptr != m_pPlayer)
+		m_pPlayer->Initialize();
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, m_pPlayer);
 
-	m_pPlayer = CObjMgr::GetInstance()->Get_Player();
 	dynamic_cast<CPlayer*>(m_pPlayer)->Set_GroundPtr(m_pBackGround);
 }
 
@@ -63,6 +63,34 @@ HRESULT CStage::Ready_Scene()
 
 void CStage::Update_Scene()
 {
+	if (true == m_pPlayer->Get_Dead())
+	{
+		// 죽을 때 이펙트 처리
+		if (nullptr == m_pDeath)
+		{
+			CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
+			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
+			CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
+			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
+			Create_DeathEffect();
+
+			// 임시로 안 보이게 위치 옮김
+			m_pPlayer->Set_Pos(D3DXVECTOR3{ -500.f, -500.f, 0.f });
+			m_pPlayer->Set_Flag(D3DXVECTOR3{ -500.f, -500.f, 0.f });
+		}
+
+		// 이펙트 끝난 후 스테이지 초기화
+		if (true == m_pDeath->Get_Dead())
+		{
+			// 이펙트 삭제 후 널포인터 지정 (다시 죽을 것을 대비해 초기화)
+			m_pDeath = nullptr;
+
+			m_pPlayer->Set_Dead(false);
+			Init_Chapter();
+		}
+	}
+
+
 	// 골 인덱스인지 확인
 	if (g_iGoalIndex == m_pPlayer->Get_ObjIndex())
 	{
@@ -71,8 +99,8 @@ void CStage::Update_Scene()
 		// 선택완료시 플레이어 클리어 모션
 		/*for (auto& iter : m_pEvil)
 		{
-			if (nullptr != iter)
-				dynamic_cast<CEvil*>(iter)->Set_White(true);
+		if (nullptr != iter)
+		dynamic_cast<CEvil*>(iter)->Set_White(true);
 		}*/
 		CObjMgr::GetInstance()->Set_EvilWhite();
 
@@ -86,7 +114,6 @@ void CStage::Update_Scene()
 		// Change_NextChapter();
 		// Init_Chapter();
 	}
-
 	CObjMgr::GetInstance()->Update();
 }
 
@@ -204,8 +231,11 @@ void CStage::Init_ChapterZERO()
 	// 골 인덱스 60
 	g_iGoalIndex = 60;
 
+	m_ChapterHp = 10;
+	m_pPlayer->Set_Hp(m_ChapterHp);
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 	m_pPlayer->Set_ObjIndex(15);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 
 	// 판데모니카. Pandemonica
 	CObj* pEvil = new CPandemonica;
@@ -507,4 +537,13 @@ void CStage::Init_ChapterEIGHT()
 		pObj->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+}
+
+void CStage::Create_DeathEffect()
+{
+	m_pDeath = new CDeathEffect;
+	m_pDeath->Set_Pos(D3DXVECTOR3{ m_pPlayer->Get_Info().vPos.x, m_pPlayer->Get_Info().vPos.y - 200, 0.f });
+	m_pDeath->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pDeath);
 }
