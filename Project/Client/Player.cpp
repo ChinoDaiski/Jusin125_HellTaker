@@ -340,6 +340,7 @@ bool CPlayer::CheckTile(int _index)
 	{
 		--m_iHp;
 
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_Vive(true);
 		Create_Blood(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));	
 		bleeding = true;
 		bleedingCount = 0.f;

@@ -7,6 +7,7 @@
 
 CBackGround::CBackGround()
 	: m_Chapter(ZERO)
+	, m_bVibration(false), m_iViveCount(0)
 {
 	ZeroMemory(&m_GridInfo, sizeof(GRID_INFO));
 }
@@ -35,6 +36,28 @@ HRESULT CBackGround::Initialize(void)
 
 int CBackGround::Update(void)
 {
+	if (m_bVibration)
+	{
+		if (m_iViveCount % 2 == 0)
+		{
+			m_tInfo.vPos.x += 4.f;
+			m_tInfo.vPos.y += 5.f;
+		}
+		else
+		{
+			m_tInfo.vPos.x -= 4.f;
+			m_tInfo.vPos.y -= 5.f;
+		}
+
+		++m_iViveCount;
+
+		if (m_iViveCount >= 70)
+		{
+			m_iViveCount = 0;
+			m_bVibration = false;
+		}
+	}
+
 	D3DXMATRIX	matTrans, matScale;
 
 	D3DXMatrixIdentity(&matTrans);
