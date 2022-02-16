@@ -151,6 +151,9 @@
     <Filter Include="02. Obj\04. Effect\07. Bone">
       <UniqueIdentifier>{61f7721d-e816-4d0f-bd5a-6a7f73ecf7e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\08. Blood">
+      <UniqueIdentifier>{7898069b-cded-43b4-8928-e25d0210c463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -300,6 +303,9 @@
     <ClInclude Include="Bone.h">
       <Filter>02. Obj\04. Effect\07. Bone</Filter>
     </ClInclude>
+    <ClInclude Include="BloodEffect.h">
+      <Filter>02. Obj\04. Effect\08. Blood</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -436,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="Bone.cpp">
       <Filter>02. Obj\04. Effect\07. Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodEffect.cpp">
+      <Filter>02. Obj\04. Effect\08. Blood</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

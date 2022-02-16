@@ -10,11 +10,14 @@
 
 #include "MoveEffect.h"
 #include "HitEffect.h"
+#include "BloodEffect.h"
 
 #include "Bone.h"
 
 CPlayer::CPlayer()
-	: moveCount(0), m_fClearCount(0.f)
+	: moveCount(0), bloodCount(0)
+	, m_fClearCount(0.f)
+	, bleeding(false), bleedingCount(0.f), bloodColor(70)
 {
 	// empty
 }
@@ -56,9 +59,11 @@ HRESULT CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 {
+	// 키 입력
 	if (m_iHp > 0)
 		Key_Input();
 
+	// 이동 or 죽음 처리
 	if (true == moving)
 	{
 		Moving();
@@ -68,6 +73,24 @@ int CPlayer::Update(void)
 	{
 		if (m_iHp <= 0)
 			m_bDead = true;
+	}
+
+	// 출혈중
+	if (bleeding)
+	{
+		if (bleedingCount <= 4.f)
+		{
+			bleedingCount += 3.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+			
+			if(bloodColor < 255)
+				++bloodColor;
+		}
+		else
+		{
+			bleeding = false;
+			bleedingCount = 0.f;
+			bloodColor = 70;
+		}
 	}
 
 	D3DXMATRIX	matTrans, matScale;
@@ -127,11 +150,22 @@ void CPlayer::Render(void)
 	// 행렬을 장치를 이용하여 모든 정점에 곱해주는 함수
 	CDevice::GetInstance()->Get_Sprite()->SetTransform(&m_tInfo.matWorld);
 
-	CDevice::GetInstance()->Get_Sprite()->Draw(pTexInfo->pTexture,		// 텍스처 컴객체 주소
-		nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
-		&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
-		nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
-		D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+	if (bleeding)
+	{
+		CDevice::GetInstance()->Get_Sprite()->Draw(pTexInfo->pTexture,		// 텍스처 컴객체 주소
+			nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
+			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
+			nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
+			D3DCOLOR_ARGB(255, 255, bloodColor, bloodColor)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+	}
+	else
+	{
+		CDevice::GetInstance()->Get_Sprite()->Draw(pTexInfo->pTexture,		// 텍스처 컴객체 주소
+			nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
+			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
+			nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
+			D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+	}
 }
 
 void CPlayer::Release(void)
@@ -146,7 +180,7 @@ void CPlayer::Key_Input(void)
 	{
 		m_Dir = DIR_UP;
 
-		if (DontMove(m_ObjIndex -
+		if (CheckTile(m_ObjIndex -
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
 			return;
@@ -169,7 +203,7 @@ void CPlayer::Key_Input(void)
 	{
 		m_Dir = DIR_DOWN;
 
-		if (DontMove(m_ObjIndex +
+		if (CheckTile(m_ObjIndex +
 			(dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index)))
 			return;
@@ -193,7 +227,7 @@ void CPlayer::Key_Input(void)
 		m_Dir = DIR_LEFT;
 		m_PreDir = DIR_LEFT;
 
-		if (DontMove(m_ObjIndex - 1))
+		if (CheckTile(m_ObjIndex - 1))
 			return;
 
 		Create_MoveEffect(m_tInfo.vPos);
@@ -210,7 +244,7 @@ void CPlayer::Key_Input(void)
 		m_Dir = DIR_RIGHT;
 		m_PreDir = DIR_RIGHT;
 
-		if (DontMove(m_ObjIndex + 1))
+		if (CheckTile(m_ObjIndex + 1))
 			return;
 
 		Create_MoveEffect(m_tInfo.vPos);
@@ -223,16 +257,15 @@ void CPlayer::Key_Input(void)
 	}
 }
 
-bool CPlayer::DontMove(int _index)
+bool CPlayer::CheckTile(int _index)
 {
 	// 갈 수 없는 타일인지 판단
 	if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 		return true;
-
 	// 오브젝트가 위에 있는지 판단
-	if (ON_OBJECT == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
+	else if (ON_OBJECT == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 	{
-		for(int i = 0; i < 30; ++i)
+		for(int i = 0; i < 15; ++i)
 			Create_Bone();
 
 		m_wstrStateKey = L"Kick";
@@ -301,6 +334,16 @@ bool CPlayer::DontMove(int _index)
 		}
 
 		return true;
+	}
+	// 트랩이 있는지 판단
+	else if (ON_TRAP == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
+	{
+		--m_iHp;
+
+		Create_Blood(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));	
+		bleeding = true;
+		bleedingCount = 0.f;
+		bloodColor = 70.f;
 	}
 
 	m_tFrame = { 0.f, 6.f, 2.f };
@@ -386,6 +429,32 @@ void CPlayer::Create_Bone()
 	CObj*	pEffect = new CBone;
 	pEffect->Initialize();
 	pEffect->Set_Pos(m_tInfo.vPos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Create_Blood(D3DXVECTOR3 _pos)
+{
+	CObj*	pEffect = new CBloodEffect;
+	pEffect->Initialize();
+
+	switch (bloodCount)
+	{
+	case 0:
+		pEffect->Set_ObjKey(L"Blood0");
+		++bloodCount;
+		break;
+	case 1:
+		pEffect->Set_ObjKey(L"Blood1");
+		++bloodCount;
+		break;
+	case 2:
+		pEffect->Set_ObjKey(L"Blood2");
+		bloodCount = 0;
+		break;
+	}
+
+	pEffect->Set_Pos(_pos - D3DXVECTOR3{10.f, 45.f, 0.f});
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

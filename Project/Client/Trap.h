@@ -3,7 +3,8 @@
 
 class CTrap : public CObj
 {
-	enum ACTIVE { ON, OFF, ON_READY, OFF_READY, STOP };
+public:
+	enum ACTIVE { ON, OFF, ON_READY, OFF_READY, ON_KEEP, STOP };
 
 public:
 	CTrap();
@@ -24,6 +25,6 @@ private:
 	void	Active_Trap();
 
 private:
-	ACTIVE		m_Active;		// -1 == ON, 0 == REVERSE, 1 == ON_READY, 2 == OFF 
+	ACTIVE		m_Active;
 };
 

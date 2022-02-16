@@ -24,20 +24,27 @@ public:
 
 private:
 	void		Key_Input(void);				// 방향키 입력
-	bool		DontMove(int _index);			// 필드의 끝에 있을 때 움직이지 않음
+	bool		CheckTile(int _index);			// 필드의 끝에 있을 때 움직이지 않음
 	void		ClearMotion();
 
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
 	void		Create_Bone();
+	void		Create_Blood(D3DXVECTOR3 _pos);
 
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;
 	DIR				m_PreDir;		// 이전 방향
 
-	int				moveCount;				// MoveEffect 카운트 (0~3 반복)
+	int				moveCount;				// MoveEffect 카운트 (0~2 반복)
+	int				bloodCount;				// BloodEffect 카운트 (0~2 반복)
+
+	bool			bleeding;				// 트랩에 맞고 출혈 중
+	float			bleedingCount;			// 출혈 지속시간
+	int				bloodColor;				// 출혈 렌더링용
+
 	bool			m_bCrush = false;		// 클리어시 내리치는 모션용		
 	float			m_fClearCount;			// Clear 3프레임 용
 };

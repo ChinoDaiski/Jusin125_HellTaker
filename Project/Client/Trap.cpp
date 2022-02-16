@@ -107,6 +107,9 @@ void CTrap::Active_Trap()
 		m_tFrame = { 6.f, 7.f, 2.4f };
 		m_Active = OFF;
 		break;
+	case ON_KEEP:
+		m_tFrame.fFrame = 6.f;
+		break;
 	}
 
 }

@@ -26,10 +26,10 @@ HRESULT CBone::Initialize(void)
 	// ·£´ýÇÑ ±×¸²
 	m_tFrame = { (float)(rand()%7), 7.f };
 
-	m_fPower = float(rand()%15+85);
+	m_fPower = float(rand()%30+80);
 	m_fTime = 0.f;
 
-	m_fAngle = D3DXToRadian(rand() % 180);
+	m_fAngle = D3DXToRadian(rand() % 150 + 30);
 
 	return S_OK;
 }

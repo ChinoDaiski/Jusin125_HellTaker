@@ -8,7 +8,7 @@ class CObjMgr final
 	DECLARE_SINGLETON(CObjMgr)
 
 public:
-	enum ID { TERRAIN, MONSTER, WALL, TRAP, EVENT_OBJ, EFFECT, PLAYER, EVIL, UI, END };
+	enum ID { TERRAIN, MONSTER, TRAP, WALL, EVENT_OBJ, EFFECT, PLAYER, EVIL, UI, END };
 
 private:
 	CObjMgr();

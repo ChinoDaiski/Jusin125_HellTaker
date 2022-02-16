@@ -29,7 +29,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ZERO), m_pDeath(nullptr)
+	: m_chapter(ONE), m_pDeath(nullptr)
 	, m_fTimer(0.f)
 {
 	// 백그라운드 생성
@@ -397,6 +397,157 @@ void CStage::Init_ChapterONE()
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
+
+	// 몬스터. Monster
+	CObj* pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(29));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(29, ON_OBJECT);
+		pObj->Set_ObjIndex(29);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(60));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(60, ON_OBJECT);
+		pObj->Set_ObjIndex(60);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	// 몬스터. Monster
+	pObj = new CMonster;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(70));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(70, ON_OBJECT);
+		pObj->Set_ObjIndex(70);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::MONSTER, pObj);
+
+	
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(41));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(41, ON_OBJECT);
+		pObj->Set_ObjIndex(41);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(42));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(42, ON_OBJECT);
+		pObj->Set_ObjIndex(42);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+
+	// Wall
+	pObj = new CWall;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(43));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(43, ON_OBJECT);
+		pObj->Set_ObjIndex(43);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::WALL, pObj);
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(31));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(31, ON_TRAP);
+		pObj->Set_ObjIndex(31);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(32));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(32, ON_TRAP);
+		pObj->Set_ObjIndex(32);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(38, ON_TRAP);
+		pObj->Set_ObjIndex(38);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(41));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(41, ON_TRAP);
+		pObj->Set_ObjIndex(41);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(42));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(42, ON_TRAP);
+		pObj->Set_ObjIndex(42);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
+
+	// Trap
+	pObj = new CTrap;
+	if (nullptr != pObj)
+	{
+		pObj->Initialize();
+		pObj->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(51));
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(51, ON_TRAP);
+		pObj->Set_ObjIndex(51);
+		dynamic_cast<CTrap*>(pObj)->Set_Active(CTrap::ON_KEEP);
+	}
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TRAP, pObj);
 }
 
 void CStage::Init_ChapterTWO()
