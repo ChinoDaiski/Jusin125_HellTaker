@@ -30,6 +30,8 @@ private:
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
+	void		Create_Bone();
+
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;

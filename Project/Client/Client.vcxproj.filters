@@ -148,6 +148,9 @@
     <Filter Include="02. Obj\04. Effect\06. Death\00. DeathBackGround">
       <UniqueIdentifier>{d51faf2c-8e0f-4c1d-8763-b50f93eace92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\07. Bone">
+      <UniqueIdentifier>{61f7721d-e816-4d0f-bd5a-6a7f73ecf7e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -294,6 +297,9 @@
     <ClInclude Include="DeathBackGround.h">
       <Filter>02. Obj\04. Effect\06. Death\00. DeathBackGround</Filter>
     </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>02. Obj\04. Effect\07. Bone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -427,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="DeathBackGround.cpp">
       <Filter>02. Obj\04. Effect\06. Death\00. DeathBackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>02. Obj\04. Effect\07. Bone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

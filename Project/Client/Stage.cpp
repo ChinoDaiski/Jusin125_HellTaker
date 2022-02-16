@@ -448,6 +448,7 @@ void CStage::Init_ChapterTWO()
 
 void CStage::Init_ChapterTHREE()
 {
+	m_pPlayer->Set_Hp(m_ChapterHp[3]);
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 	m_pPlayer->Set_ObjIndex(15);
 

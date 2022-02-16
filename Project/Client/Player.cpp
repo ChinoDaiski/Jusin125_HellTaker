@@ -11,6 +11,8 @@
 #include "MoveEffect.h"
 #include "HitEffect.h"
 
+#include "Bone.h"
+
 CPlayer::CPlayer()
 	: moveCount(0), m_fClearCount(0.f)
 {
@@ -230,6 +232,9 @@ bool CPlayer::DontMove(int _index)
 	// 오브젝트가 위에 있는지 판단
 	if (ON_OBJECT == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 	{
+		for(int i = 0; i < 30; ++i)
+			Create_Bone();
+
 		m_wstrStateKey = L"Kick";
 		m_tFrame = { 0.f, 13.f, 2.4f };
 
@@ -372,6 +377,15 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	}
 
 	pEffect->Set_Pos(_pos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Create_Bone()
+{
+	CObj*	pEffect = new CBone;
+	pEffect->Initialize();
+	pEffect->Set_Pos(m_tInfo.vPos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

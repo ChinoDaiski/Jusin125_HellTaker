@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Azazel.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Bone.h" />
     <ClInclude Include="Cerberus.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Client.h" />
@@ -212,6 +213,7 @@
   <ItemGroup>
     <ClCompile Include="Azazel.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Cerberus.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Client.cpp" />
