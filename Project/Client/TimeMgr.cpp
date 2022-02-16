@@ -36,7 +36,6 @@ void CTimeMgr::Update(void)
 {
 	QueryPerformanceCounter(&m_CurrentTime);	// 2000	//	3000 // 4000 // 5000
 
-
 	if (m_CurrentTime.QuadPart - m_OriginTime.QuadPart > m_CpuTick.QuadPart)
 	{
 		QueryPerformanceFrequency(&m_CpuTick);
@@ -46,7 +45,6 @@ void CTimeMgr::Update(void)
 	m_fTimeDelta = float(m_CurrentTime.QuadPart - m_OldTime.QuadPart) / m_CpuTick.QuadPart;
 
 	m_OldTime = m_CurrentTime;
-
 }
 
 

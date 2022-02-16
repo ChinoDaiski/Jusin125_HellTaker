@@ -35,6 +35,9 @@ private:
 
 	void	Create_DeathEffect();
 
+	void	Goal_Arrive();		// 목적지 도착
+	void	Player_Death();		// 체력 소모로 인한 플레이어 사망
+
 private:
 	CObj*	m_pPlayer;		// 플레이어
 	CObj*	m_pBackGround;	// 백그라운드 보관
@@ -42,6 +45,8 @@ private:
 	CHAPTER	m_chapter;		// 챕터 저장
 
 	int		m_ChapterHp;	// 챕터별 플레이어의 Hp 맥스 저장
+
+	float	m_fTimer;		// 타이머 (딜레이용)
 
 };
 

@@ -49,20 +49,6 @@ int CBackGround::Update(void)
 
 	m_tInfo.matWorld = matScale * matTrans;
 
-	D3DXVECTOR3	vMouse = ::Get_Mouse();
-
-	if (0.f > vMouse.x)
-		m_vScroll.x += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
-
-	if (WINCX < vMouse.x)
-		m_vScroll.x -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
-
-	if (0.f > vMouse.y)
-		m_vScroll.y += 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
-
-	if (WINCY < vMouse.y)
-		m_vScroll.y -= 300.f * CTimeMgr::GetInstance()->Get_TimeDelta();
-
 	for (auto& iter : vecGrid)
 		iter->Update();
 

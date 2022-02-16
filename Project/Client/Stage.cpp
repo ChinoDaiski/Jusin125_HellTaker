@@ -2,6 +2,7 @@
 #include "Stage.h"
 
 #include "TextureMgr.h"
+#include "TimeMgr.h"
 #include "ObjMgr.h"
 #include "BackGround.h"
 
@@ -28,7 +29,8 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ZERO), m_pDeath(nullptr), m_ChapterHp(0)
+	: m_chapter(ZERO), m_pDeath(nullptr)
+	, m_ChapterHp(0), m_fTimer(0.f)
 {
 	CObj* pBackGround = new CBackGround;
 
@@ -63,57 +65,12 @@ HRESULT CStage::Ready_Scene()
 
 void CStage::Update_Scene()
 {
-	if (true == m_pPlayer->Get_Dead())
-	{
-		// 죽을 때 이펙트 처리
-		if (nullptr == m_pDeath)
-		{
-			CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
-			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
-			CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
-			CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
-			Create_DeathEffect();
-
-			// 임시로 안 보이게 위치 옮김
-			m_pPlayer->Set_Pos(D3DXVECTOR3{ -500.f, -500.f, 0.f });
-			m_pPlayer->Set_Flag(D3DXVECTOR3{ -500.f, -500.f, 0.f });
-		}
-
-		// 이펙트 끝난 후 스테이지 초기화
-		if (true == m_pDeath->Get_Dead())
-		{
-			// 이펙트 삭제 후 널포인터 지정 (다시 죽을 것을 대비해 초기화)
-			m_pDeath = nullptr;
-
-			m_pPlayer->Set_Dead(false);
-			Init_Chapter();
-		}
-	}
-
-
 	// 골 인덱스인지 확인
 	if (g_iGoalIndex == m_pPlayer->Get_ObjIndex())
-	{
-		// TODO : 대화문 추가
+		Goal_Arrive();
+	else
+		Player_Death();
 
-		// 선택완료시 플레이어 클리어 모션
-		/*for (auto& iter : m_pEvil)
-		{
-		if (nullptr != iter)
-		dynamic_cast<CEvil*>(iter)->Set_White(true);
-		}*/
-		CObjMgr::GetInstance()->Set_EvilWhite();
-
-		if (L"Idle" == dynamic_cast<CPlayer*>(m_pPlayer)->Get_StateKey())
-		{
-			dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
-			m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.6f));
-		}
-
-		// 다음 챕터로 전환
-		// Change_NextChapter();
-		// Init_Chapter();
-	}
 	CObjMgr::GetInstance()->Update();
 }
 
@@ -546,4 +503,67 @@ void CStage::Create_DeathEffect()
 	m_pDeath->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pDeath);
+}
+
+void CStage::Goal_Arrive()
+{
+	// TODO : 대화문 추가
+
+	// 선택완료시 플레이어 클리어 모션
+	/*for (auto& iter : m_pEvil)
+	{
+	if (nullptr != iter)
+	dynamic_cast<CEvil*>(iter)->Set_White(true);
+	}*/
+	CObjMgr::GetInstance()->Set_EvilWhite();
+
+	if (L"Idle" == dynamic_cast<CPlayer*>(m_pPlayer)->Get_StateKey())
+	{
+		dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
+		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.6f));
+	}
+
+	// 다음 챕터로 전환
+	// Change_NextChapter();
+	// Init_Chapter();
+}
+
+void CStage::Player_Death()
+{
+	if (true == m_pPlayer->Get_Dead())
+	{
+		// 죽을 때 이펙트 처리
+		if (nullptr == m_pDeath)
+		{
+			if (m_fTimer <= 4.f)
+				m_fTimer += 4.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+			else
+			{
+				CObjMgr::GetInstance()->Delete_ID(CObjMgr::MONSTER);
+				CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
+				CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
+				CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
+
+				Create_DeathEffect();
+
+				// 임시로 안 보이게 위치 옮김
+				m_pPlayer->Set_Pos(D3DXVECTOR3{ -500.f, -500.f, 0.f });
+				m_pPlayer->Set_Flag(D3DXVECTOR3{ -500.f, -500.f, 0.f });
+			}
+		}
+		else
+		{
+			// 이펙트 끝난 후 스테이지 초기화
+			if (true == m_pDeath->Get_Dead())
+			{
+				// 이펙트 삭제 후 널포인터 지정 (다시 죽을 것을 대비해 초기화)
+				m_pDeath = nullptr;
+
+				m_pPlayer->Set_Dead(false);
+				Init_Chapter();
+
+				m_fTimer = 0.f;
+			}
+		}
+	}
 }
