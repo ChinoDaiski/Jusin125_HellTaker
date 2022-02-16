@@ -23,11 +23,11 @@ bool CObjMgr::Get_Empty(ID eID)
 	return false;
 }
 
-void CObjMgr::Set_EvilWhite()
+void CObjMgr::Set_EvilWhite(bool _white)
 {
 	for (auto& iter = m_listObject[EVIL].begin(); iter != m_listObject[EVIL].end(); ++iter)
 	{
-		dynamic_cast<CEvil*>(*iter)->Set_White(true);
+		dynamic_cast<CEvil*>(*iter)->Set_White(_white);
 	}
 }
 

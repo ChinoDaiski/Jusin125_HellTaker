@@ -20,7 +20,7 @@ public:
 	
 	bool			Get_Empty(ID eID);
 
-	void			Set_EvilWhite();
+	void			Set_EvilWhite(bool _white);
 
 public:
 	void	Add_Object(ID eID, CObj* pObject); 

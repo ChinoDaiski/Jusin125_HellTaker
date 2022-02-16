@@ -58,7 +58,10 @@ int CPlayer::Update(void)
 		Key_Input();
 
 	if (true == moving)
+	{
 		Moving();
+		m_fClearCount = 0.f;
+	}
 	else
 	{
 		if (m_iHp <= 0)

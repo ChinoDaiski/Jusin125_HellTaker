@@ -22,6 +22,7 @@ public:
 private:
 	void	Change_NextChapter();
 
+	void	Init_ChapterHp();
 	void	Init_Chapter();
 	void	Init_ChapterZERO();
 	void	Init_ChapterONE();
@@ -44,7 +45,7 @@ private:
 	CObj*	m_pDeath;		// 데스 이펙트
 	CHAPTER	m_chapter;		// 챕터 저장
 
-	int		m_ChapterHp;	// 챕터별 플레이어의 Hp 맥스 저장
+	int		m_ChapterHp[9];	// 챕터별(0~8) 플레이어의 Hp 맥스 저장
 
 	float	m_fTimer;		// 타이머 (딜레이용)
 

@@ -25,11 +25,5 @@ HRESULT CPandemonica::Initialize(void)
 
 	Create_LoveSign();
 
-	/*for(int i = 0; i<30; ++i)
-		Create_Heart();*/
-	
-	/*for (int i = 0; i<30; ++i)
-		Create_Shine();*/
-
 	return S_OK;
 }

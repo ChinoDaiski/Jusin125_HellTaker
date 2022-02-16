@@ -30,8 +30,9 @@
 
 CStage::CStage()
 	: m_chapter(ZERO), m_pDeath(nullptr)
-	, m_ChapterHp(0), m_fTimer(0.f)
+	, m_fTimer(0.f)
 {
+	// 백그라운드 생성
 	CObj* pBackGround = new CBackGround;
 
 	if (nullptr != pBackGround)
@@ -49,6 +50,9 @@ CStage::CStage()
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::PLAYER, m_pPlayer);
 
 	dynamic_cast<CPlayer*>(m_pPlayer)->Set_GroundPtr(m_pBackGround);
+
+	// 챕터 Hp 초기화
+	Init_ChapterHp();
 }
 
 CStage::~CStage()
@@ -105,7 +109,11 @@ void CStage::Change_NextChapter()
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVIL);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVENT_OBJ);
 	
+	dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Idle");
+	m_pPlayer->Set_fFrame(FRAME(0.f, 12.f));
+
 	switch (m_chapter)
 	{
 	case ZERO:
@@ -139,6 +147,19 @@ void CStage::Change_NextChapter()
 		// TODO : 엔딩 씬(Ending Scene)?
 		break;
 	}
+}
+
+void CStage::Init_ChapterHp()
+{
+	m_ChapterHp[0] = 10;
+	m_ChapterHp[1] = 10;
+	m_ChapterHp[2] = 10;
+	m_ChapterHp[3] = 10;
+	m_ChapterHp[4] = 10;
+	m_ChapterHp[5] = 10;
+	m_ChapterHp[6] = 10;
+	m_ChapterHp[7] = 10;
+	m_ChapterHp[8] = 10;
 }
 
 void CStage::Init_Chapter()
@@ -188,8 +209,7 @@ void CStage::Init_ChapterZERO()
 	// 골 인덱스 60
 	g_iGoalIndex = 60;
 
-	m_ChapterHp = 10;
-	m_pPlayer->Set_Hp(m_ChapterHp);
+	m_pPlayer->Set_Hp(m_ChapterHp[0]);
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 	m_pPlayer->Set_ObjIndex(15);
 	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
@@ -361,6 +381,7 @@ void CStage::Init_ChapterONE()
 	// 골 인덱스 59
 	g_iGoalIndex = 59;
 
+	m_pPlayer->Set_Hp(m_ChapterHp[1]);
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
 	m_pPlayer->Set_ObjIndex(55);
 	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(55));
@@ -383,6 +404,7 @@ void CStage::Init_ChapterTWO()
 	// 골 인덱스 17
 	g_iGoalIndex = 17;
 
+	m_pPlayer->Set_Hp(m_ChapterHp[2]);
 	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
 	m_pPlayer->Set_ObjIndex(38);
 	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
@@ -393,6 +415,8 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(14));
 		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(14, ON_OBJECT);
+		pEvil->Set_ObjIndex(14);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
@@ -403,6 +427,8 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(15, ON_OBJECT);
+		pEvil->Set_ObjIndex(15);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
@@ -413,6 +439,8 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(16));
 		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(16, ON_OBJECT);
+		pEvil->Set_ObjIndex(16);
 	}
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
@@ -507,15 +535,9 @@ void CStage::Create_DeathEffect()
 
 void CStage::Goal_Arrive()
 {
-	// TODO : 대화문 추가
+	// TODO : 대화문 추가, 선택완료시 플레이어 클리어 모션
 
-	// 선택완료시 플레이어 클리어 모션
-	/*for (auto& iter : m_pEvil)
-	{
-	if (nullptr != iter)
-	dynamic_cast<CEvil*>(iter)->Set_White(true);
-	}*/
-	CObjMgr::GetInstance()->Set_EvilWhite();
+	CObjMgr::GetInstance()->Set_EvilWhite(true);
 
 	if (L"Idle" == dynamic_cast<CPlayer*>(m_pPlayer)->Get_StateKey())
 	{
@@ -523,9 +545,21 @@ void CStage::Goal_Arrive()
 		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.6f));
 	}
 
-	// 다음 챕터로 전환
-	// Change_NextChapter();
-	// Init_Chapter();
+	// 다음 챕터로 전환.
+	// TODO : 추후 씬체인지간 렌더링되는 UI 추가할 것.
+	if (14.f <= m_pPlayer->Get_Frame().fFrame)
+	{
+		m_fTimer += 4.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+
+		if (m_fTimer >= 7.f)
+		{
+			Change_NextChapter();
+			Init_Chapter();
+			m_fTimer = 0.f;
+			CObjMgr::GetInstance()->Set_EvilWhite(false);
+			dynamic_cast<CPlayer*>(m_pPlayer)->Set_Crush(false);
+		}
+	}
 }
 
 void CStage::Player_Death()
