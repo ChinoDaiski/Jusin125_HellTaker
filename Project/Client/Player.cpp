@@ -60,7 +60,7 @@ HRESULT CPlayer::Initialize(void)
 int CPlayer::Update(void)
 {
 	// 키 입력
-	if (m_iHp > 0)
+	if (m_iHp > 0 && L"Clear" != m_wstrStateKey)
 		Key_Input();
 
 	// 이동 or 죽음 처리

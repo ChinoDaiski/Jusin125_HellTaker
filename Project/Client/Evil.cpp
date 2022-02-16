@@ -11,6 +11,7 @@
 #include "Heart.h"
 
 #include "Player.h"
+#include "White.h"
 
 CEvil::CEvil()
 	: m_pLoveSign(nullptr), m_pLoveBomb(nullptr)
@@ -42,7 +43,7 @@ int CEvil::Update(void)
 		for (int i = 0; i < 20; ++i)
 			Create_Shine(true);
 
-		for (int i = 0; i < 40; ++i)
+		for (int i = 0; i < 30; ++i)
 			Create_Heart();
 		
 		return OBJ_DEAD;
@@ -69,7 +70,12 @@ int CEvil::Update(void)
 
 void CEvil::Late_Update(void)
 {
-	MoveFrame();
+	if (true == m_White)
+	{
+		m_tFrame.fFrame = 12.f;
+	}
+	else
+		MoveFrame();
 }
 
 void CEvil::Render(void)
@@ -86,11 +92,8 @@ void CEvil::Render(void)
 
 	if (true == m_White)
 	{
-		CDevice::GetInstance()->Get_Sprite()->Draw(pTexInfo->pTexture,		// 텍스처 컴객체 주소
-			nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
-			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
-			nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
-			D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+		Create_White();
+		m_White = false;
 	}
 	else
 	{
@@ -113,7 +116,7 @@ void CEvil::ClearMotion()
 	{
 		m_pLoveSign->Set_Damage();
 
-		for (int i = 0; i < 30; ++i)
+		for (int i = 0; i < 20; ++i)
 			Create_Shine();
 	}
 
@@ -224,4 +227,13 @@ void CEvil::Create_Heart()
 	pHeart->Set_Pos(random);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pHeart);
+}
+
+void CEvil::Create_White()
+{
+	CObj*	pEvil = new CWhite;
+	pEvil->Initialize();
+	pEvil->Set_Pos(m_tInfo.vPos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }

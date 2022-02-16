@@ -29,7 +29,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ONE), m_pDeath(nullptr)
+	: m_chapter(ZERO), m_pDeath(nullptr)
 	, m_fTimer(0.f)
 {
 	// 백그라운드 생성
@@ -110,7 +110,8 @@ void CStage::Change_NextChapter()
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::WALL);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EFFECT);
 	CObjMgr::GetInstance()->Delete_ID(CObjMgr::EVENT_OBJ);
-	
+	CObjMgr::GetInstance()->Delete_ID(CObjMgr::TRAP);
+
 	dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Idle");
 	m_pPlayer->Set_fFrame(FRAME(0.f, 12.f));
 

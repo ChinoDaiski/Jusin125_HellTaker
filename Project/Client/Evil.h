@@ -25,6 +25,8 @@ protected:
 	void		Create_Shine(bool _pink);
 	void		Create_Heart();
 
+	void		Create_White();
+
 private:
 	CObj*	m_pLoveSign;
 	CObj*	m_pLoveBomb;

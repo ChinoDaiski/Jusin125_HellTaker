@@ -154,6 +154,9 @@
     <Filter Include="02. Obj\04. Effect\08. Blood">
       <UniqueIdentifier>{7898069b-cded-43b4-8928-e25d0210c463}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\02. Evil\99. White">
+      <UniqueIdentifier>{6ac60e62-48a0-4d08-92ec-386e4901d742}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -306,6 +309,9 @@
     <ClInclude Include="BloodEffect.h">
       <Filter>02. Obj\04. Effect\08. Blood</Filter>
     </ClInclude>
+    <ClInclude Include="White.h">
+      <Filter>02. Obj\02. Evil\99. White</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -445,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="BloodEffect.cpp">
       <Filter>02. Obj\04. Effect\08. Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="White.cpp">
+      <Filter>02. Obj\02. Evil\99. White</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
