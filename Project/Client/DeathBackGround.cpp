@@ -26,6 +26,28 @@ HRESULT CDeathBackGround::Initialize(void)
 	return S_OK;
 }
 
+int CDeathBackGround::Update(void)
+{
+	if (true == m_bDead)
+		return OBJ_DEAD;
+
+	D3DXMATRIX	matTrans, matScale;
+
+	D3DXMatrixIdentity(&matTrans);
+	D3DXMatrixIdentity(&matScale);
+
+	D3DXMatrixTranslation(&matTrans,
+		m_tInfo.vPos.x + CObj::m_vScroll.x,
+		m_tInfo.vPos.y + CObj::m_vScroll.y,
+		0.f);
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+
+	m_tInfo.matWorld = matScale * matTrans;
+
+	return OBJ_NOEVENT;
+}
+
 void CDeathBackGround::Late_Update(void)
 {
 	// empty

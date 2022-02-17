@@ -33,6 +33,8 @@ private:
 	void		Create_Bone();
 	void		Create_Blood(D3DXVECTOR3 _pos);
 
+	void		Synchro_Scroll();				// 스크롤 동기화
+
 private:
 	wstring			m_wstrStateKey = L"";
 	CObj*			m_pBackGround;

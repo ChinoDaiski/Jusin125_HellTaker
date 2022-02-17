@@ -99,7 +99,10 @@ void CEvil::Render(void)
 
 void CEvil::Release(void)
 {
-	// empty
+	if (L"Cerberus" != m_wstrObjKey)
+		++CObj::m_iChapterNum;
+	else
+		CObj::m_iChapterNum = 2;
 }
 
 void CEvil::ClearMotion()
@@ -225,11 +228,6 @@ void CEvil::Create_Heart()
 
 void CEvil::Create_White()
 {
-	if (L"Cerberus" != m_wstrObjKey)
-		++CObj::m_iChapterNum;
-	else
-		CObj::m_iChapterNum = 2;
-
 	m_pWhite = new CWhite;
 	m_pWhite->Initialize();
 	m_pWhite->Set_Pos(m_tInfo.vPos);

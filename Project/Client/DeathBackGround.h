@@ -9,6 +9,8 @@ public:
 
 public:
 	virtual HRESULT Initialize(void) override;
+	virtual int Update(void) override;
 	virtual void Late_Update(void) override;
+
 };
 

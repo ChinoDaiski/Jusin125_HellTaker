@@ -122,6 +122,9 @@ int CPlayer::Update(void)
 
 void CPlayer::Late_Update(void)
 {
+	if (7 == CObj::m_iChapterNum)
+		Synchro_Scroll();
+
 	if(L"Idle" == m_wstrStateKey)
 		MoveFrame();
 	else if (L"Clear" == m_wstrStateKey)
@@ -458,4 +461,21 @@ void CPlayer::Create_Blood(D3DXVECTOR3 _pos)
 	pEffect->Set_Pos(_pos - D3DXVECTOR3{10.f, 45.f, 0.f});
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
+}
+
+void CPlayer::Synchro_Scroll()
+{
+	// 스크롤 락
+	if (m_tInfo.vPos.y >= 887)
+		return;
+	else if (m_tInfo.vPos.y < 0)
+		return;
+
+	// 위 스크롤
+	if (m_tInfo.vPos.y + m_vScroll.y < 570)
+		m_vScroll.y += 370.f * CTimeMgr::GetInstance()->Get_TimeDelta();
+	
+	// 아래 스크롤
+	if (m_tInfo.vPos.y + m_vScroll.y > 550)
+		m_vScroll.y -= 370.f * CTimeMgr::GetInstance()->Get_TimeDelta();
 }

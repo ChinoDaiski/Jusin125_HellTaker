@@ -600,7 +600,7 @@ void CStage::Init_ChapterTWO()
 
 void CStage::Init_ChapterTHREE()
 {
-	// °ñ ÀÎµ¦½º 17
+	// °ñ ÀÎµ¦½º 37
 	g_iGoalIndex = 37;
 
 	m_pPlayer->Set_Hp(m_ChapterHp[3]);
@@ -623,54 +623,95 @@ void CStage::Init_ChapterTHREE()
 
 void CStage::Init_ChapterFOUR()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	// °ñ ÀÎµ¦½º 12
+	g_iGoalIndex = 12;
+
+	m_pPlayer->Set_Hp(m_ChapterHp[4]);
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(25));
+	m_pPlayer->Set_ObjIndex(25);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(25));
+
 
 	// Áîµå¶ó´Ù. Zdrada
-	CObj* pObj = new CZdrada;
-	if (nullptr != pObj)
-		pObj->Initialize();
+	CObj* pEvil = new CZdrada;
+	if (nullptr != pEvil)
+	{
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(13));
+		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(13, ON_OBJECT);
+		pEvil->Set_ObjIndex(13);
+	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterFIVE()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	// °ñ ÀÎµ¦½º 77
+	g_iGoalIndex = 77;
+
+	m_pPlayer->Set_Hp(m_ChapterHp[5]);
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(12));
+	m_pPlayer->Set_ObjIndex(12);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(12));
 
 	// ¾ÆÀÚÁ©. Azazel
-	CObj* pObj = new CAzazel;
-	if (nullptr != pObj)
-		pObj->Initialize();
+	CObj* pEvil = new CAzazel;
+	if (nullptr != pEvil)
+	{
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(78));
+		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(78, ON_OBJECT);
+		pEvil->Set_ObjIndex(78);
+	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterSIX()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	// °ñ ÀÎµ¦½º 13
+	g_iGoalIndex = 13;
+
+	m_pPlayer->Set_Hp(m_ChapterHp[6]);
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(46));
+	m_pPlayer->Set_ObjIndex(46);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(46));
 
 	// Àú½ºÆ¼½º. Justice
-	CObj* pObj = new CJustice;
-	if (nullptr != pObj)
-		pObj->Initialize();
+	CObj* pEvil = new CJustice;
+	if (nullptr != pEvil)
+	{
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(12));
+		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(12, ON_OBJECT);
+		pEvil->Set_ObjIndex(12);
+	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterSeven()
 {
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	// °ñ ÀÎµ¦½º 13
+	g_iGoalIndex = 27;
+
+	m_pPlayer->Set_Hp(m_ChapterHp[6]);
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(126));
+	m_pPlayer->Set_ObjIndex(126);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(126));
 
 	// ·ç½ÃÆÛ. Lucifer
-	CObj* pObj = new CLucifer;
-	if (nullptr != pObj)
-		pObj->Initialize();
+	CObj* pEvil = new CLucifer;
+	if (nullptr != pEvil)
+	{
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(5));
+		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(5, ON_OBJECT);
+		pEvil->Set_ObjIndex(5);
+	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterEIGHT()
