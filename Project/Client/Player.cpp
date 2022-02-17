@@ -366,12 +366,12 @@ void CPlayer::ClearMotion()
 			MoveFrame();
 		// Clear 프레임 3단계 준비
 		else
-			m_fClearCount += 4.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
+			m_fClearCount += 5.f * 0.5f * CTimeMgr::GetInstance()->Get_TimeDelta();
 
 		// Clear 프레임 3단계
 		if (m_fClearCount >= 3.f)
 		{
-			if (m_tFrame.fFrame >= 18.f)
+			if (m_tFrame.fFrame >= 17.5f)
 				m_tFrame.fFrame = 14.f;
 
 			MoveFrame();

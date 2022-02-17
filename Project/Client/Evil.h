@@ -30,6 +30,7 @@ protected:
 private:
 	CObj*	m_pLoveSign;
 	CObj*	m_pLoveBomb;
+	CObj*	m_pWhite;	
 	CObj*	m_pPlayer;	
 
 	float	m_fDeadCount;		// 죽기 전 이펙트 대기용

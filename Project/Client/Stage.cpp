@@ -695,7 +695,7 @@ void CStage::Goal_Arrive()
 	if (L"Idle" == dynamic_cast<CPlayer*>(m_pPlayer)->Get_StateKey())
 	{
 		dynamic_cast<CPlayer*>(m_pPlayer)->Set_StateKey(L"Clear");
-		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.6f));
+		m_pPlayer->Set_fFrame(FRAME(0.f, 19.f, 0.7f));
 	}
 
 	// 다음 챕터로 전환.

@@ -14,6 +14,6 @@ public:
 	virtual void Render(void) override;
 
 private:
-	int		m_trans;			// 투명도 관리
+	float	m_fTrans;			// 투명도 관리
 };
 

@@ -4,7 +4,7 @@
 #include "TextureMgr.h"
 
 CWhite::CWhite()
-	: m_trans(0)
+	: m_fTrans(0)
 {
 	// empty
 }
@@ -21,7 +21,6 @@ HRESULT CWhite::Initialize(void)
 
 	m_wstrObjKey = L"White";
 
-	m_fSpeed = 100.f;
 	m_tFrame = { 0.f, 1.f };
 
 	return S_OK;
@@ -29,10 +28,8 @@ HRESULT CWhite::Initialize(void)
 
 int CWhite::Update(void)
 {
-	if (m_trans >= 255)
-		m_bDead = true;
-	else
-		++m_trans;
+	if (m_fTrans < 255.f)
+		m_fTrans += 1.f;
 
 	if (true == m_bDead)
 		return OBJ_DEAD;
@@ -75,5 +72,5 @@ void CWhite::Render(void)
 		nullptr,	// 출력할 이미지 영역에 대한 rect 구조체 주소값, null인 경우 이미지의 0, 0을 기준으로 출력
 		&D3DXVECTOR3(fCenterX, fCenterY, 0.f),	// 출력할 이미지 중심축에 대한 vec3 구조체 주소값, null인 경우 0,0이 중심 좌표가 됨
 		nullptr,	// 출력할 이미지의 위치를 지정하는 vec3 구조체 주소값, null인 경우 스크린 상 0,0 좌표에 출력
-		D3DCOLOR_ARGB(m_trans, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
+		D3DCOLOR_ARGB((int)m_fTrans, 255, 255, 255)); // 출력할 원본 이미지와 섞을 색상, 출력 시 섞은 색상이 반영된다. 기본값으로 0xffffffff를 넣어주면 원본색 유지
 }
