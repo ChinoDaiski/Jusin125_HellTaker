@@ -99,10 +99,7 @@ void CEvil::Render(void)
 
 void CEvil::Release(void)
 {
-	if (L"Cerberus" != m_wstrObjKey)
-		++CObj::m_iChapterNum;
-	else
-		CObj::m_iChapterNum = 2;
+	// empty
 }
 
 void CEvil::ClearMotion()

@@ -5,7 +5,7 @@
 
 CMalina::CMalina()
 {
-	// empty
+	CObj::m_iChapterNum = 3;
 }
 
 CMalina::~CMalina()

@@ -6,7 +6,7 @@
 
 CJudgement::CJudgement()
 {
-	// empty
+	CObj::m_iChapterNum = 8;
 }
 
 CJudgement::~CJudgement()

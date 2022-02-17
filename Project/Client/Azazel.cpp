@@ -5,7 +5,7 @@
 
 CAzazel::CAzazel()
 {
-	// empty
+	CObj::m_iChapterNum = 5;
 }
 
 CAzazel::~CAzazel()

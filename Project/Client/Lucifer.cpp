@@ -5,7 +5,7 @@
 
 CLucifer::CLucifer()
 {
-	// empty
+	CObj::m_iChapterNum = 7;
 }
 
 CLucifer::~CLucifer()

@@ -5,7 +5,7 @@
 
 CJustice::CJustice()
 {
-	// empty
+	CObj::m_iChapterNum = 6;
 }
 
 CJustice::~CJustice()

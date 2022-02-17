@@ -5,7 +5,7 @@
 
 CCerberus::CCerberus()
 {
-	// empty
+	CObj::m_iChapterNum = 2;
 }
 
 CCerberus::~CCerberus()

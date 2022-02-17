@@ -5,7 +5,7 @@
 
 CModeus::CModeus()
 {
-	// empty
+	CObj::m_iChapterNum = 1;
 }
 
 CModeus::~CModeus()

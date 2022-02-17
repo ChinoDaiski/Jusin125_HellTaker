@@ -5,7 +5,7 @@
 
 CPandemonica::CPandemonica()
 {
-	// empty
+	CObj::m_iChapterNum = 0;
 }
 
 CPandemonica::~CPandemonica()

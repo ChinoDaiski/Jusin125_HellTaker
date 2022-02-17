@@ -5,7 +5,7 @@
 
 CZdrada::CZdrada()
 {
-	// empty
+	CObj::m_iChapterNum = 4;
 }
 
 CZdrada::~CZdrada()
