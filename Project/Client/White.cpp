@@ -16,12 +16,12 @@ CWhite::~CWhite()
 
 HRESULT CWhite::Initialize(void)
 {
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/White/white%d.png", L"White", L"Idle", 1)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_MULTI, L"../Texture/Evil/White/white%d.png", L"White", L"Idle", 9)))
 		return S_FALSE;
 
 	m_wstrObjKey = L"White";
 
-	m_tFrame = { 0.f, 1.f };
+	m_tFrame = { (float)CObj::m_iChapterNum, 9.f };
 
 	return S_OK;
 }

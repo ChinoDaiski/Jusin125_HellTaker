@@ -33,6 +33,6 @@ private:
 	CObj*	m_pWhite;	
 	CObj*	m_pPlayer;	
 
-	float	m_fDeadCount;		// 죽기 전 이펙트 대기용
-	bool	m_White;			// 죽기 전 하얀색 렌더링용
+	float	m_fDeadCount;		// 클리어 전 이펙트 대기용
+	bool	m_White;			// 클리어 전 하얀색 렌더링용
 };

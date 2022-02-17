@@ -107,6 +107,7 @@ void CEvil::ClearMotion()
 	if (0.f == m_fDeadCount)
 	{
 		Create_White();
+		
 		m_pLoveSign->Set_Damage();
 
 		for (int i = 0; i < 20; ++i)
@@ -224,6 +225,11 @@ void CEvil::Create_Heart()
 
 void CEvil::Create_White()
 {
+	if (L"Cerberus" != m_wstrObjKey)
+		++CObj::m_iChapterNum;
+	else
+		CObj::m_iChapterNum = 2;
+
 	m_pWhite = new CWhite;
 	m_pWhite->Initialize();
 	m_pWhite->Set_Pos(m_tInfo.vPos);

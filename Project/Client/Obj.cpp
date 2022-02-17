@@ -4,6 +4,8 @@
 
 D3DXVECTOR3 CObj::m_vScroll{};
 
+int CObj::m_iChapterNum = -1;
+
 CObj::CObj()
 	: m_bDead(false), m_iHp(10), m_ObjIndex(0)
 	, m_Dir(DIR_END), m_GridState(GRID_END) 

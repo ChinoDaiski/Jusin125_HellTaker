@@ -600,16 +600,25 @@ void CStage::Init_ChapterTWO()
 
 void CStage::Init_ChapterTHREE()
 {
+	// °ñ ÀÎµ¦½º 17
+	g_iGoalIndex = 37;
+
 	m_pPlayer->Set_Hp(m_ChapterHp[3]);
-	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
-	m_pPlayer->Set_ObjIndex(15);
+	m_pPlayer->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(13));
+	m_pPlayer->Set_ObjIndex(13);
+	m_pPlayer->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(13));
 
 	// ¸»¸®³ª. Malina
-	CObj* pObj = new CMalina;
-	if (nullptr != pObj)
-		pObj->Initialize();
+	CObj* pEvil = new CMalina;
+	if (nullptr != pEvil)
+	{
+		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
+		pEvil->Initialize();
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(38, ON_OBJECT);
+		pEvil->Set_ObjIndex(38);
+	}
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pObj);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EVIL, pEvil);
 }
 
 void CStage::Init_ChapterFOUR()

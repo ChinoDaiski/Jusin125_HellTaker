@@ -9,6 +9,9 @@ public:
 	virtual ~CObj();
 
 public:
+	static int	m_iChapterNum;			// 현재 챕터 정보 저장
+
+public:
 	virtual HRESULT		Initialize(void)PURE;
 	virtual int			Update(void)PURE;
 	virtual void		Late_Update(void)PURE;
