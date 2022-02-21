@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "DeathEffect.h"
+#include "Transition.h"
 
 // Evil
 #include "Azazel.h"
@@ -165,8 +166,8 @@ void CStage::Init_ChapterHp()
 
 void CStage::Init_Chapter()
 {
+	Create_Transition();
 	m_pBackGround->Release();
-	dynamic_cast<CPlayer*>(m_pPlayer)->Set_GroundPtr(m_pBackGround);
 	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(m_chapter);
 
 	switch (m_chapter)
@@ -734,6 +735,15 @@ void CStage::Create_DeathEffect()
 	m_pDeath->Initialize();
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, m_pDeath);
+}
+
+void CStage::Create_Transition()
+{
+	CObj* pTrans = new CTransition;
+	pTrans->Set_Pos(D3DXVECTOR3{ (float)(WINCX>>1), (float)(WINCY>>1), 0.f });
+	pTrans->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::UI, pTrans);
 }
 
 void CStage::Goal_Arrive()

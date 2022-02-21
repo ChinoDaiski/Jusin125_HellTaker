@@ -45,7 +45,7 @@ int CDeathEffect::Update(void)
 {
 	if (true == m_bDead)
 	{
-		m_pDeathBackGround->Set_Damage();
+		m_pDeathBackGround->Set_Dead(true);
 		return OBJ_DEAD;
 	}
 

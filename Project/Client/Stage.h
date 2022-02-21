@@ -35,6 +35,7 @@ private:
 	void	Init_ChapterEIGHT();
 
 	void	Create_DeathEffect();
+	void	Create_Transition();
 
 	void	Goal_Arrive();		// 목적지 도착
 	void	Player_Death();		// 체력 소모로 인한 플레이어 사망

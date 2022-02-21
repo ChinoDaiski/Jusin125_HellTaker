@@ -157,6 +157,9 @@
     <Filter Include="02. Obj\02. Evil\99. White">
       <UniqueIdentifier>{6ac60e62-48a0-4d08-92ec-386e4901d742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Obj\04. Effect\09. Transition">
+      <UniqueIdentifier>{5a18cb34-d899-47f0-8221-03f28e2edf66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -312,6 +315,9 @@
     <ClInclude Include="White.h">
       <Filter>02. Obj\02. Evil\99. White</Filter>
     </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>02. Obj\04. Effect\09. Transition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -454,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="White.cpp">
       <Filter>02. Obj\02. Evil\99. White</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>02. Obj\04. Effect\09. Transition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
