@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "Monster.h"
+
 #include "Device.h"
 #include "TextureMgr.h"
+#include "ObjMgr.h"
+
+#include "Bone.h"
 
 CMonster::CMonster()
 {
@@ -32,6 +36,13 @@ HRESULT CMonster::Initialize(void)
 
 int CMonster::Update(void)
 {
+	if (true == m_bDead)
+	{
+		for (int i = 0; i < 15; ++i)
+			Create_Bone();
+		return OBJ_DEAD;
+	}
+
 	if (true == moving)
 	{
 		if (L"Idle" == m_wstrStateKey)
@@ -99,4 +110,13 @@ void CMonster::Render(void)
 void CMonster::Release(void)
 {
 	// empty
+}
+
+void CMonster::Create_Bone()
+{
+	CObj*	pEffect = new CBone;
+	pEffect->Initialize();
+	pEffect->Set_Pos(m_tInfo.vPos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

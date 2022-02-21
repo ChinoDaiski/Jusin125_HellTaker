@@ -30,7 +30,6 @@ private:
 	void		Create_HitEffect(D3DXVECTOR3 _pos);
 	void		Create_MoveEffect(D3DXVECTOR3 _pos);
 
-	void		Create_Bone();
 	void		Create_Blood(D3DXVECTOR3 _pos);
 
 	void		Synchro_Scroll();				// 스크롤 동기화

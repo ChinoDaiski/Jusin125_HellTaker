@@ -30,7 +30,6 @@ HRESULT CBackGround::Initialize(void)
 
 	Map_Init();
 	Create_Grid();
-	//LoadData();
 
 	return S_OK;
 }
@@ -362,5 +361,5 @@ void CBackGround::LoadData(CHAPTER _chap)
 
 	// 파일 소멸
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, _T("Load 완료"), _T("Success"), MB_OK);
+	//MessageBox(g_hWnd, _T("Load 완료"), _T("Success"), MB_OK);
 }

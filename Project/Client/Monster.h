@@ -15,6 +15,9 @@ public:
 	virtual void Release(void) override;
 
 private:
+	void		Create_Bone();
+
+private:
 	wstring		m_wstrStateKey = L"";
 };
 

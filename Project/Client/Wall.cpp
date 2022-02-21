@@ -1,10 +1,15 @@
 #include "stdafx.h"
 #include "Wall.h"
+
 #include "Device.h"
 #include "TextureMgr.h"
+#include "ObjMgr.h"
+
+#include "MoveEffect.h"
 
 CWall::CWall()
-	: m_iOption(0)
+	: m_iOption(0), moveCount(0)
+	, m_effect(0)
 {
 	// empty
 }
@@ -30,8 +35,22 @@ HRESULT CWall::Initialize(void)
 
 int CWall::Update(void)
 {
+	if (true == m_bDead)
+		return OBJ_DEAD;
+
 	if (true == moving)
+	{
+		if (0 == m_effect)
+		{
+			Create_MoveEffect();
+			++m_effect;
+		}
+
 		Moving();
+
+		if (false == moving)
+			m_effect = 0;
+	}
 
 	D3DXMATRIX	matTrans, matScale;
 
@@ -78,4 +97,30 @@ void CWall::Render(void)
 void CWall::Release(void)
 {
 	// empty
+}
+
+void CWall::Create_MoveEffect()
+{
+	CObj*	pEffect = new CMoveEffect;
+	pEffect->Initialize();
+
+	switch (moveCount)
+	{
+	case 0:
+		pEffect->Set_ObjKey(L"MoveCase0");
+		++moveCount;
+		break;
+	case 1:
+		pEffect->Set_ObjKey(L"MoveCase1");
+		++moveCount;
+		break;
+	case 2:
+		pEffect->Set_ObjKey(L"MoveCase2");
+		moveCount = 0;
+		break;
+	}
+
+	pEffect->Set_Pos(m_tInfo.vPos);
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

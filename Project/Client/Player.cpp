@@ -259,28 +259,28 @@ void CPlayer::Key_Input(void)
 		moving = true;
 	}
 
-	// 피킹
-	if (CKeyMgr::GetInstance()->Key_Down(VK_LBUTTON))
-	{
-		// 마우스 좌표 얻어오기
-		D3DXVECTOR3 mouse = ::Get_Mouse();
-		mouse.x -= CObj::m_vScroll.x;
-		mouse.y -= CObj::m_vScroll.y;
+	//// 피킹
+	//if (CKeyMgr::GetInstance()->Key_Down(VK_LBUTTON))
+	//{
+	//	// 마우스 좌표 얻어오기
+	//	D3DXVECTOR3 mouse = ::Get_Mouse();
+	//	mouse.x -= CObj::m_vScroll.x;
+	//	mouse.y -= CObj::m_vScroll.y;
 
-		dynamic_cast<CBackGround*>(m_pBackGround)->Picking(mouse);
-	}
+	//	dynamic_cast<CBackGround*>(m_pBackGround)->Picking(mouse);
+	//}
 
-	// 세이브
-	if (CKeyMgr::GetInstance()->Key_Down('S'))
-	{
-		dynamic_cast<CBackGround*>(m_pBackGround)->SaveData();
-	}
+	//// 세이브
+	//if (CKeyMgr::GetInstance()->Key_Down('S'))
+	//{
+	//	dynamic_cast<CBackGround*>(m_pBackGround)->SaveData();
+	//}
 
-	// 로드
-	if (CKeyMgr::GetInstance()->Key_Down('L'))
-	{
-		//dynamic_cast<CBackGround*>(m_pBackGround)->LoadData();
-	}
+	//// 로드
+	//if (CKeyMgr::GetInstance()->Key_Down('L'))
+	//{
+	//	dynamic_cast<CBackGround*>(m_pBackGround)->LoadData();
+	//}
 }
 
 bool CPlayer::CheckTile(int _index)
@@ -291,8 +291,19 @@ bool CPlayer::CheckTile(int _index)
 	// 오브젝트가 위에 있는지 판단
 	else if (ON_OBJECT == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index))
 	{
-		for(int i = 0; i < 15; ++i)
-			Create_Bone();
+		// 발차기할 때 밑에 트랩이 있으면 데미지
+		if (ON_TRAP == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(m_ObjIndex))
+		{
+			--m_iHp;
+
+			dynamic_cast<CBackGround*>(m_pBackGround)->Set_Vive(true);
+			Create_Blood(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
+			bleeding = true;
+			bleedingCount = 0.f;
+			bloodColor = 70;
+		}
+
+		--m_iHp;
 
 		m_wstrStateKey = L"Kick";
 		m_tFrame = { 0.f, 13.f, 2.4f };
@@ -303,22 +314,46 @@ bool CPlayer::CheckTile(int _index)
 		// 좌
 		if (DIR_LEFT == m_Dir)
 		{
+			// 이펙트
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index - 1);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - 1, ON_OBJECT);
+
+			// 밀려나는 곳이 벽일 때(갈 수 없는 곳)
+			if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index - 1))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Dead(true);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			}
+			// 밀려나는 곳에 오브젝트가 있을 때
+			else if (ON_OBJECT != dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index - 1))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index - 1));
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index - 1);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index - 1, ON_OBJECT);
+			}
+
 		}
 		// 우
 		else if (DIR_RIGHT == m_Dir)
 		{
+			// 이펙트
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index + 1);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + 1, ON_OBJECT);
+
+			// 밀려나는 곳이 벽일 때(갈 수 없는 곳)
+			if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index + 1))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Dead(true);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			}
+			else if (ON_OBJECT != dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(_index + 1))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index + 1));
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(_index + 1);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index + 1, ON_OBJECT);
+			}
 		}
 		// 상
 		else if (DIR_UP == m_Dir)
@@ -330,14 +365,24 @@ bool CPlayer::CheckTile(int _index)
 			pushIndex = _index - (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index);
 
+			// 이펙트
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
+			// 밀려나는 곳이 벽일 때(갈 수 없는 곳)
+			if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(pushIndex))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Dead(true);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			}
+			else if (ON_OBJECT != dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(pushIndex))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
 
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
+			}
 		}
 		// 하
 		else if (DIR_DOWN == m_Dir)
@@ -349,14 +394,24 @@ bool CPlayer::CheckTile(int _index)
 			pushIndex = _index + (dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jEnd_Index -
 				dynamic_cast<CBackGround*>(m_pBackGround)->Get_GridInfo().jStart_Index);
 
+			// 이펙트
 			Create_HitEffect(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));
 
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
-			CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
+			// 밀려나는 곳이 벽일 때(갈 수 없는 곳)
+			if (CANT_MOVE == dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(pushIndex))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Dead(true);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+			}
+			else if (ON_OBJECT != dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexBlock(pushIndex))
+			{
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_Flag(pushPos);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_moving(true);
+				CObjMgr::GetInstance()->Get_IndexObject(_index)->Set_ObjIndex(pushIndex);
 
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
-			dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(_index, CAN_MOVE);
+				dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(pushIndex, ON_OBJECT);
+			}
 		}
 
 		return true;
@@ -447,15 +502,6 @@ void CPlayer::Create_MoveEffect(D3DXVECTOR3 _pos)
 	}
 
 	pEffect->Set_Pos(_pos);
-
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
-}
-
-void CPlayer::Create_Bone()
-{
-	CObj*	pEffect = new CBone;
-	pEffect->Initialize();
-	pEffect->Set_Pos(m_tInfo.vPos);
 
 	CObjMgr::GetInstance()->Add_Object(CObjMgr::EFFECT, pEffect);
 }

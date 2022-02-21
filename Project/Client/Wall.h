@@ -15,6 +15,12 @@ public:
 	virtual void Release(void) override;
 
 private:
+	void		Create_MoveEffect();
+
+private:
 	int m_iOption;		// 벽의 종류 옵션
+
+	int		moveCount;
+	int		m_effect;
 };
 
