@@ -264,6 +264,8 @@ void CPlayer::Key_Input(void)
 	{
 		// 마우스 좌표 얻어오기
 		D3DXVECTOR3 mouse = ::Get_Mouse();
+		mouse.x += CObj::m_vScroll.x;
+		mouse.y += CObj::m_vScroll.y;
 
 		dynamic_cast<CBackGround*>(m_pBackGround)->Picking(mouse);
 	}

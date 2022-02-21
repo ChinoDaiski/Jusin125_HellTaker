@@ -29,7 +29,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(ZERO), m_pDeath(nullptr)
+	: m_chapter(SEVEN), m_pDeath(nullptr)
 	, m_fTimer(0.f)
 {
 	// 백그라운드 생성
@@ -152,7 +152,7 @@ void CStage::Change_NextChapter()
 
 void CStage::Init_ChapterHp()
 {
-	m_ChapterHp[0] = 10;
+	m_ChapterHp[0] = 23;
 	m_ChapterHp[1] = 10;
 	m_ChapterHp[2] = 10;
 	m_ChapterHp[3] = 10;
