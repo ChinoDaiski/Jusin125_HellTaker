@@ -267,6 +267,18 @@ void CPlayer::Key_Input(void)
 
 		dynamic_cast<CBackGround*>(m_pBackGround)->Picking(mouse);
 	}
+
+	// 세이브
+	if (CKeyMgr::GetInstance()->Key_Down('S'))
+	{
+		dynamic_cast<CBackGround*>(m_pBackGround)->SaveData();
+	}
+
+	// 로드
+	if (CKeyMgr::GetInstance()->Key_Down('L'))
+	{
+		//dynamic_cast<CBackGround*>(m_pBackGround)->LoadData();
+	}
 }
 
 bool CPlayer::CheckTile(int _index)

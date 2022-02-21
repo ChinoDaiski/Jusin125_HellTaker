@@ -30,6 +30,7 @@ HRESULT CBackGround::Initialize(void)
 
 	Map_Init();
 	Create_Grid();
+	//LoadData();
 
 	return S_OK;
 }
@@ -230,7 +231,8 @@ void CBackGround::Select_Chapter(CHAPTER _chapter)
 	m_Chapter = _chapter;
 	m_tFrame.fFrame = (float)m_Chapter;
 	Map_Init();
-	Create_Grid();
+	//Create_Grid();
+	LoadData(_chapter);
 }
 
 D3DXVECTOR3 CBackGround::Find_IndexPos(int _index)
@@ -284,4 +286,81 @@ void CBackGround::Picking(D3DXVECTOR3 _pos)
 			iter->Set_GridState(CANT_MOVE);
 		}
 	}
+}
+
+void CBackGround::SaveData()
+{
+	TCHAR		szFullPath[MAX_PATH] = L"";
+
+	wsprintf(szFullPath, L"../Data/Grid%d.dat", (int)m_Chapter);
+
+	HANDLE	hFile = CreateFile(szFullPath,	// 파일의 경로 및 이름 명시	
+		GENERIC_WRITE,		// 파일 접근 모드, WRITE는 쓰기, READ는 읽기
+		NULL,				// 공유방식, 파일이 열려있는 상태에서 다른 프로세스가 오픈 할 때 허가할 것인지 옵션, NULL 공유하지 않음
+		NULL,				// 보안속성, NULL일 경우 기본값으로 설정
+		CREATE_ALWAYS,		// 파일이 없다면 생성, 있다면 덮어 쓰기, OPEN_EXITING 파일이 있을 경우에만 여는 옵션
+		FILE_ATTRIBUTE_NORMAL, // 파일 속성(읽기 전용, 숨김과 같은 속성을 의미), 아무런 속성이 없는 경우의 플래그
+		NULL);	// 생성될 파일의 속성을 제공할 템플릿 파일이 있는 주소값
+
+	DWORD		dwByte = 0;
+	GRID_STATE	gridState;
+
+	for (auto& iter : vecGrid)
+	{
+		gridState = dynamic_cast<CGrid*>(iter)->Get_GridState();
+
+		WriteFile(hFile, &iter->Get_Info(), sizeof(INFO), &dwByte, nullptr);
+		WriteFile(hFile, &gridState, sizeof(GRID_STATE), &dwByte, nullptr);
+	}
+
+	// 파일 소멸
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, _T("Save 완료"), _T("Success"), MB_OK);
+}
+
+void CBackGround::LoadData(CHAPTER _chap)
+{
+	TCHAR		szFullPath[MAX_PATH] = L"";
+
+	wsprintf(szFullPath, L"../Data/Grid%d.dat", (int)_chap);
+
+	HANDLE	hFile = CreateFile(szFullPath,	// 파일의 경로 및 이름 명시	
+		GENERIC_READ,		// 파일 접근 모드, WRITE는 쓰기, READ는 읽기
+		NULL,				// 공유방식, 파일이 열려있는 상태에서 다른 프로세스가 오픈 할 때 허가할 것인지 옵션, NULL 공유하지 않음
+		NULL,				// 보안속성, NULL일 경우 기본값으로 설정
+		OPEN_EXISTING,		// 파일이 없다면 생성, 있다면 덮어 쓰기, OPEN_EXITING 파일이 있을 경우에만 여는 옵션
+		FILE_ATTRIBUTE_NORMAL, // 파일 속성(읽기 전용, 숨김과 같은 속성을 의미), 아무런 속성이 없는 경우의 플래그
+		NULL);	// 생성될 파일의 속성을 제공할 템플릿 파일이 있는 주소값
+
+
+	DWORD		dwByte = 0;
+	INFO		tInfo{};
+	GRID_STATE	gridState;
+
+	Release();
+
+	int iIndex = 0;	
+
+	while (true)
+	{
+		ReadFile(hFile, &tInfo, sizeof(INFO), &dwByte, nullptr);
+		ReadFile(hFile, &gridState, sizeof(GRID_STATE), &dwByte, nullptr);
+
+		if (0 == dwByte)
+			break;
+
+		m_pGrid = new CGrid;
+		m_pGrid->Initialize();
+
+		dynamic_cast<CGrid*>(m_pGrid)->Set_Index(iIndex);
+		dynamic_cast<CGrid*>(m_pGrid)->Set_GridState(gridState);
+		m_pGrid->Set_Pos(D3DXVECTOR3(tInfo.vPos.x, tInfo.vPos.y, 0.f));
+
+		vecGrid.push_back(m_pGrid);
+		++iIndex;
+	}
+
+	// 파일 소멸
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, _T("Load 완료"), _T("Success"), MB_OK);
 }

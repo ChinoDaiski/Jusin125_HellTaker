@@ -36,11 +36,14 @@ public:
 
 	void		Set_Vive(bool _vive) { m_bVibration = _vive; }
 
-	void		Picking(D3DXVECTOR3 _pos);
+	void		Picking(D3DXVECTOR3 _pos);	// 피킹
+
+	void		SaveData();		// 세이브
+	void		LoadData(CHAPTER _chap);		// 로드
 
 private:
 	vector<CObj*>	vecGrid;
-	CObj*	m_pGrid; 
+	CObj*			m_pGrid; 
 
 	CHAPTER		m_Chapter;		// 챕터 번호. switch~case 사용
 	GRID_INFO	m_GridInfo;		// Grid 격자를 챕터에 따라 변경하여 출력 위함

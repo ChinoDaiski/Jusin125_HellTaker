@@ -20,7 +20,6 @@ HRESULT CGrid::Initialize(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(TEX_SINGLE, L"../Texture/BackGround/Layer/Layer.png", L"Layer")))
 		return S_FALSE;
 
-	m_tInfo.vPos = { 0.f, 0.f, 0.f };
 	m_wstrObjKey = L"Layer";
 	m_fSpeed = 100.f;
 
