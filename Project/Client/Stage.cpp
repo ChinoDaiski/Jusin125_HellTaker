@@ -29,7 +29,7 @@
 #include "FlameBase.h"
 
 CStage::CStage()
-	: m_chapter(SEVEN), m_pDeath(nullptr)
+	: m_chapter(ZERO), m_pDeath(nullptr)
 	, m_fTimer(0.f)
 {
 	// 백그라운드 생성
@@ -153,14 +153,14 @@ void CStage::Change_NextChapter()
 void CStage::Init_ChapterHp()
 {
 	m_ChapterHp[0] = 23;
-	m_ChapterHp[1] = 10;
-	m_ChapterHp[2] = 10;
-	m_ChapterHp[3] = 10;
-	m_ChapterHp[4] = 10;
-	m_ChapterHp[5] = 10;
-	m_ChapterHp[6] = 10;
-	m_ChapterHp[7] = 10;
-	m_ChapterHp[8] = 10;
+	m_ChapterHp[1] = 24;
+	m_ChapterHp[2] = 32;
+	m_ChapterHp[3] = 23;
+	m_ChapterHp[4] = 23;
+	m_ChapterHp[5] = 43;
+	m_ChapterHp[6] = 32;
+	m_ChapterHp[7] = 12;
+	m_ChapterHp[8] = 33;
 }
 
 void CStage::Init_Chapter()
@@ -221,7 +221,7 @@ void CStage::Init_ChapterZERO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(61));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(61, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(61, CANT_MOVE);
 		pEvil->Set_ObjIndex(61);
 	}
 
@@ -393,7 +393,7 @@ void CStage::Init_ChapterONE()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(68));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(68, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(68, CANT_MOVE);
 		pEvil->Set_ObjIndex(68);
 	}
 
@@ -567,7 +567,7 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(14));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(14, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(14, CANT_MOVE);
 		pEvil->Set_ObjIndex(14);
 	}
 
@@ -579,7 +579,7 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(15));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(15, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(15, CANT_MOVE);
 		pEvil->Set_ObjIndex(15);
 	}
 
@@ -591,7 +591,7 @@ void CStage::Init_ChapterTWO()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(16));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(16, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(16, CANT_MOVE);
 		pEvil->Set_ObjIndex(16);
 	}
 
@@ -614,7 +614,7 @@ void CStage::Init_ChapterTHREE()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(38));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(38, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(38, CANT_MOVE);
 		pEvil->Set_ObjIndex(38);
 	}
 
@@ -638,7 +638,7 @@ void CStage::Init_ChapterFOUR()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(13));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(13, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(13, CANT_MOVE);
 		pEvil->Set_ObjIndex(13);
 	}
 
@@ -661,7 +661,7 @@ void CStage::Init_ChapterFIVE()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(78));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(78, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(78, CANT_MOVE);
 		pEvil->Set_ObjIndex(78);
 	}
 
@@ -684,7 +684,7 @@ void CStage::Init_ChapterSIX()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(12));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(12, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(12, CANT_MOVE);
 		pEvil->Set_ObjIndex(12);
 	}
 
@@ -707,7 +707,7 @@ void CStage::Init_ChapterSeven()
 	{
 		pEvil->Set_Pos(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(5));
 		pEvil->Initialize();
-		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(5, ON_OBJECT);
+		dynamic_cast<CBackGround*>(m_pBackGround)->Set_GridState(5, CANT_MOVE);
 		pEvil->Set_ObjIndex(5);
 	}
 
