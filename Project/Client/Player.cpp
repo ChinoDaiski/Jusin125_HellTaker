@@ -258,6 +258,15 @@ void CPlayer::Key_Input(void)
 		--m_iHp;
 		moving = true;
 	}
+
+	// 피킹
+	if (CKeyMgr::GetInstance()->Key_Down(VK_LBUTTON))
+	{
+		// 마우스 좌표 얻어오기
+		D3DXVECTOR3 mouse = ::Get_Mouse();
+
+		dynamic_cast<CBackGround*>(m_pBackGround)->Picking(mouse);
+	}
 }
 
 bool CPlayer::CheckTile(int _index)
@@ -347,7 +356,7 @@ bool CPlayer::CheckTile(int _index)
 		Create_Blood(dynamic_cast<CBackGround*>(m_pBackGround)->Find_IndexPos(_index));	
 		bleeding = true;
 		bleedingCount = 0.f;
-		bloodColor = 70.f;
+		bloodColor = 70;
 	}
 
 	m_tFrame = { 0.f, 6.f, 2.f };

@@ -274,3 +274,14 @@ void CBackGround::Set_GridState(int _index, GRID_STATE _gridState)
 		}
 	}
 }
+
+void CBackGround::Picking(D3DXVECTOR3 _pos)
+{
+	for (auto& iter : vecGrid)
+	{
+		if (true == dynamic_cast<CGrid*>(iter)->Click_Grid(_pos))
+		{
+			iter->Set_GridState(CANT_MOVE);
+		}
+	}
+}

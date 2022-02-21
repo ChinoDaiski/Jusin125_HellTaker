@@ -36,6 +36,8 @@ public:
 
 	void		Set_Vive(bool _vive) { m_bVibration = _vive; }
 
+	void		Picking(D3DXVECTOR3 _pos);
+
 private:
 	vector<CObj*>	vecGrid;
 	CObj*	m_pGrid; 

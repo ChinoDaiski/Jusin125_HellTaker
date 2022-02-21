@@ -90,3 +90,15 @@ void CGrid::Release(void)
 {
 	// empty
 }
+
+bool CGrid::Click_Grid(D3DXVECTOR3 _pos)
+{
+	// 그리드 크기 100x100
+	if (((m_tInfo.vPos.x - 50 < _pos.x) && (m_tInfo.vPos.x + 50 > _pos.x))
+		&& ((m_tInfo.vPos.y - 50 < _pos.y) && (m_tInfo.vPos.y + 50 > _pos.y)))
+	{
+		return true;
+	}
+
+	return false;
+}
