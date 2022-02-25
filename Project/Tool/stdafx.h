@@ -41,20 +41,16 @@
 #endif
 #endif
 
-#include <malloc.h>
-#include <memory.h>
-#include <tchar.h>
-#include <fstream>
-#include <time.h>
-
+// TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 #include <d3d9.h>
 #include <d3dx9.h>
-
 #include <vector>
 #include <list>
 #include <map>
-#include <string>
 #include <algorithm>
+#include <string>
+#include <fstream>
+#include <time.h>
 
 #ifdef _DEBUG
 

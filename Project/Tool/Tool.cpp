@@ -15,6 +15,9 @@
 #define new DEBUG_NEW
 #endif
 
+// WindowSize / PictureSize
+float	MAPSIZEX = WINCX / 1920.f;
+float	MAPSIZEY = WINCY / 1080.f;
 
 // CToolApp
 

@@ -23,12 +23,11 @@
 
 HWND	g_hWnd;
 
-
 // CToolView
 
-IMPLEMENT_DYNCREATE(CToolView, CView)
+IMPLEMENT_DYNCREATE(CToolView, CScrollView)
 
-BEGIN_MESSAGE_MAP(CToolView, CView)
+BEGIN_MESSAGE_MAP(CToolView, CScrollView)
 	// 표준 인쇄 명령입니다.
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
@@ -41,11 +40,11 @@ END_MESSAGE_MAP()
 CToolView::CToolView()
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-
 }
 
 CToolView::~CToolView()
 {
+	// empty
 }
 
 BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -58,7 +57,42 @@ BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CToolView::OnInitialUpdate()
 {
-	CView::OnInitialUpdate();
+	CScrollView::OnInitialUpdate();
+
+	// SetScrollSizes : 스크롤 바의 사이즈를 지정하는 scrollview 클래스 멤버 함수
+	// MM_TEXT : 픽셀단위 크기로 조정하겠다는 의미
+	// 두 번째 : 가로, 세로 사이즈
+
+	SetScrollSizes(MM_TEXT, CSize(TILECX * TILEX, TILECY * TILEY / 2));
+
+	//AfxGetMainWnd : 현재의 메인 윈도우를 반환하는 전역 함수
+	// 자식 타입으로 형 변환하여 반환함
+	CMainFrame*		pMainFrm = (CMainFrame*)AfxGetMainWnd();
+
+	RECT	rcWnd{};
+
+	// GetWindowRect : 현재 윈도우 창의 렉트 정보를 얻어오는 함수
+	pMainFrm->GetWindowRect(&rcWnd);
+
+	// SetRect : 지정한 인자값으로 rect정보를 세팅하는 함수
+	// 현재 0,0기준으로 창의 렉트를 조정하고 있는 상황
+	SetRect(&rcWnd, 0, 0, rcWnd.right - rcWnd.left, rcWnd.bottom - rcWnd.top);
+
+	RECT	rcMainView{};
+	//GetClientRect : 현재 view 창의 rect 정보를 얻어오는 함수
+	GetClientRect(&rcMainView);
+
+	// 프레임과 view창의 가로, 세로 갭을 구한다.
+	float	fRowFrm = float(rcWnd.right - rcMainView.right);
+	float	fColFrm = float(rcWnd.bottom - rcMainView.bottom);
+
+	// SetWindowPos: 인자값 대로 새롭게 윈도우 위치와 크기를 조정하는 함수
+	// 1인자 : 배치할 윈도우의 Z순서에 대한 포인터
+	// 2, 3인자 : left, top 좌표
+	// 4, 5인자 : 가로, 세로 창 사이즈
+	// 6인자 : SWP_NOZORDER : 현재 순서를 유지하겠다는 플래그 값, 만약 null인 경우 순서 변경을 하지 않겠다.
+
+	pMainFrm->SetWindowPos(nullptr, 300, 100, int(WINCX + fRowFrm), int(WINCY + fColFrm), SWP_NOZORDER);
 
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
@@ -66,6 +100,21 @@ void CToolView::OnInitialUpdate()
 
 	if (FAILED(CDevice::GetInstance()->InitDevice()))
 		AfxMessageBox(L"Device Create Failed");
+
+	// 백그라운드 생성
+	CObj* pBackGround = new CBackGround;
+
+	if (nullptr != pBackGround)
+		pBackGround->Initialize();
+
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pBackGround);
+
+	dynamic_cast<CBackGround*>(pBackGround)->Select_Chapter(ZERO);
+	m_pBackGround = CObjMgr::GetInstance()->Get_Terrain();
+
+	/*m_pTerrain = new CTerrain;
+	m_pTerrain->Initialize();
+	m_pTerrain->SetMainView(this);*/
 }
 // CToolView 그리기
 void CToolView::OnDraw(CDC* /*pDC*/)
@@ -78,6 +127,10 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
 	CDevice::GetInstance()->Render_Begin();
+
+	m_pBackGround->Update();
+
+	m_pBackGround->Render();
 
 	CDevice::GetInstance()->Render_End(g_hWnd);
 
@@ -129,8 +182,7 @@ CToolDoc* CToolView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지
 
 void CToolView::OnDestroy()
 {
-	CView::OnDestroy();
-
+	CScrollView::OnDestroy();
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	CDevice::GetInstance()->DestroyInstance();
 

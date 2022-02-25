@@ -3,9 +3,10 @@
 //
 
 #pragma once
+#include "BackGround.h"
 
 class CToolDoc;
-class CToolView : public CView
+class CToolView : public CScrollView
 {
 protected: // serialization에서만 만들어집니다.
 	CToolView();
@@ -43,6 +44,10 @@ protected:
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnDestroy();
+
+private:
+	CObj*		m_pBackGround = nullptr;
+
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전
