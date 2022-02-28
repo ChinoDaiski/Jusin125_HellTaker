@@ -54,6 +54,9 @@ public:
 	void			Set_Flag(D3DXVECTOR3 _vFlag) { m_vFlag = _vFlag; }
 
 	void			Set_moving(bool _moving) { moving = _moving; }
+	D3DXVECTOR3		Get_Scroll() { return m_vScroll; }
+	void			Set_ScrollX(float _ScrollX) { m_vScroll.x += _ScrollX; }
+	void			Set_ScrollY(float _ScrollY) { m_vScroll.y += _ScrollY; }
 
 protected:
 	static D3DXVECTOR3			m_vScroll;		// ½ºÅ©·Ñ

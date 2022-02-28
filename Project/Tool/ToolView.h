@@ -18,6 +18,7 @@ public:
 
 // 작업입니다.
 public:
+	
 
 // 재정의입니다.
 public:
@@ -48,6 +49,9 @@ public:
 private:
 	CObj*		m_pBackGround = nullptr;
 
+public:
+	void Synchro_Scroll();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

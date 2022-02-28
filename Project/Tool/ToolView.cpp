@@ -17,6 +17,8 @@
 #include "MainFrm.h"
 #include "MyForm.h"
 
+#include "Obj.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -33,6 +35,7 @@ BEGIN_MESSAGE_MAP(CToolView, CScrollView)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 	ON_WM_DESTROY()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -63,7 +66,8 @@ void CToolView::OnInitialUpdate()
 	// MM_TEXT : 픽셀단위 크기로 조정하겠다는 의미
 	// 두 번째 : 가로, 세로 사이즈
 
-	SetScrollSizes(MM_TEXT, CSize(TILECX * TILEX, TILECY * TILEY / 2));
+	// SetScrollSizes(MM_TEXT, CSize(TILECX * TILEX, TILECY * TILEY / 2));
+	SetScrollSizes(MM_TEXT, CSize(0, 0));
 
 	//AfxGetMainWnd : 현재의 메인 윈도우를 반환하는 전역 함수
 	// 자식 타입으로 형 변환하여 반환함
@@ -102,20 +106,16 @@ void CToolView::OnInitialUpdate()
 		AfxMessageBox(L"Device Create Failed");
 
 	// 백그라운드 생성
-	CObj* pBackGround = new CBackGround;
+	m_pBackGround = new CBackGround;
 
-	if (nullptr != pBackGround)
-		pBackGround->Initialize();
+	if (nullptr != m_pBackGround)
+		m_pBackGround->Initialize();
 
-	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, pBackGround);
+	CObjMgr::GetInstance()->Add_Object(CObjMgr::TERRAIN, m_pBackGround);
 
-	dynamic_cast<CBackGround*>(pBackGround)->Select_Chapter(ZERO);
-	m_pBackGround = CObjMgr::GetInstance()->Get_Terrain();
-
-	/*m_pTerrain = new CTerrain;
-	m_pTerrain->Initialize();
-	m_pTerrain->SetMainView(this);*/
+	dynamic_cast<CBackGround*>(m_pBackGround)->Select_Chapter(SEVEN);
 }
+
 // CToolView 그리기
 void CToolView::OnDraw(CDC* /*pDC*/)
 {
@@ -128,6 +128,8 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 
 	CDevice::GetInstance()->Render_Begin();
 
+	Synchro_Scroll();
+
 	m_pBackGround->Update();
 
 	m_pBackGround->Render();
@@ -135,7 +137,6 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	CDevice::GetInstance()->Render_End(g_hWnd);
 
 }
-
 
 // CToolView 인쇄
 
@@ -154,7 +155,6 @@ void CToolView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: 인쇄 후 정리 작업을 추가합니다.
 }
-
 
 // CToolView 진단
 
@@ -176,9 +176,7 @@ CToolDoc* CToolView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지
 }
 #endif //_DEBUG
 
-
 // CToolView 메시지 처리기
-
 
 void CToolView::OnDestroy()
 {
@@ -186,4 +184,44 @@ void CToolView::OnDestroy()
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	CDevice::GetInstance()->DestroyInstance();
 
+}
+
+void CToolView::Synchro_Scroll()
+{
+	D3DXVECTOR3	vMouse = ::Get_Mouse();
+
+	if (0.f > vMouse.x)
+		m_pBackGround->Set_ScrollX(2.f);
+
+	if (WINCX < vMouse.x)
+		m_pBackGround->Set_ScrollX(-2.f);
+
+	if (0.f > vMouse.y)
+		m_pBackGround->Set_ScrollY(2.f);
+
+	if (WINCY < vMouse.y)
+		m_pBackGround->Set_ScrollY(-2.f);
+
+	Invalidate(FALSE);
+}
+
+void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CScrollView::OnLButtonDown(nFlags, point);
+
+	CMainFrame*		pMain = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+
+	//CMyForm*		pMyForm = dynamic_cast<CMyForm*>(pMain->m_SecondSplitter.GetPane(0, 0));
+	//CMapTool*		pMapTool = &(pMyForm->m_MapTool);
+
+	// 피킹
+	D3DXVECTOR3 vMouse = ::Get_Mouse();
+	vMouse.x -= m_pBackGround->Get_Scroll().x;
+	vMouse.y -= m_pBackGround->Get_Scroll().y;
+
+	dynamic_cast<CBackGround*>(m_pBackGround)->Picking(vMouse);
+
+	Invalidate(FALSE);
 }
