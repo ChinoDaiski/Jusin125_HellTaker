@@ -205,10 +205,12 @@
     <ClInclude Include="Device.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MapTab.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="MyForm.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="ObjectTab.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SingleTexture.h" />
@@ -227,10 +229,12 @@
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MapTab.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="ObjectTab.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="SingleTexture.cpp" />
     <ClCompile Include="stdafx.cpp">

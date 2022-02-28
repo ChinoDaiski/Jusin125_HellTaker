@@ -48,6 +48,8 @@ CMainFrame::~CMainFrame()
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
+	
+
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
@@ -56,10 +58,17 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
+
 	if( !CFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
+	this->SetTitle(TEXT("HellTaker Tool"));
+	//cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE;
+	//cs.style &= WS_THICKFRAME;
+
+	cs.hMenu = NULL;
+	cs.style &= ~FWS_ADDTOTITLE;
 
 	return TRUE;
 }

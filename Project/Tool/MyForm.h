@@ -3,6 +3,10 @@
 #include "Include.h"
 #include "UnitTool.h"
 #include "MapTool.h"
+#include "afxcmn.h"
+
+#include "ObjectTab.h"
+#include "MapTab.h"
 
 // CMyForm 폼 뷰입니다.
 
@@ -29,6 +33,12 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CTabCtrl	m_TabCtrl;
+	CObjectTab* m_pObjectTab;
+	CMapTab*	m_pMapTab;
+	virtual void OnInitialUpdate();
+	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 

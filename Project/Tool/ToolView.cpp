@@ -131,7 +131,7 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	Synchro_Scroll();
 
 	m_pBackGround->Update();
-
+	
 	m_pBackGround->Render();
 
 	CDevice::GetInstance()->Render_End(g_hWnd);
