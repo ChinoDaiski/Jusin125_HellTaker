@@ -38,8 +38,8 @@ public:
 
 	void		Picking(D3DXVECTOR3 _pos);	// 피킹
 
-	void		SaveData();		// 세이브
-	void		LoadData(CHAPTER _chap);		// 로드
+	bool		SaveData();		// 세이브
+	bool		LoadData(CHAPTER _chap);		// 로드
 
 private:
 	vector<CObj*>	vecGrid;

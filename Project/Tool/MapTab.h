@@ -1,5 +1,7 @@
 #pragma once
-
+#include "afxwin.h"
+#include "Include.h"
+#include "BackGround.h"
 
 // CMapTab 대화 상자입니다.
 
@@ -23,4 +25,22 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
+
+private:
+	CComboBox m_MapComboBox;
+
+private:
+	// value
+
+	// control
+	map<CString, CImage*>		m_MapPngImage;
+	CObj*		m_pBackGround = nullptr;
+
+	// general
+	afx_msg void OnMapComboBox();
+	virtual BOOL OnInitDialog();
+
+	void		Load_MapPreview();
+	afx_msg void OnSaveButton();
+	afx_msg void OnLoadButton();
 };

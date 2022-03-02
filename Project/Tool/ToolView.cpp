@@ -128,7 +128,7 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 
 	CDevice::GetInstance()->Render_Begin();
 
-	Synchro_Scroll();
+	//Synchro_Scroll();
 
 	m_pBackGround->Update();
 	
@@ -211,7 +211,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CScrollView::OnLButtonDown(nFlags, point);
 
-	CMainFrame*		pMain = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	//CMainFrame*		pMain = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
 
 	//CMyForm*		pMyForm = dynamic_cast<CMyForm*>(pMain->m_SecondSplitter.GetPane(0, 0));
 	//CMapTool*		pMapTool = &(pMyForm->m_MapTool);
@@ -223,5 +223,5 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	dynamic_cast<CBackGround*>(m_pBackGround)->Picking(vMouse);
 
-	Invalidate(FALSE);
+	//Invalidate(FALSE);
 }

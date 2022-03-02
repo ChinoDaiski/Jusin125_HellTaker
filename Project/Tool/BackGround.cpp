@@ -287,12 +287,12 @@ void CBackGround::Picking(D3DXVECTOR3 _pos)
 	}
 }
 
-void CBackGround::SaveData()
+bool CBackGround::SaveData()
 {
 	TCHAR		szFullPath[MAX_PATH] = L"";
 
 	wsprintf(szFullPath, L"../Data/Grid%d.dat", (int)m_Chapter);
-
+	
 	HANDLE	hFile = CreateFile(szFullPath,	// 파일의 경로 및 이름 명시	
 		GENERIC_WRITE,		// 파일 접근 모드, WRITE는 쓰기, READ는 읽기
 		NULL,				// 공유방식, 파일이 열려있는 상태에서 다른 프로세스가 오픈 할 때 허가할 것인지 옵션, NULL 공유하지 않음
@@ -301,11 +301,17 @@ void CBackGround::SaveData()
 		FILE_ATTRIBUTE_NORMAL, // 파일 속성(읽기 전용, 숨김과 같은 속성을 의미), 아무런 속성이 없는 경우의 플래그
 		NULL);	// 생성될 파일의 속성을 제공할 템플릿 파일이 있는 주소값
 
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
 	DWORD		dwByte = 0;
 	GRID_STATE	gridState;
 
 	for (auto& iter : vecGrid)
 	{
+		if(iter == nullptr)
+			return false;
+
 		gridState = dynamic_cast<CGrid*>(iter)->Get_GridState();
 
 		WriteFile(hFile, &iter->Get_Info(), sizeof(INFO), &dwByte, nullptr);
@@ -315,9 +321,11 @@ void CBackGround::SaveData()
 	// 파일 소멸
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, _T("Save 완료"), _T("Success"), MB_OK);
+
+	return true;
 }
 
-void CBackGround::LoadData(CHAPTER _chap)
+bool CBackGround::LoadData(CHAPTER _chap)
 {
 	TCHAR		szFullPath[MAX_PATH] = L"";
 
@@ -331,6 +339,8 @@ void CBackGround::LoadData(CHAPTER _chap)
 		FILE_ATTRIBUTE_NORMAL, // 파일 속성(읽기 전용, 숨김과 같은 속성을 의미), 아무런 속성이 없는 경우의 플래그
 		NULL);	// 생성될 파일의 속성을 제공할 템플릿 파일이 있는 주소값
 
+	if (INVALID_HANDLE_VALUE == hFile)
+		return false;
 
 	DWORD		dwByte = 0;
 	INFO		tInfo{};
@@ -362,4 +372,6 @@ void CBackGround::LoadData(CHAPTER _chap)
 	// 파일 소멸
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, _T("Load 완료"), _T("Success"), MB_OK);
+
+	return true;
 }
